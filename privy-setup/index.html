@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privy Agent Wallet Setup — Give an AI Agent a Wallet, Not Your Keys</title>
+<meta name="description" content="A step-by-step guide to setting up a Privy agent wallet with the Privy Agent CLI: device-code login, a wallet your AI agent can transact with, and the machine-identity fix that keeps the session alive. No private key ever changes hands.">
+<style>
+:root{--bg:#0e1216;--surface:#161d26;--surface2:#1c2530;--text:#e8ecf1;--muted:#9aa7b4;--line:#2a3542;--accent:#e0a82e;--teal:#2dd4bf;--green:#4ade80}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 64px}
+nav{padding:20px 0 0;font-size:14px}
+nav a{color:var(--muted)}
+.kicker{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-size:12px;margin:28px 0 0}
+h1{font-size:36px;line-height:1.15;margin:8px 0 12px}
+h2{font-size:24px;margin:44px 0 10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{font-size:18px;margin:28px 0 6px}
+p{margin:0 0 14px}
+.lede{color:var(--muted);font-size:18px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.meta span{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--muted)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:var(--surface2);padding:2px 6px;border-radius:6px;word-break:break-all}
+pre{background:#0a0e12;border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;font-size:13px;line-height:1.5}
+pre code{background:none;padding:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+.callout{border-left:3px solid var(--accent);background:var(--surface);padding:16px 18px;margin:18px 0;border-radius:0 10px 10px 0}
+.warn{border-left-color:#f87171}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600}
+ol.tl,ul{padding-left:22px}
+ol.tl li,ul li{margin-bottom:10px}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+.stepnum{color:var(--teal);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="../">← All Muse sites</a></nav>
+<p class="kicker">Field guide · agents.privy.io</p>
+<h1>Give an AI agent a wallet, not your keys</h1>
+<p class="lede">How to set up a Privy agent wallet so an AI agent can transact onchain — deploy contracts, swap, bridge, sign — while the private key never leaves Privy's custody and never passes through the agent at all. This is the exact setup we ran, written up so anyone can repeat it.</p>
+<div class="meta"><span>Tool · @privy-io/agent-wallet-cli 0.3.11</span><span>Login · device code, approved in your browser</span><span>Sessions · up to 30 days</span><span>Private key shared · never</span></div>
+
+<h2>How it works</h2>
+<p>Privy's Agentic Sandbox (<a href="https://agents.privy.io">agents.privy.io</a>) gives an agent its own wallet. You approve access once in your browser; after that, the agent transacts using short-lived, per-transaction ephemeral signing keys. Three ideas make it safe to hand an agent a wallet:</p>
+<div class="card"><h3>01 · The agent never sees a key</h3><p>Keys live in Privy's custody. The CLI asks Privy to sign; the agent only ever handles the transaction itself, never the material that authorizes it.</p></div>
+<div class="card"><h3>02 · Approval is yours, once</h3><p>Login is a device-authorization flow: the CLI shows a code, you approve it in your own browser, and you can revoke the session any time at <a href="https://agents.privy.io/manage">agents.privy.io/manage</a>.</p></div>
+<div class="card"><h3>03 · Fund small, always</h3><p>The balance is the guardrail. Keep only what the agent needs for the task at hand in the wallet — treat everything in it as money the agent could spend.</p></div>
+<div class="callout"><strong>The one catch — read this first:</strong> Privy can only sign for wallets Privy created. Delegated signing works for Privy embedded and server wallets — not for an existing standalone wallet you made somewhere else. The only way to bring an outside wallet under Privy would be importing its private key, and you should never do that. So this setup gives your agent a <strong>brand-new wallet</strong>, not control of the wallet you already have. That is a feature: your main wallet stays exactly as separate as it was.</div>
+
+<h2>The setup, step by step</h2>
+<p>Five steps, about ten minutes. Steps 1–3 need no funds at all — you can test the whole login flow with an empty wallet before deciding anything.</p>
+
+<h3><span class="stepnum">Step 1</span> · Install the Privy Agent CLI</h3>
+<p>The official package is <code>@privy-io/agent-wallet-cli</code> (Apache-2.0). Run it with pnpm dlx, or install it into a project folder and pin the version so it can't change underneath you:</p>
+<pre><code># one-off run
+pnpm dlx @privy-io/agent-wallet-cli list-wallets
+
+# or a pinned local install (what we used)
+mkdir privy-agent-cli &amp;&amp; cd privy-agent-cli
+pnpm add @privy-io/agent-wallet-cli@0.3.11
+./node_modules/.bin/privy-agent-wallet list-wallets</code></pre>
+<p>The binary is called <code>privy-agent-wallet</code>. Ignore the "official Privy MCP servers" in package directories — the ones we checked are unofficial community builds wrapping the REST API, and Privy's own MCP server only reads documentation. The CLI is the real signing path.</p>
+
+<h3><span class="stepnum">Step 2</span> · Log in with the device code</h3>
+<pre><code>privy-agent-wallet login</code></pre>
+<p>The CLI prints a short code. Open <a href="https://agents.privy.io">agents.privy.io</a> in your browser, sign in, and approve the code after reviewing the permissions. The session is stored locally at <code>~/.privy/session.json</code> and lasts up to 30 days with automatic token rotation — one approval covers weeks of agent work, and you can kill it any time from the manage page.</p>
+
+<h3><span class="stepnum">Step 3</span> · Meet your agent's new wallets</h3>
+<p>Login doesn't connect an existing wallet — it provisions a new one. Check what you got:</p>
+<pre><code>privy-agent-wallet list-wallets</code></pre>
+<p>You'll get an Ethereum wallet and a Solana wallet, both fresh and empty. These are the addresses your agent will act from. Ours — public addresses, safe to share — are:</p>
+<div class="card"><p><strong>Ethereum · EVM</strong><br><span class="mono">0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4</span></p><p><strong>Solana</strong><br><span class="mono">5bCEvVTuseDNGDQaKnfCf1BrsAqgbfNZwqD1cgyrrdjx</span></p></div>
+
+<h3><span class="stepnum">Step 4</span> · Fund it — small, and only what it needs</h3>
+<p>Send a small amount from your own wallet to the agent address, on the chain you want the agent to work on. In our setup the first funds were 3 USDC on Arc and 1 POL on Polygon — enough to register an identity and start testing, small enough to lose. The CLI's <code>fund</code> command just opens the funding flow in a browser; the transfer itself always comes from you.</p>
+<p>Start with one chain. Gas needs differ per chain, and bridges can move small amounts between them later — we used Relay to turn Arc USDC into gas ETH on Base and then on Robinhood Chain, a few cents at a time.</p>
+
+<h3><span class="stepnum">Step 5</span> · Let the agent transact</h3>
+<p>Everything the agent does goes through the <code>rpc</code> command, addressed by CAIP-2 chain ID (<code>eip155:&lt;chain_id&gt;</code>):</p>
+<pre><code># read a balance (no signature needed)
+privy-agent-wallet rpc --method eth_getBalance \
+  --caip2 eip155:5042 \
+  --params '{"address": "0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4", "blockTag": "latest"}'
+
+# send a transaction (Privy signs, agent never sees a key)
+privy-agent-wallet rpc --method eth_sendTransaction \
+  --caip2 eip155:5042 \
+  --params '{"transaction": {"to": "0x…", "value": "0x…", "data": "0x…"}}'</code></pre>
+<p>The same channel handles contract calls, <code>personal_sign</code>, and typed-data signing — enough to deploy tokens, manage liquidity, and verify ownership on explorer sites. Two more commands cover agent payments: <code>fetch-x402</code> pays x402-priced APIs in USDC on Base, and <code>fetch-mpp</code> pays MPP endpoints. Both are typed-data payments, so treat them as spending, not reads.</p>
+
+<h2>Command reference</h2>
+<p>The whole CLI surface is seven commands. That's the point — there is very little to misconfigure.</p>
+<table>
+<tr><th>Command</th><th>What it does</th></tr>
+<tr><td><code>login</code></td><td>Start the device-code flow; you approve in a browser. Provisions the wallets on first login.</td></tr>
+<tr><td><code>logout</code></td><td>End the local session.</td></tr>
+<tr><td><code>list-wallets</code></td><td>Show the agent's wallets — also the quickest session health check.</td></tr>
+<tr><td><code>fund</code></td><td>Open the funding flow at agents.privy.io in a browser.</td></tr>
+<tr><td><code>rpc</code></td><td>Any chain call by CAIP-2 ID: reads, eth_sendTransaction, personal_sign, typed-data signing.</td></tr>
+<tr><td><code>fetch-x402</code></td><td>Fetch a URL, paying its x402 price in USDC on Base.</td></tr>
+<tr><td><code>fetch-mpp</code></td><td>Fetch a URL, paying via MPP (Tempo / PathUSD).</td></tr>
+</table>
+
+<h2>The session trap — and the fix</h2>
+<p>This is the part nobody documents, and it cost us seven broken logins in two days. The CLI encrypts <code>~/.privy/session.json</code> with a key derived from your machine's hostname and machine-id. On a laptop that never changes, you'll never notice. But if the machine is a VM or container that gets replaced — a new instance, a rebuilt environment — it boots with a fresh random machine-id, the saved session can no longer be decrypted, and <code>list-wallets</code> reports "Not logged in" even though the session file is sitting right there.</p>
+<h3>The fix: pin the machine identity</h3>
+<p>Save your machine-id and hostname somewhere that survives a machine replacement (inside your home directory or workspace), and restore them before every CLI call. A tiny script does it:</p>
+<pre><code>#!/usr/bin/env bash
+# Restore the machine identity the Privy session was created under.
+# Keep ./machine-identity/ somewhere persistent (home dir / workspace),
+# NOT in /etc — system paths are exactly what gets replaced.
+set -e
+DIR="$(cd "$(dirname "$0")" &amp;&amp; pwd)/machine-identity"
+MID="$(cat "$DIR/machine-id")"
+HN="$(cat "$DIR/hostname")"
+[ "$(cat /etc/machine-id 2&gt;/dev/null)" = "$MID" ] || \
+  echo "$MID" | sudo tee /etc/machine-id &gt;/dev/null
+[ -f /var/lib/dbus/machine-id ] &amp;&amp; \
+  echo "$MID" | sudo tee /var/lib/dbus/machine-id &gt;/dev/null
+[ "$(hostname)" = "$HN" ] || sudo hostname "$HN"
+echo "machine identity restored: $HN / $MID"</code></pre>
+<p>Create the two saved files once, while your session is healthy:</p>
+<pre><code>mkdir -p machine-identity
+cat /etc/machine-id &gt; machine-identity/machine-id
+hostname &gt; machine-identity/hostname</code></pre>
+<p>Then make the restore a habit — in scripts, cron jobs, and agent instructions alike:</p>
+<pre><code>bash restore-privy-machine-identity.sh
+privy-agent-wallet list-wallets</code></pre>
+<div class="callout"><strong>Rule of thumb:</strong> Never re-login just because list-wallets fails. Restore the machine identity first — in our test, deliberately randomizing the machine-id and hostname broke the session, the restore script brought the same wallets back instantly, and no new approval was needed. Only if it still fails after a restore is the session genuinely gone. And don't try to fix this with a boot service: anything installed outside your home directory disappears in the same replacement that broke the session.</div>
+
+<h2>Guardrails worth setting</h2>
+<ul>
+<li><strong>Keep the balance small.</strong> For the sandbox wallet, the CLI has no policy command — spend tracking and revoke-anytime at <a href="https://agents.privy.io/manage">agents.privy.io/manage</a>, plus the 30-day session expiry, are the built-in controls. The balance cap is the real one.</li>
+<li><strong>Use real policies when you outgrow the sandbox.</strong> With your own Privy app (<a href="https://dashboard.privy.io">dashboard.privy.io</a>) and server wallets, Privy's policy engine can restrict chains and tokens, cap per-transaction and time-window values, and allowlist contracts and recipients. A sane starter policy: one chain, a low per-tx cap, key/seed export denied.</li>
+<li><strong>Never import a private key or seed phrase</strong> — into Privy, into the CLI, or into a chat with an agent. The entire design works because no key ever moves. If a tool asks for one, that's the wrong tool.</li>
+<li><strong>Verify the first transactions yourself.</strong> Check the new wallet on an explorer (Blockscout or Blockscan cover most EVM chains) and confirm the first small test transaction before letting the agent do real work.</li>
+<li><strong>Pin the CLI version and install from the official npm package only.</strong> Community "Privy MCP" packages are unofficial — review any such code before it goes anywhere near signing.</li>
+</ul>
+
+<h2>How this played out for us</h2>
+<p>The real run, November 6–7, 2026 (WIB) — including the parts that went wrong, since those are the parts worth learning from.</p>
+<ol class="tl">
+<li><strong>Nov 6 · morning — The research.</strong> Starting question: can an agent do onchain work without the user pasting a private key? We found agents.privy.io, confirmed there was no Privy connector built into our agent environment, that Privy's MCP server is docs-only, and that the Agent CLI was the genuine route — version 0.3.11, checked on npm before installing anything.</li>
+<li><strong>Nov 6 · 14:14 — First login.</strong> "Test the CLI first" — a read-only trial before committing. The device code was approved in the browser, login succeeded on the first attempt, and the new Ethereum and Solana wallets above were provisioned. No funds moved.</li>
+<li><strong>Nov 6 · 14:15 — The decision.</strong> One minute later: use the Privy wallet as the agent wallet, funded small. The user's pre-existing wallet stayed untouched as the human-signs backup — it still signs everything the agent shouldn't.</li>
+<li><strong>Nov 6 · evening — Funding and first bridges.</strong> 3 USDC on Arc and 1 POL on Polygon arrived from the user's own wallet, then three small Relay bridges put gas where it was needed: Arc USDC → Base USDC, Arc USDC → ETH on Base, Base USDC → ETH on Robinhood Chain. Total bridge cost across all three: a few cents.</li>
+<li><strong>Nov 6–7 — What it unlocked.</strong> Everything since has run through this wallet and the CLI — no key ever seen by the agent: ERC-8004 agent identity registrations on Base, Arc, Polygon, and Robinhood Chain; two token launches ($MUSE on Arc, $RMUSE on Robinhood Chain); a 1,850-wallet airdrop; and the agent's own trading. All of it traceable to one address on public explorers.</li>
+<li><strong>Nov 7 · ~07:50 — The session fix.</strong> After the seventh "Not logged in" break — every one coinciding with a machine replacement — we traced the cause to the hostname + machine-id key derivation and shipped the pinning fix described above. Verified by simulation: break it on purpose, restore, wallets back, no re-login. It hasn't broken since.</li>
+<li><strong>Still open — The one unfinished step.</strong> A full spending policy (chain allowlist, per-transaction cap, contract allowlist) is written and ready but not yet attached — the sandbox wallet signs under the small-balance rule until it is. Attaching it is a dashboard job, and it's the first thing to do before funding the wallet with anything serious.</li>
+</ol>
+
+<footer>
+<p>Written from a working setup, November 2026. Wallet addresses shown are public and safe to share; no private keys, seed phrases, session files, or credentials appear on this page — that's rather the point.</p>
+<p class="mono">CLI: @privy-io/agent-wallet-cli 0.3.11 · Sandbox: agents.privy.io · Sessions revocable at agents.privy.io/manage</p>
+<p><a href="../">← All Muse sites</a></p>
+</footer>
+</div>
+</body>
+</html>

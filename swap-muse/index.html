@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swap $MUSE on Arc — How the Trade Works</title>
+<meta name="description" content="Trade USDC ↔ $MUSE directly against the Uniswap V4 pool on Arc. Wallet apps show 'No quote available' for this pool — this page explains why, and how the swap actually works.">
+<style>
+:root{--bg:#0e1216;--surface:#161d26;--surface2:#1c2530;--text:#e8ecf1;--muted:#9aa7b4;--line:#2a3542;--accent:#e0a82e;--teal:#2dd4bf;--green:#4ade80}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 64px}
+nav{padding:20px 0 0;font-size:14px}
+nav a{color:var(--muted)}
+.kicker{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-size:12px;margin:28px 0 0}
+h1{font-size:36px;line-height:1.15;margin:8px 0 12px}
+h2{font-size:24px;margin:44px 0 10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{font-size:18px;margin:20px 0 6px}
+p{margin:0 0 14px}
+.lede{color:var(--muted);font-size:18px}
+.hero{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;margin:24px 0}
+.hero img{width:140px;height:140px;border-radius:20px;border:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:24px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.stat b{font-size:20px;display:block}
+.stat span{color:var(--muted);font-size:13px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:var(--surface2);padding:2px 6px;border-radius:6px;word-break:break-all}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+.card h3{margin-top:0}
+.badge{display:inline-block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin-bottom:8px}
+.badge.amber{color:var(--accent)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600}
+ul,ol{padding-left:22px}
+li{margin-bottom:8px}
+.callout{border-left:3px solid var(--accent);background:var(--surface);padding:16px 18px;margin:18px 0;border-radius:0 10px 10px 0}
+.callout.green{border-left-color:var(--green)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="../">← All Muse sites</a></nav>
+<p class="kicker">Uniswap V4 · Arc mainnet 5042</p>
+<h1>Swap $MUSE on Arc</h1>
+<p class="lede">Trade USDC ↔ $MUSE directly against the Uniswap V4 pool on Arc, from your own wallet. Wallet apps show "No quote available" for this pool — the interactive version of this page computes the quote itself from live pool state and builds the swap for you to sign.</p>
+<div class="hero">
+<img src="https://i.postimg.cc/hPMD9djp/logo-48.png" alt="Muse Ai Agent logo — fluffy beige character with headphones">
+<div>
+<p><strong>Static copy of the swap page.</strong> The live, interactive version runs on muse.ai and needs a browser wallet (Bitget Wallet, MetaMask, or OKX Wallet built-in browser) plus live Arc RPC calls. This GitHub copy is the static explainer: how the swap works, why wallet apps can't quote this pool, the contracts, and the pool state snapshot it was built from. You sign everything in your own wallet; no page here holds keys or moves funds.</p>
+<p>Pool: MUSE/USDC · PoolId <span class="mono">0x5a14e63c9943a180d24b31f45964bc11e24639e9f055f88f33a3ac58b6b27ff1</span><br>
+Pool fee: 0.30% LP + 3% hook · <a href="https://arc.etherscan.io/address/0xd1242aEcA57Cb80f9067800F2f43D78cc3F8D198">$MUSE contract</a> · <a href="../muse-ai-agent/">$MUSE token page</a></p>
+</div>
+</div>
+
+<h2>Live pool state — snapshot</h2>
+<p>The interactive page refreshes these values every 30 seconds from the PoolManager. This is the snapshot the GitHub copy was built from — not live values.</p>
+<div class="stats">
+<div class="stat"><b>$5.106e-11</b><span>Price per $MUSE (USDC / $MUSE · Uniswap V4 · Arc mainnet)</span></div>
+<div class="stat"><b>306072</b><span>Tick</span></div>
+<div class="stat"><b>21,130,171,658,904</b><span>Liquidity (L)</span></div>
+<div class="stat"><b>30,322,841</b><span>Block · updated 8:49:57 AM</span></div>
+<div class="stat"><b>19,584,562,199</b><span>MUSE per USDC</span></div>
+<div class="stat"><b>0.30% LP + 3% hook</b><span>Pool fee</span></div>
+<div class="stat"><b>In range</b><span>Position range: tick 304080 (−20.2%) to tick 308520 (+25.1%)</span></div>
+</div>
+<p><em>Pool state at block 30,322,841 · updated 8:49:57 AM · auto-refreshes every 30s on the live page. Quotes use this state; your wallet confirms the final amounts.</em></p>
+
+<h2>Your wallet</h2>
+<p>Connect the wallet that holds your USDC / $MUSE. Nothing is signed until you approve it in the wallet. <strong>On the live page:</strong> "No browser wallet found yet. If you opened this page from a chat or another app, copy the page link and open it inside Bitget Wallet's, MetaMask's, or OKX Wallet's built-in browser — the wallet only appears there — then reload." Once connected, the page shows your address, USDC balance and $MUSE balance. Gas on Arc is paid in USDC (the native token), drawn from the same balance.</p>
+
+<h2>How the swap works</h2>
+<p>Direction toggle: <strong>Buy $MUSE</strong> / <strong>Sell $MUSE</strong>. You pay USDC, you receive $MUSE (estimated, after the 3% hook fee). Amount field with 25% / 50% / 75% / MAX shortcuts and a "Flip direction" button. The quote details shown on the live page:</p>
+<table>
+<tr><th>Quote detail</th><th>What it means</th></tr>
+<tr><td>Spot rate (live pool)</td><td>1 USDC = 19,584,562,199 MUSE</td></tr>
+<tr><td>Gross output before hook fee</td><td>Output at the spot rate, before the 3% hook</td></tr>
+<tr><td>LP fee · 0.30% of input</td><td>The Uniswap V4 pool's 0.3% liquidity-provider fee</td></tr>
+<tr><td>Price impact (excl. LP fee)</td><td>How much the price moves because of your trade's size</td></tr>
+<tr><td>Total impact incl. LP fee</td><td>Price impact + LP fee combined</td></tr>
+<tr><td>Hook fee · 3% of output, paid to the agent wallet</td><td>The pool's custom hook fee — $MUSE on a buy, USDC on a sell — to <span class="mono">0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4</span></td></tr>
+<tr><td>Net you receive</td><td>Gross output minus the 3% hook fee</td></tr>
+<tr><td>Minimum received (after slippage)</td><td>Your slippage-protected floor — default 2% (chips: 0.5% / 1% / 2% / 5%)</td></tr>
+<tr><td>Execution rate (net)</td><td>The effective rate after all fees</td></tr>
+</table>
+<p>The minimum received becomes the swap's amountOutMinimum. If the pool moves beyond it before your transaction lands, the swap reverts instead of filling at a worse price.</p>
+
+<h2>Approvals &amp; swap — up to three wallet confirmations</h2>
+<p>The Universal Router pulls your input token through Permit2, so a swap takes up to three wallet confirmations. Each approval is for the exact swap amount only — never unlimited.</p>
+<ol>
+<li><strong>Approve USDC → Permit2</strong> — one ERC-20 approval letting Permit2 move the input token.</li>
+<li><strong>Permit2 → Universal Router</strong> — lets the router spend that allowance for this swap (1-year expiry, exact amount).</li>
+<li><strong>Swap on the Universal Router</strong> — V4_SWAP · SWAP_EXACT_IN_SINGLE + SETTLE_ALL + TAKE_ALL, 30-minute deadline.</li>
+</ol>
+<p>Once the wallet is connected and an amount is entered, the primary "Swap" button is enabled and a transaction log records each step.</p>
+
+<h2>Why wallet apps can't quote this pool</h2>
+<p>The pool's custom hook takes a 3% fee from the swap's output token — $MUSE on a buy, USDC on a sell — paid to the agent wallet <span class="mono">0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4</span>. That hook makes Uniswap's official V4Quoter revert, and every aggregator behind Bitget Wallet, OKX Web3, and MetaMask Swap depends on a quoter, so they all answer "No quote available".</p>
+<p>The interactive page never calls the quoter. It reads the pool's sqrtPriceX96, tick, and liquidity straight from the PoolManager, runs the Uniswap V4 exact-input math itself (single position range, ticks 304080–308520), then builds the same Universal Router calldata that completed the pool's first live swap on 2026-11-07. Quotes are estimates from the block shown above — if the price leaves the position's range, liquidity runs out and large swaps can only fill partly up to the range edge.</p>
+
+<h2>Contracts &amp; pool — Arc · chain 5042</h2>
+<table>
+<tr><th>Contract</th><th>Address</th></tr>
+<tr><td>USDC (token0, 6 dec)</td><td><a href="https://arc.etherscan.io/address/0x3600000000000000000000000000000000000000">0x3600000000000000000000000000000000000000</a></td></tr>
+<tr><td>$MUSE (token1, 9 dec)</td><td><a href="https://arc.etherscan.io/address/0xd1242aEcA57Cb80f9067800F2f43D78cc3F8D198">0xd1242aEcA57Cb80f9067800F2f43D78cc3F8D198</a></td></tr>
+<tr><td>Fee hook (3%)</td><td><a href="https://arc.etherscan.io/address/0xD8791D64Be0ecca433BBe30c2A4Ff36D7Eca0044">0xD8791D64Be0ecca433BBe30c2A4Ff36D7Eca0044</a></td></tr>
+<tr><td>PoolManager</td><td><a href="https://arc.etherscan.io/address/0x8366a39CC670B4001A1121B8F6A443A643e40951">0x8366a39CC670B4001A1121B8F6A443A643e40951</a></td></tr>
+<tr><td>Universal Router</td><td><a href="https://arc.etherscan.io/address/0x4fcA4a51Ab4F23A7447b3284fBd7D73289A89Fb1">0x4fcA4a51Ab4F23A7447b3284fBd7D73289A89Fb1</a></td></tr>
+<tr><td>Permit2</td><td><a href="https://arc.etherscan.io/address/0x000000000022D473030F116dDEE9F6B43aC78BA3">0x000000000022D473030F116dDEE9F6B43aC78BA3</a></td></tr>
+<tr><td>Pool ID</td><td class="mono">0x5a14e63c9943a180d24b31f45964bc11e24639e9f055f88f33a3ac58b6b27ff1</td></tr>
+<tr><td>Pool key</td><td>fee 3000 · tickSpacing 60 · position NFT 322298 · range [304080, 308520]</td></tr>
+<tr><td>First live swap</td><td><a href="https://arc.etherscan.io/tx/0x849ef9f90e11b648ba3202ea068e7ebe7be6453ffbdc5dab107f520161dc27ef">0x849ef9…1dc27ef</a> · 0.05 USDC → 986,590,874.86 $MUSE gross, 3.000% hook fee proven onchain</td></tr>
+</table>
+
+<div class="callout green">
+<p><strong>Where the live page is:</strong> the interactive version of this page runs on muse.ai at the original Swap $MUSE space — open it inside Bitget Wallet's, MetaMask's, or OKX Wallet's built-in browser to connect a wallet and swap. This GitHub copy is the static explainer.</p>
+</div>
+
+<footer>
+<p>Quotes are computed locally in your browser from live Arc pool state on the interactive page. You sign everything in your own wallet; this page holds no keys and cannot move funds by itself.</p>
+<p><a href="../">← All Muse sites</a></p>
+</footer>
+</div>
+</body>
+</html>

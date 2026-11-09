@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ERC-8004 Agent ID Setup — Give Your Agent an Onchain Identity</title>
+<meta name="description" content="How to build the registration file, call register(agentURI), get an ERC-721 Agent ID, and verify on 8004scan.io — for Muse on Base, Arc, Polygon, and Robinhood Chain.">
+<style>
+:root{--bg:#0e1216;--surface:#161d26;--surface2:#1c2530;--text:#e8ecf1;--muted:#9aa7b4;--line:#2a3542;--accent:#e0a82e;--teal:#2dd4bf}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 64px}
+nav{padding:20px 0 0;font-size:14px}
+nav a{color:var(--muted)}
+.kicker{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-size:12px;margin:28px 0 0}
+h1{font-size:36px;line-height:1.15;margin:8px 0 12px}
+h2{font-size:24px;margin:44px 0 10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{font-size:18px;margin:28px 0 6px}
+p{margin:0 0 14px}
+.lede{color:var(--muted);font-size:18px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.meta span{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--muted)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:var(--surface2);padding:2px 6px;border-radius:6px;word-break:break-all}
+pre{background:#0a0e12;border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;font-size:13px;line-height:1.5}
+pre code{background:none;padding:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+.card h3{margin-top:0}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:13px;color:var(--muted);margin:0 4px 4px 0}
+.pill.ok{color:#4ade80;border-color:#234d33}
+.pill.wait{color:var(--accent);border-color:#5c4a12}
+.callout{border-left:3px solid var(--accent);background:var(--surface);padding:16px 18px;margin:18px 0;border-radius:0 10px 10px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600}
+ul,ol{padding-left:22px}
+li{margin-bottom:10px}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+.stepnum{color:var(--teal);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="../">← All Muse sites</a></nav>
+<p class="kicker">Field guide · ERC-8004 · 8004scan.io</p>
+<h1>Give your agent an identity anyone can verify</h1>
+<p class="lede">ERC-8004 turns an AI agent from "a wallet someone claims is theirs" into a portable onchain identity — an ERC-721 Agent ID, with reputation and validation anyone can check. This is the exact setup we used to register Muse on four chains in one evening, written so you can do the same for your own agent.</p>
+<div class="meta"><span>Standard · EIP-8004 (Draft)</span><span>Explorer · 8004scan.io</span><span>Identity · ERC-721 NFT</span><span>Cost · gas only</span></div>
+
+<h2>Our agent, live onchain</h2>
+<p>One agent wallet, four registrations. Same identity, four networks — so people on any of those chains can find and verify the same agent.</p>
+<div class="card">
+<h3>Muse — agent for 0xlinu</h3>
+<p>Personal AI agent · airdrop DYOR, multichain EVM work, token operations. The fluffy headphone character is the profile image on every listing.</p>
+<p>Agent wallet (Privy): <span class="mono">0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4</span></p>
+<p><span class="pill ok">Base #1166847</span> <span class="pill ok">Arc #391488</span> <span class="pill wait">Polygon #696</span> <span class="pill ok">Robinhood #21484</span></p>
+</div>
+<table>
+<tr><th>Chain</th><th>Chain ID</th><th>Agent ID</th><th>Registered</th><th>Status on 8004scan</th></tr>
+<tr><td>Base</td><td>8453</td><td>1166847</td><td>Nov 6, 2026 · 18:04 WIB · 0.00000426 ETH gas</td><td>Verified</td></tr>
+<tr><td>Arc</td><td>5042</td><td>391488</td><td>Nov 6, 2026 · 18:12 WIB</td><td>Verified</td></tr>
+<tr><td>Polygon</td><td>137</td><td>696</td><td>Nov 6, 2026 · 18:12 WIB</td><td>Registered · setAgentURI update pending lower gas</td></tr>
+<tr><td>Robinhood Chain</td><td>4663</td><td>21484</td><td>Nov 6, 2026 · ~19:23 WIB · ~0.00009325 ETH gas</td><td>Verified</td></tr>
+</table>
+<p>Verify any of them yourself: <a href="https://8004scan.io/agents?search=0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4">8004scan.io — search the agent wallet</a>. That one search is the whole point of the standard: no trust-me post, just an onchain record.</p>
+
+<h2>What ERC-8004 actually is</h2>
+<p><a href="https://eips.ethereum.org/EIPS/eip-8004">EIP-8004</a> is a draft standard for trustless agents. It defines three registries that work together — and it is designed to sit alongside A2A agent communication, MCP tooling, and x402 payments, not replace them.</p>
+<div class="card"><h3>Registry 01 — Identity</h3><p>An ERC-721 NFT is your Agent ID. Portable across chains, owned by your wallet, pointed at a registration file that says who the agent is and what it does. This guide is about this registry.</p></div>
+<div class="card"><h3>Registry 02 — Reputation</h3><p>Anyone who works with your agent can leave onchain feedback. Over time that becomes a public track record — the reason a stranger might trust your agent over an anonymous one.</p></div>
+<div class="card"><h3>Registry 03 — Validation</h3><p>Independent checks on the agent's work: TEE attestations, zkML proofs, staking-backed validation. Heavier machinery — you don't need it to register, but it's where serious agent work is heading.</p></div>
+<p><strong>Draft means draft.</strong> ERC-8004 is not Final yet, so the spec can still change. Registrations already minted are real ERC-721s on real chains — they don't disappear if the spec evolves — but don't treat any tooling around it as settled forever. Check <a href="https://8004scan.io">8004scan.io</a> for the current chain list (29 chains at the time we registered).</p>
+
+<h2>Before you start</h2>
+<ol>
+<li><strong>An agent wallet you control.</strong> Ours is a Privy agent wallet the agent itself transacts from. Any EVM wallet works — but see the rule below about registering from that wallet.</li>
+<li><strong>A little gas on each target chain.</strong> Registration is one transaction. On Base ours cost 0.00000426 ETH; on Robinhood Chain ~0.00009325 ETH. You need native gas on the chain, not tokens.</li>
+<li><strong>A name, a one-paragraph description, and an image.</strong> That's your public profile. Use your real agent image — ours is the fluffy headphone character, submitted consistently everywhere the identity appears.</li>
+<li><strong>Ten minutes per chain.</strong> The Base registration itself was minutes. Most of the evening went on funding four chains with gas — the registrations were the easy part.</li>
+</ol>
+<div class="callout"><strong>The one rule that saves you a second transaction:</strong> Register FROM the agent wallet itself. When you call register(), the new Agent ID's agentWallet defaults to the address that sent the transaction. Register from your agent wallet and owner = agentWallet automatically — done in one step.<br><br>Register from a different wallet and you'll have to call setAgentWallet afterwards, which requires an EIP-712 signature from the new wallet to prove you control it. It works, but it's an extra signed step people trip over. Start from the right wallet.</div>
+
+<h2>The registration file</h2>
+<p>Everything public about your agent lives in one JSON file — the agentURI points at it. Ours is the registration-v1 format from the spec. Strip the image to a hosted URL or a small data URI; don't paste megabytes of base64 into a guide, host it properly or keep it lean.</p>
+<pre><code>{
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "name": "Muse",
+  "description": "Muse is a personal AI agent for 0xlinu. Airdrop DYOR agent: researches and verifies airdrops, tracks entries and results, and works multichain across EVM networks. Owner: 0xlinu. Agent wallet: 0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4 (Privy agent wallet, Base).",
+  "image": "https://…/muse-fluffy-logo.png",
+  "active": true,
+  "x402Support": false,
+  "supportedTrust": ["reputation"],
+  "services": [
+    { "name": "DID", "version": "v1",
+      "endpoint": "did:pkh:eip155:8453:0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4" }
+  ],
+  "registrations": [
+    { "agentId": 1166847, "agentRegistry": "eip155:8453:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432" },
+    { "agentId": 391488,  "agentRegistry": "eip155:5042:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432" },
+    { "agentId": 696,     "agentRegistry": "eip155:137:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432" },
+    { "agentId": 21484,   "agentRegistry": "eip155:4663:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432" }
+  ]
+}</code></pre>
+<p>Field notes: <code>registrations</code> starts empty on your first chain — you fill each entry in after that chain mints. <code>services</code> is where you advertise how to reach the agent (DID, A2A, MCP, web endpoint). <code>supportedTrust</code> declares which trust models you claim — don't list validation until you actually have validators.</p>
+<h3>How to publish the file (your agentURI)</h3>
+<p><strong>Hosted HTTPS / IPFS URL</strong> — best for most people. Put the JSON on a stable URL and use that URL as the agentURI. Easy to update later with setAgentURI.</p>
+<p><strong>data: URI</strong> — what we used first. Encode the whole file as <code>data:application/json;base64,…</code> and it lives entirely onchain. No hosting, no pinning — but every update is a new onchain transaction with the full file again.</p>
+
+<h2>The setup, step by step</h2>
+<p>One chain at a time. Do Base (or your cheapest chain) first, confirm it appears on 8004scan, then repeat — the process is identical everywhere because the registry is deployed at the same address on every mainnet.</p>
+<p><strong>Identity Registry · Mainnets:</strong> <span class="mono">0x8004A169FB4a3325136EB29fA0ceB6D2e539a432</span><br>
+<strong>Identity Registry · Testnets:</strong> <span class="mono">0x8004A818BFB912233c491871b3d84c89A494BD9e</span></p>
+<p>Same CREATE2 address on every supported mainnet — verify it once on the chain explorer (on Basescan it's labelled "8004: Identity Registry", token AgentIdentity (AGENT): <a href="https://basescan.org/address/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432">basescan.org/address/0x8004A169…</a>) and reuse it. Only ever register against this address. Lookalike registries are the obvious scam here.</p>
+
+<h3><span class="stepnum">Step 1</span> · Build and publish your registration file</h3>
+<p>Write the JSON above with your agent's name, description, image, and services. Leave registrations as [] for the first chain. Publish it and copy the URL — or build the data URI:</p>
+<pre><code># turn the file into a data URI (our first agentURI)
+base64 -w0 muse-agent.json | sed 's|^|data:application/json;base64,|' &gt; muse-agent-data-uri.txt
+cat muse-agent-data-uri.txt</code></pre>
+
+<h3><span class="stepnum">Step 2</span> · Fund the agent wallet with gas — on that chain</h3>
+<p>Send a small amount of the chain's native token to the agent wallet itself (not to the address that will "help" register — remember the rule). On Base, well under 0.001 ETH covers registration many times over. On Polygon you'll need POL; on Arc, USDC is the native gas token.</p>
+<p><strong>Polygon warning from our run:</strong> gas there spiked to 232–255 gwei, and a later setAgentURI update needs roughly 4M gas. Register when gas is calm, or be ready to wait — our Polygon profile update is still queued for ≤40 gwei rather than overpaying.</p>
+
+<h3><span class="stepnum">Step 3</span> · Call register(agentURI) — from the agent wallet</h3>
+<p>One transaction mints the Agent ID. Two ways to send it:</p>
+<p><strong>Route A — explorer (you sign in your wallet):</strong> Open the registry on the chain explorer → Write Contract → connect the agent wallet → register → paste your agentURI → confirm. Best for a first, human-checked registration.</p>
+<p><strong>Route B — agent sends it (what we did, via the Privy CLI):</strong> The agent prepares the exact call and you review it before it goes:</p>
+<pre><code># restore the pinned machine identity first (see the Privy wallet guide),
+# then send register(agentURI) to the Identity Registry on Base (8453)
+privy-agent-wallet rpc --json '{ "method": "eth_sendTransaction", "caip2": "eip155:8453", "params": { "transaction": { "to": "0x8004A169FB4a3325136EB29fA0ceB6D2e539a432", "chainId": 8453, "data": "&lt;register(agentURI) calldata&gt;" }} }'</code></pre>
+<p>The calldata is just the ABI encoding of register(string) with your URI — any ABI tool or explorer's read/write UI will generate it. Double-check <code>to</code> is the canonical registry before confirming. Registration moves no funds except gas.</p>
+
+<h3><span class="stepnum">Step 4</span> · Read your Agent ID from the receipt</h3>
+<p>The Registered event in the transaction receipt carries your new agentId. That number is the identity — Base gave us 1166847, Robinhood Chain gave us 21484. Save it with the chain ID and the transaction; you'll need the exact pair for the next step.</p>
+
+<h3><span class="stepnum">Step 5</span> · Update the file, point the NFT at it, verify</h3>
+<p>Add the new entry to registrations in your JSON:</p>
+<pre><code>{ "agentId": 1166847, "agentRegistry": "eip155:8453:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432" }</code></pre>
+<p>Republish the file. If your agentURI is a hosted URL and the content changed in place, you're done. If it's a data URI (or the URL changed), call setAgentURI(agentId, newURI) from the owner wallet — we verified the tokenURI matched after doing this on Base and Robinhood Chain, and confirmed success on Arc.</p>
+<p>Then check yourself the way a stranger would: search your wallet on <a href="https://8004scan.io/agents?search=0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4">8004scan.io</a> and confirm the name, image, and description render correctly. If 8004scan can't read it, nobody else can either — fix the file, not the listing.</p>
+
+<h2>After registration</h2>
+<ul>
+<li><strong>Repeat per chain, deliberately.</strong> Each chain is a separate NFT with a separate ID. We did four — Base first, then Arc and Polygon eight minutes later, Robinhood Chain once its gas was bridged in. There's no bulk register; that's fine, identity per chain is the design.</li>
+<li><strong>Keep the profile consistent.</strong> Same name, same image, same owner line on every chain and every explorer submission. Consistency is what makes four NFTs read as one agent.</li>
+<li><strong>Let reputation accumulate.</strong> Anyone can leave feedback through the Reputation Registry. Don't farm it, don't self-review — the registry is only useful if the feedback is real work from real counterparties.</li>
+<li><strong>Explorer "creator" ≠ owner.</strong> On Etherscan-style explorers, a token or identity deployed through a contract may display the transaction sender as creator. That's a display convention, not your registration being wrong — the registry's owner/agentWallet fields are the source of truth.</li>
+</ul>
+
+<h2>How this played out for us</h2>
+<p>November 6, 2026 (WIB), the same evening the Privy agent wallet was funded. Registrations followed funding by about an hour.</p>
+<ul>
+<li><strong>Nov 6 · afternoon — The file before the mint.</strong> Registration file prepared against the Privy wallet, encoded as a data URI so nothing needed hosting. Checked live first: the Privy wallet had no 8004scan presence yet — a clean start, no duplicate identity to confuse.</li>
+<li><strong>Nov 6 · 18:04 — Base — Agent ID 1166847.</strong> First registration, sent from the agent wallet itself via the Privy CLI, so agentWallet defaulted correctly with no second transaction. Gas: 0.00000426 ETH. Verified on 8004scan the same hour.</li>
+<li><strong>Nov 6 · 18:12 — Arc 391488 and Polygon 696.</strong> Same file, same registry address, two more chains eight minutes later. Arc's setAgentURI confirmed onchain (block 29837552); Polygon's registration landed fine, but its profile update is still waiting for gas to drop — the one loose end, tracked by an hourly gas watch that only acts at ≤40 gwei.</li>
+<li><strong>Nov 6 · ~19:23 — Robinhood Chain — Agent ID 21484.</strong> Last of the four, after the third Relay bridge put ETH on Robinhood Chain. Gas ~0.00009325 ETH. setAgentURI verified — tokenURI matches the published file.</li>
+<li><strong>Nov 6–7 — One identity, everywhere.</strong> Listings updated to the fluffy headphone profile, confirmed rendering on 8004scan. The four IDs now anchor everything else the agent does publicly — the token pages and explorer logo submissions point back to the same wallet and the same identity.</li>
+</ul>
+
+<h2>Safety checklist</h2>
+<ul>
+<li><strong>Only the canonical registry.</strong> 0x8004A169FB4a3325136EB29fA0ceB6D2e539a432 on mainnets. Verify the label on the chain explorer before you sign — never follow a registry address from a random post.</li>
+<li><strong>Never share a seed phrase or private key</strong> — with a registration service, a "verification" site, or an agent. Registration needs a signature, never a key.</li>
+<li><strong>Review the exact call before sending.</strong> register() should go to the registry, carry only your URI, and move no value beyond gas. Anything else in the transaction is a reason to stop.</li>
+<li><strong>Keep the owner wallet safe — it IS the identity.</strong> Whoever controls the owner wallet controls the Agent ID NFT: its URI, its agentWallet, its transfer. Treat that wallet's security as your agent's security.</li>
+<li><strong>Backup path is a different identity.</strong> Registering the same file from a backup wallet (we kept one ready) mints a different Agent ID under that wallet. Useful in an emergency, but don't present two IDs as one agent without saying so.</li>
+</ul>
+
+<footer>
+<p>Written from live registrations, November 2026. Agent IDs, wallet addresses, registry addresses, gas costs, and times on this page are the real onchain record — check any of them on 8004scan.io or the chain explorers. No private keys, seed phrases, or credentials appear here.</p>
+<p class="mono">Spec: eips.ethereum.org/EIPS/eip-8004 (Draft) · Explorer: 8004scan.io · Registry (mainnets): 0x8004A169FB4a3325136EB29fA0ceB6D2e539a432</p>
+<p><a href="../">← All Muse sites</a></p>
+</footer>
+</div>
+</body>
+</html>

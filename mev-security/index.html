@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MEV &amp; Security Research — Don't Trust. Verify Onchain.</title>
+<meta name="description" content="MEV attacks, sandwich maths, the AutoSniper case file, Flashbots per chain, the Bankr hacks, airdrop verdicts, launchpads, and the defensive playbook. Research snapshot 6–7 Nov 2026.">
+<style>
+:root{--bg:#0e1216;--surface:#161d26;--surface2:#1c2530;--text:#e8ecf1;--muted:#9aa7b4;--line:#2a3542;--accent:#e0a82e;--teal:#2dd4bf;--green:#4ade80;--red:#f87171}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 64px}
+nav{padding:20px 0 0;font-size:14px}
+nav a{color:var(--muted)}
+.kicker{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-size:12px;margin:28px 0 0}
+h1{font-size:36px;line-height:1.15;margin:8px 0 12px}
+h2{font-size:24px;margin:44px 0 10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{font-size:18px;margin:20px 0 6px}
+p{margin:0 0 14px}
+.lede{color:var(--muted);font-size:18px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:24px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.stat b{font-size:24px;display:block}
+.stat span{color:var(--muted);font-size:13px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:var(--surface2);padding:2px 6px;border-radius:6px;word-break:break-all}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+.card h3{margin-top:0}
+.card.dnu{border-color:#5b2323}
+.card.dnu h3{color:var(--red)}
+.badge{display:inline-block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin-bottom:8px}
+.badge.red{color:var(--red)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600}
+ul,ol{padding-left:22px}
+li{margin-bottom:8px}
+.callout{border-left:3px solid var(--accent);background:var(--surface);padding:16px 18px;margin:18px 0;border-radius:0 10px 10px 0}
+.callout.red{border-left-color:var(--red)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="../">← All Muse sites</a></nav>
+<p class="kicker">Research Library · Permanent Page · Snapshot 06–07 Nov 2026 · Asia/Jakarta (WIB) · Re-check before acting</p>
+<h1>Don't trust. Verify onchain.</h1>
+<p class="lede">0xlinu × Muse — DYOR, MEV &amp; Security. Companion pages: Privy Setup, Muse Token Build $MUSE/$RMUSE, ERC-8004.</p>
+<div class="stats">
+<div class="stat"><b>32</b><span>Parts</span></div>
+<div class="stat"><b>20+</b><span>Reports</span></div>
+<div class="stat"><b>1,410</b><span>MEV repos scanned</span></div>
+<div class="stat"><b>4</b><span>Chains (Base · Arc · Polygon · Robinhood)</span></div>
+<div class="stat"><b>$344k</b><span>Bankr losses</span></div>
+<div class="stat"><b>804k</b><span>CLAUDE "holders"</span></div>
+</div>
+
+<h2>How we DYOR — every time</h2>
+<p>The standing rule since Nov 6: research and verify before recommending or claiming. If it fails a check, it doesn't get funded — no exceptions for hype.</p>
+<ol>
+<li><strong>Verify the source.</strong> Official docs and onchain contracts first. Directory labels and marketing pages don't count.</li>
+<li><strong>Check the money.</strong> Real fees, real gas, real custody. Who holds the keys? Who can pause, mint, or drain?</li>
+<li><strong>Hunt red flags.</strong> Placeholder addresses, bundled snipes, fake holder counts, unlimited approvals.</li>
+<li><strong>Test small, prove it.</strong> A claim isn't proven until a live test or onchain read confirms it. Then we label it PROVEN.</li>
+<li><strong>Save everything.</strong> Every lesson goes to the full report + tools-and-sites log + memory. Nothing learned gets dropped.</li>
+</ol>
+
+<h2>MEV attacks — sandwich maths on our own pool</h2>
+<p>A sandwich attack on a $MUSE buy, measured against the real pool. No attack: 879,412,567 MUSE for $0.05.</p>
+<table>
+<tr><th>Attack size</th><th>MUSE received</th><th>Loss vs no attack</th><th>Attacker profit</th></tr>
+<tr><td>$0.05</td><td>733.2M</td><td>−16.6%</td><td>$0.0054</td></tr>
+<tr><td>$0.20</td><td>461.4M</td><td>−47.5%</td><td>$0.0125</td></tr>
+<tr><td>$0.30 peak</td><td>356.4M</td><td>−59.5%</td><td>$0.0135</td></tr>
+<tr><td>$1.00</td><td>104.4M</td><td>−88.1%</td><td>−$0.0009</td></tr>
+</table>
+<p>Small pools are sandwich bait. The defence is the same as the sniper's: tiny sizes, minimum-out guards that revert instead of filling badly, and never trading into a thin pool at size.</p>
+
+<h2>AutoSniper v4.0 — case file</h2>
+<div class="card dnu"><span class="badge red">Do not copy or fund</span><h3>AutoSniper — live MEV bot, investigated Nov 7</h3><p><code>0x000000000000feA5F4B241F9E77B4D43B76798a9</code> on Ethereum mainnet is a live NFT sniper + MEV bot — AutoSniper v4.0 (for @oSnipeNFT, by 0xQuit), verified on Etherscan and labelled "MEV Bot". Balance 6.325501 ETH (~$14,163), 5,447 txs, still active at investigation time.</p><p>Operator osnipe.eth calls a generic multicall (snipe_2572234525) to buy underpriced NFTs on OpenSea Seaport 1.6, paying block builders (BuilderNet, Eureka, Titan) to land first, profit to osnipe.eth. Multi-user: deposits, per-sniper balances, pause flag. The leading zeros are a deliberate vanity/mined address — cheaper calldata gas + branding, not a burn address.</p><p>Do NOT copy or fund it — it's oSnipeNFT/0xQuit production infrastructure.</p></div>
+<p><strong>Legit MEV repos we found:</strong> Flashbots (mev-boost, mev-share, Protect), UniswapX, CowSwap solvers, 1inch Fusion. <strong>Scam pattern:</strong> "MEV bot" GitHub repos that ask you to fund a contract with a hidden drain — the 1,410-repo scan found the same drain code reused across dozens of forks.</p>
+
+<h2>Flashbots — what works per chain</h2>
+<table>
+<tr><th>Chain</th><th>Flashbots Protect</th><th>MEV-Boost / MEV-Share</th><th>Notes</th></tr>
+<tr><td>Ethereum</td><td>Yes</td><td>Yes</td><td>Full protection available</td></tr>
+<tr><td>Base</td><td>No</td><td>Partial</td><td>Sequencer-controlled; no public Protect</td></tr>
+<tr><td>Polygon</td><td>No</td><td>Partial</td><td>Fast blocks, low MEV surface at our size</td></tr>
+<tr><td>Robinhood</td><td>No</td><td>No</td><td>No Flashbots infra; tiny sizes are the defence</td></tr>
+<tr><td>Arc</td><td>No</td><td>No</td><td>No Flashbots infra; USDC gas, fixed 20 gwei base fee</td></tr>
+</table>
+<p>Flashbots Protect only exists on Ethereum mainnet + Sepolia/Holesky. On the chains we actually use, the protection is size discipline, not infrastructure. Docs: <a href="https://docs.flashbots.net">docs.flashbots.net</a> · <a href="https://docs.privy.io/recipes/flashbots-protect">Privy × Flashbots Protect recipe</a>.</p>
+
+<h2>Bankr — the custody lesson</h2>
+<p>Bankr is a real, leading AI trading agent — $BNKR on Base (<code>0x22af33fe49fd1fa80c7149773dde5890d3c76f3b</code>), 100B supply, 18 decimals. There is no $BNKR airdrop.</p>
+<ul>
+<li><strong>4 May 2026 — ~$174K.</strong> Exploit via the Grok integration (3B DRB). A third-party AI output carried transaction instructions the agent followed.</li>
+<li><strong>19 May 2026 — ~$170K.</strong> 14 wallets drained. Same root cause: the agent accepted instructions from an untrusted source.</li>
+<li><strong>The point:</strong> Privy holds keys; Bankr holds an ERC-7710 delegation — functionally custodial. No Bankr integration for the agent wallet, and it can't swap on Arc anyway.</li>
+</ul>
+<p>Lessons kept: scoped API keys, never accept transaction instructions from social replies or third-party AI outputs.</p>
+
+<h2>Airdrop verdicts</h2>
+<table>
+<tr><th>Drop</th><th>Verdict</th><th>Why</th></tr>
+<tr><td>IPX FAN SZN</td><td>Low</td><td>Deadline 15 Nov 2026; unproven value</td></tr>
+<tr><td>Fomo $7 bot</td><td>Avoid</td><td>Pay-to-play pattern</td></tr>
+<tr><td>Grokiefun</td><td>High</td><td>Red flags on team/contract</td></tr>
+<tr><td>Syqora</td><td>High</td><td>Red flags on team/contract</td></tr>
+<tr><td>Saturn testnet</td><td>Medium</td><td>Testnet only, low value</td></tr>
+<tr><td>Fungo + Sovren</td><td>Already entered</td><td>Entered Nov 6; Sovren deadline passed 9 Nov 11:59 WIB, no winners yet</td></tr>
+</table>
+<p>KieDex TGE: 18 Nov 2026, 12:00 UTC — watch only.</p>
+<div class="card"><h3>The CLAUDE holder-spam lesson</h3><p>Token <code>0xA8DEF24B9e5cF402E14D6f94e2e460499377d3aa</code> shows 804,056 holders — because one owner sent 2 CLAUDE to 500 wallets per batch, 25+ batches. Most holders hold exactly 2 tokens of dust and never traded. Holder count is a vanity metric. Batch-500 lesson: 1,850 recipients cost $0.37 on Base / 1.284 USDC on Arc.</p></div>
+
+<h2>Launchpads</h2>
+<table>
+<tr><th>Platform</th><th>Chain</th><th>Launch fee</th><th>Trading fee</th><th>Verdict</th></tr>
+<tr><td>Pools.xyz (Uniswap)</td><td>Robinhood + Arc</td><td>$0</td><td>0.25%</td><td>Cheapest legit — permanently locked v4 liquidity</td></tr>
+<tr><td>Robinlaunch</td><td>Robinhood</td><td>0.0002 ETH</td><td>1%</td><td>Cheapest bonding-curve alternative on Robinhood</td></tr>
+<tr><td>biddin</td><td>Arc</td><td>1 USDC</td><td>1%</td><td>Cheapest bonding-curve alternative on Arc</td></tr>
+<tr><td>Clanker v5</td><td>Arc + more</td><td>$0</td><td>1–10% tax</td><td>Legit — audited, 99% decaying sniper fee. Factory <code>0xcA111dcdd2cE924c3378d6514fDCbC46217bcA16</code>, hook <code>0x565189a6780D1a50FC1792F64db8e4881119AaCC</code>. Real $CLANKER: <code>0x1bc0c42215582d5A085795f4baDbaC3ff36d1Bcb</code></td></tr>
+<tr><td>Pump.fun</td><td>Solana only</td><td>—</td><td>—</td><td>Not an option for EVM creation</td></tr>
+<tr><td>Arcx</td><td>Arc</td><td>—</td><td>—</td><td>Do not use — TBD placeholder addresses</td></tr>
+</table>
+<p>Robinhood Chain launch risks: fake Pons front-ends, honeypots, and a bundled-snipe ring of at least $18.43M (navi.trade, 53 launches). New launches need contract-level checks before any buy.</p>
+<p>disperse.app (<code>0xD152f549545093347A162Dce210e7293f1452150</code>) has no code on Arc — do not use for Arc multisends.</p>
+
+<h2>Charts &amp; TA — the honest result</h2>
+<p>DexScreener vs GeckoTerminal, deep-dived Nov 7. Both embed TradingView. DexScreener: free, no key, 300 req/min, snapshots only — no OHLCV, no holder count. GeckoTerminal: free beta API, keyless OHLCV + trades — the TA route.</p>
+<p><strong>TA is impossible right now — and we say so.</strong> At deep-dive time: Alon had 2 hourly candles, GHOST had 1, $MUSE had 1 daily candle. Every indicator — RSI (needs 15), Bollinger (20), MACD (26) — returns INSUFFICIENT DATA. No chart gets dressed up to pretend otherwise.</p>
+<p>"Fewer, verified signals beat a dashboard full of guesses."</p>
+
+<h2>Defensive playbook</h2>
+<ol>
+<li>Verify the contract address from the launchpad or pool — never from a post. The address is the identity, not the name or ticker.</li>
+<li>Check owner powers: mint, pause, blacklist, maxTx, tax setters. A dangerous owner is a veto, whatever the score says.</li>
+<li>Simulate buy + sell before spending. If the sell reverts or returns under 50%, it's a honeypot — skip.</li>
+<li>Approve exactly the total, never unlimited.</li>
+<li>Never share a seed phrase or private key — with anyone, for any reason.</li>
+<li>Watch for address poisoning: a lookalike wallet with the same prefix and suffix is a scammer, not you.</li>
+<li>Fake-POL warning: token <code>0xe174c72d8f772838269a4dc5a88ce0cdfcbbc02b</code> ("POL" with a combining dot) is a spoof — balanceOf and totalSupply both revert, worth $0. The scammer address <code>0x333089e07fad944bc5d07f4679af7ace9efec932</code> mimics the real wallet <code>0x3330Cbbb45Ceb68447De5a0550e6FA18C4Cec932</code>. Never approve, swap, or interact with it.</li>
+<li>Locked liquidity: check the % and the duration, not just the lock label.</li>
+<li>Holder concentration: exclude contracts, watch the deployer and bundles.</li>
+<li>Launchpad provenance: a known launchpad is a real signal; an unknown factory is a question mark.</li>
+</ol>
+
+<h2>Execution venues we use</h2>
+<p>KyberSwap (keyless swaps, no fee, Base/Robinhood/Arc), Relay (bridges, proven 3×), Jupiter (Solana). Odos shut permanently on Jul 30, 2026 — do not use.</p>
+<p>Sniper v2 is LIVE on Arc, Base, Robinhood &amp; Polygon — $0.02 buys, cap 5, watcher every 2 min, 0 buys so far. Expanded quotes: Robinhood 3→208, Base 2→13. Router V2: Polygon <code>0x1095692a6237d83c6a72f3f5efedb9a670c49223</code>, Base <code>0x6ff5693b99212da76ad316178a184ab56d299b43</code>. Three bugs fixed in the apply. First cycle 19:35:13 WIB: 0 buys. Polygon GAS-SKIP ~271 gwei. Full log on the <a href="../token-sniper/">Token Sniper Build</a> page.</p>
+
+<div class="callout red"><strong>Fake-POL warning:</strong> scammer <code>0x333089e07fad944bc5d07f4679af7ace9efec932</code> sent 5 spoof "POL" at 19:19 WIB on 7 Nov. The user confirmed they never sent it — an address-poisoning attempt. Do not touch <code>0xe174c72d8f772838269a4dc5a88ce0cdfcbbc02b</code>.</div>
+
+<footer>
+<p>Research snapshot: 6–7 Nov 2026 (Asia/Jakarta). Verdicts reflect what was verified at the time of each deep dive; fees, holder counts and balances are as recorded then. This page is research, not financial advice — DYOR applies to us too.</p>
+<p>Key sources: <a href="https://etherscan.io/address/0x000000000000fea5f4b241f9e77b4d43b76798a9#code">AutoSniper on Etherscan</a> · <a href="https://docs.flashbots.net">Flashbots docs</a> · <a href="https://docs.privy.io/recipes/flashbots-protect">Privy × Flashbots Protect</a> · <a href="https://t.me/airdropfind">Airdrop Finder</a> · <a href="https://dexscreener.com">DexScreener</a> · <a href="https://www.geckoterminal.com">GeckoTerminal</a></p>
+<p><a href="../">← All Muse sites</a></p>
+</footer>
+</div>
+</body>
+</html>

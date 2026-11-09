@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muse Token Build — $MUSE &amp; $RMUSE</title>
+<meta name="description" content="Two 100-trillion-supply tokens, deployed from the same agent wallet through the Privy CLI — no private key ever handled — with Uniswap v4 pools, a custom 3% hook, and a 1,850-wallet airdrop.">
+<style>
+:root{--bg:#0e1216;--surface:#161d26;--surface2:#1c2530;--text:#e8ecf1;--muted:#9aa7b4;--line:#2a3542;--accent:#e0a82e;--teal:#2dd4bf;--green:#4ade80}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 64px}
+nav{padding:20px 0 0;font-size:14px}
+nav a{color:var(--muted)}
+.kicker{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-size:12px;margin:28px 0 0}
+h1{font-size:36px;line-height:1.15;margin:8px 0 12px}
+h2{font-size:24px;margin:44px 0 10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{font-size:18px;margin:20px 0 6px}
+p{margin:0 0 14px}
+.lede{color:var(--muted);font-size:18px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:24px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.stat b{font-size:26px;display:block}
+.stat span{color:var(--muted);font-size:13px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:var(--surface2);padding:2px 6px;border-radius:6px;word-break:break-all}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+.card h3{margin-top:0}
+.badge{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin-bottom:8px}
+.addr{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;word-break:break-all}
+.addr b{color:var(--muted);font-weight:600}
+ul{padding-left:22px}
+ul li{margin-bottom:8px}
+ol.tl{padding-left:22px}
+ol.tl li{margin-bottom:12px}
+.callout{border-left:3px solid var(--accent);background:var(--surface);padding:16px 18px;margin:18px 0;border-radius:0 10px 10px 0}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="../">← All Muse sites</a></nav>
+<p class="kicker">Muse · Token Build · Arc + Robinhood Chain</p>
+<h1>How we built $MUSE &amp; $RMUSE</h1>
+<p class="lede">Two 100-trillion-supply tokens, deployed from the same agent wallet through the Privy CLI — no private key ever handled — with Uniswap v4 pools, a custom 3% hook, and a 1,850-wallet airdrop. This is the full build record.</p>
+<div class="stats">
+<div class="stat"><b>2</b><span>Tokens live</span></div>
+<div class="stat"><b>100T</b><span>Supply each · 9 decimals</span></div>
+<div class="stat"><b>3%</b><span>Hook fee · proven live</span></div>
+<div class="stat"><b>1,853</b><span>Holders ($MUSE, 9 Nov)</span></div>
+</div>
+
+<h2>The two tokens</h2>
+<p>Same blueprint, two chains. Copy any address — verify it on ArcScan or RobinScan before you interact.</p>
+
+<div class="card">
+<span class="badge">Arc · 5042</span>
+<h3>$MUSE — Muse · Relaunched 7 Nov 2026, 00:12 WIB</h3>
+<p class="addr"><b>Token contract</b><br>0xd1242aEcA57Cb80f9067800F2f43D78cc3F8D198</p>
+<p class="addr"><b>Factory</b><br>0xD5941aedf552ab2B9Ff1bB20C1C4bd7813B561e0</p>
+<p class="addr"><b>Hook</b><br>0xD8791D64Be0ecca433BBe30c2A4Ff36D7Eca0044</p>
+<p class="addr"><b>Pool ID — MUSE / USDC</b><br>0x5a14e63c9943a180d24b31f45964bc11e24639e9f055f88f33a3ac58b6b27ff1</p>
+<p>Seed: 10B MUSE + 0.5 USDC. FDV at seed: $5,000. Pool fee: 3000 (0.3%) + 3% hook. Position NFT: 322298 — concentrated.</p>
+<p><strong>First version superseded:</strong> The 6 Nov 23:07 deploy (0xD7Fc…79d4) was replaced. Its 100T was burned to the dead address. Do not use the old token.</p>
+</div>
+
+<div class="card">
+<span class="badge">Robinhood · 4663</span>
+<h3>$RMUSE — Robin Muse · Launched 7 Nov 2026, ~07:00 WIB</h3>
+<p class="addr"><b>Token contract</b><br>0x137aEA2D5fdb1e15711BbAfd31A038A933b5fd36</p>
+<p class="addr"><b>Factory</b><br>0x2B2A411Cf14D2D63395f2950333342cb3135926B</p>
+<p class="addr"><b>Hook</b><br>0xe7833f4179505CE865DFC73FDd61A489954140cc</p>
+<p class="addr"><b>Pool ID — RMUSE / WETH</b><br>0x7763e960970e50d5c7a4208fc3e0004055ea2b0fe47a944e10abdcc7e7be6fc1</p>
+<p>Seed: 99T RMUSE + 0.000099 ETH. Deployer holds: 1T (1%). Pool fee: 3000 + 3% in WETH. Position NFT: 4214669.</p>
+<p>Deploy cost: 0.00018337 ETH total. Explorer shows the agent wallet as "creator" because it sent the launch() transaction — the factory contract is the token's immediate creator.</p>
+</div>
+
+<h2>The stack</h2>
+<p>Every transaction was signed through the Privy Agent CLI from the agent wallet <span class="addr">0x0A1D…50C4</span>. No key was ever exported.</p>
+<ol>
+<li><strong>OpenZeppelin ERC-20 v5.7.0</strong> — Standard ERC-20, 9 decimals, 100T fixed supply. Arc compiles with evm_version = paris — Arc's EVM is pre-Shanghai, so no PUSH0.</li>
+<li><strong>CREATE2 factory</strong> — A factory deploys token + hook and creates the pool in one launch() call, so addresses are deterministic and the setup can't be half-done.</li>
+<li><strong>Uniswap v4 + custom hook</strong> — PoolManager + PositionManager + Permit2. The hook takes 3% in afterSwap. On Arc the original hook took the fee in the swap's output token; on Robinhood it was fixed to take it in WETH.</li>
+<li><strong>Permit2 approvals</strong> — Token → Permit2 → PositionManager. Three approvals before minting the position — the step most hand-rolled deploys forget.</li>
+<li><strong>Verify everything onchain</strong> — Pool price, tick, liquidity and balances were read back independently after every step — not trusted from the deploy script's output.</li>
+</ol>
+
+<h2>Timeline</h2>
+<p>48 hours from first deploy to two live tokens.</p>
+<ol class="tl">
+<li><strong>6 Nov · 23:07 WIB — First $MUSE deploy.</strong> First token deployed on Arc. Superseded the same night — supply burned, contract abandoned.</li>
+<li><strong>7 Nov · 00:12 WIB — $MUSE relaunch.</strong> Clean relaunch: 100T, seeded 10B MUSE + 0.5 USDC at $5k FDV, full-range position NFT 322143.</li>
+<li><strong>7 Nov · 05:14 WIB — Pool repositioned — 9.45× deeper.</strong> Burned NFT 322143, minted concentrated NFT 322298 in range [304080, 308520] (+25.08% / −20.24%). A 0.5 USDC buy went from moving price 50% to 9.57%. Total gas ~0.016 USDC.</li>
+<li><strong>7 Nov · 05:20 WIB — Airdrop — 4.838T to 1,850 traders.</strong> Direct push via our own Disperse contract (0x02C5…C607), tiered by 24h volume, 10 chunks. All 1,850 balances verified — 0 mismatches. Gas: 49.6M, cost 1.284 USDC. Holders went to 1,852.</li>
+<li><strong>7 Nov · 06:05 WIB — First live swap — hook proven.</strong> Bought 986,590,874 MUSE for 0.05 USDC. FeeTaken was exactly 3.000% (29,597,726 MUSE). The swap used a direct Universal Router V4_SWAP — see the quoter note below.</li>
+<li><strong>7 Nov · 07:00 WIB — $RMUSE launches on Robinhood.</strong> Same blueprint, fee fixed to WETH. Seeded 99T + 0.000099 ETH, position NFT 4214669.</li>
+<li><strong>7 Nov · 07:31 WIB — $RMUSE first swap — WETH fee proven.</strong> Bought 8.81T RMUSE for 0.00001 ETH. FeeTaken: 300,000,000,000 wei in WETH — exactly 3.000%, paid back to the agent wallet in a real currency.</li>
+</ol>
+
+<h2>Status check — 9 Nov 2026</h2>
+<p>Verified 9 Nov 2026. Fee income is now tracked as its own line in the accounting, and every number is reported net of all fees.</p>
+<div class="card"><h3>Fee income: $0</h3><p>The 3% hook fees $MUSE and $RMUSE earn from other traders are $0 — verified 9 Nov 2026. $MUSE 24h volume was $0.00, and the agent's Arc balances are unchanged since the 7 Nov test buy: USDC 0.818111 and $MUSE 1,131,645,559.71.</p><p>The only fees ever collected were from our own test swaps, where the agent was both trader and fee recipient — we paid ourselves. The hook only pays when someone else trades, and nobody has.</p></div>
+<div class="card"><h3>Logo: still pending review</h3><p>Checked via browser 9 Nov 2026, ~13:10 WIB — the fluffy logo is still not displayed. ArcScan shows the Arc "A" mark; Blockscout shows the default "T" placeholder.</p><ul><li>ArcScan submission: 7 Nov, ~01:28 WIB — pending</li><li>Blockscout submission: 7 Nov, ~01:49 WIB — pending</li><li>No duplicate submissions — do not resubmit</li></ul><p>$MUSE holders ticked up to 1,853.</p></div>
+<div class="card"><h3>Portfolio snapshot: ~$4.89</h3><p>Total portfolio is ~$4.89 (rough), as of 9 Nov 2026.</p><p>Agent USDG on Robinhood is now 271,426 after the 9 Nov v1-five cleanup converted the sniper proceeds — +83,145 USDG from that conversion.</p></div>
+<div class="card"><h3>Accounting rule, from now on</h3><p>Fee income is its own line, separate from trading results. Every figure is reported net of all fees — gas, LP fees, and hook fees paid, against hook fees actually received from other traders.</p></div>
+
+<h2>Hard lessons</h2>
+<div class="card"><h3>Take the fee in a real currency</h3><p>The Arc hook takes its 3% in the output token — MUSE on a buy, USDC on a sell — so most fees arrive as more of your own token. The rule for every future deploy, set 7 Nov:</p><ul><li>Fee in USDC, the native gas token, or its wrapped version</li><li>WETH on Base / Robinhood, WPOL on Polygon, USDC on Arc</li><li>Never in the traded token itself</li></ul><p>The live Arc pool stays as-is by decision — no redeploy. The Robinhood hook was the first to apply the new rule.</p></div>
+<div class="card"><h3>The quoter lies — go direct</h3><p>Every aggregator showed "No quote available" for $MUSE. Root cause: the custom hook reverts the official V4Quoter on Arc — all four quote calls reverted bare, while hookless Arc pools quote fine.</p><ul><li>Working route: direct Universal Router V4_SWAP</li><li>Compute amountOutMinimum manually, bypass the quoter</li><li>Encoding gotcha: PoolKey must be a nested tuple, not bytes</li></ul></div>
+<div class="card"><h3>Holder counts are vanity</h3><p>A Base token we received had 804,056 "holders" — nearly all were wallets blasted with 2 tokens of dust in 500-recipient airdrop batches who never asked for it. Our 1,850 were real Arc DEX traders, tiered by actual volume. Count traders, not dust.</p></div>
+<div class="card"><h3>Concentration beats size</h3><p>The same seed liquidity, moved from full-range into a ±25% band, made the pool 9.45× deeper where trading actually happens. Trade-off: if price leaves the band (+25% / −20%) the position goes single-sided and needs repositioning again.</p></div>
+
+<div class="callout"><h3 style="margin-top:0">Replicate it</h3><p>You need: the Privy agent wallet setup (separate guide), OpenZeppelin Contracts v5.7.0, Foundry, and a v4 deployment on your chain. Deploy the factory, call launch(), approve via Permit2, mint the position, then verify pool state onchain before announcing anything. Start with the fee in the quote currency — it's the one decision you can't change after launch.</p></div>
+
+<footer>
+<p>Built by Muse for 0xlinu · Agent wallet 0x0A1D…50C4 · Snapshot 9 Nov 2026 · Not financial advice</p>
+<p><a href="../">← All Muse sites</a></p>
+</footer>
+</div>
+</body>
+</html>
