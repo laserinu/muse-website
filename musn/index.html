@@ -137,10 +137,22 @@ Collector — same on all four chains: <span class="mono">0x0000000f64352eb1bace
 <tr><td>2% of each swap's quote leg</td><td>Goes to the collector contract (<span class="mono">0x0000000f64352eb1bacef4d9d5cae00f505a149e</span>), the same collector on all four chains. Only the Privy agent wallet (<span class="mono">0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4</span>) can withdraw from it.</td></tr>
 <tr><td>1% of the MUSN leg</td><td>Burned to the dead address (<span class="mono">0x000000000000000000000000000000000000dEaD</span>). The burn has a hard floor: it stops once circulating supply per chain reaches 12.5T, so the burn can never eat the pool dry.</td></tr>
 </table>
-<p>The fork test before launch confirmed the exact 2% / 1% split on the Polygon pool, and the same hook design runs on all four chains.</p>
+<p>The fork test before launch confirmed the exact 2% / 1% split on the Polygon pool, and the same hook design runs on all four chains. The 9 Nov 2026 test buys confirmed the same split live on all four chains — each $0.02 buy paid exactly 2% to the collector and burned ~1% of the MUSN output.</p>
+
+<h2>Airdrop Season 1 — 1T MUSN, 100 winners × 10B</h2>
+<p>Season 1 is live. <strong>1T MUSN</strong> (1% of supply) goes to <strong>100 winners, 10B MUSN each</strong>, distributed on Base. Qualification window: <strong>10–17 November 2026</strong>.</p>
+<p>How to qualify — do the tasks on our Zealy board:</p>
+<table>
+<tr><th>Task</th><th>What counts</th></tr>
+<tr><td>Zealy quests</td><td>Complete the quests on <a href="https://zealy.io/cw/muselinu">zealy.io/cw/muselinu</a> — website visit, $MUSN quiz, Instagram and Facebook visits. Top 50 on the leaderboard by XP qualify.</td></tr>
+<tr><td>The $MUSN Quiz</td><td>Finish the quiz (250 XP). Every quiz completer qualifies.</td></tr>
+<tr><td>AMA code word</td><td>Join the X Spaces AMA on <strong>Tue 10 Nov 2026, 20:00 WIB</strong> — a secret code word is announced live, and a Zealy quest opens right after to submit it. Attendees qualify.</td></tr>
+</table>
+<p>One wallet per person. The deployer, pool and collector addresses are excluded. The winners list is published with the distribution transaction hashes.</p>
+<p><strong>The honest bit.</strong> $MUSN trades at roughly $1e-14 today, so 10B MUSN is worth a fraction of a cent — this is a symbolic, engagement airdrop, and it only becomes real value if the price grows. Nothing here promises dollar value. Distribution happens on Base once trading fees fund it: the trigger is $0.50 of combined collected quote, paid from the 50% collect slice of the fee split — never by buying MUSN out of the thin $0.25 pools. First fee income arrived 9 Nov 2026 from the first test trades ($0.0004 per chain, $0.0016 total).</p>
 
 <h2>What the collector fees do next — proposed, not yet live</h2>
-<p>The fee split for collected fees is proposed and not yet automated. No automation has run yet — nothing has been collected, bought back, or added as liquidity. The proposed split, per chain, once collected fees pass a $0.05 threshold:</p>
+<p>The fee split for collected fees is proposed and not yet automated. No automation has run yet — but the first fees have arrived: the 9 Nov 2026 test trades paid $0.0004 of quote into each chain's collector ($0.0016 total). Nothing has been bought back or added as liquidity yet. The proposed split, per chain, once collected fees pass a $0.05 threshold:</p>
 <table>
 <tr><th>Share</th><th>Use</th></tr>
 <tr><td>50%</td><td>Collected — held by the agent wallet</td></tr>
