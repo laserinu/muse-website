@@ -76,6 +76,18 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:v
 <p>Deploy cost: 0.00018337 ETH total. Explorer shows the agent wallet as "creator" because it sent the launch() transaction — the factory contract is the token's immediate creator.</p>
 </div>
 
+<h2>New: $MUSN — one token, four chains</h2>
+<p>The third token, deployed 9 Nov 2026 (~21:22–21:35 WIB), takes the same blueprint multichain: the same MuseLinu contract address on Base, Arc, Polygon and Robinhood Chain, one hooked V4 pool per chain, 25T MUSN + $0.25 seeded per chain, deployer holding 0 MUSN everywhere.</p>
+<div class="card">
+<span class="badge">Base · Arc · Polygon · Robinhood</span>
+<h3>$MUSN — MuseLinu · Launched 9 Nov 2026</h3>
+<p class="addr"><b>Token contract — same on all four chains</b><br>0x0000000fc9a3c921ca909d84ae404a9ccaef4479</p>
+<p class="addr"><b>Collector — same on all four chains</b><br>0x0000000f64352eb1bacef4d9d5cae00f505a149e</p>
+<p>Hook fee: 3% — 2% of each swap's quote leg to the collector, 1% of the MUSN leg burned to the dead address (hard floor: burn stops at 12.5T circulating per chain). Pool fee: 3000 + 3% hook. Total deploy gas for all four chains: ~$0.30.</p>
+<p>Hooks — Base <span class="addr">0x833b94cf…00cc</span> · Arc <span class="addr">0x88a5b0ef…00cc</span> · Polygon <span class="addr">0xe7733138…00cc</span> · Robinhood <span class="addr">0x15a97f2b…00cc</span></p>
+<p><a href="../musn/">Full $MUSN page — pools, pool IDs, seed transactions →</a></p>
+</div>
+
 <h2>The stack</h2>
 <p>Every transaction was signed through the Privy Agent CLI from the agent wallet <span class="addr">0x0A1D…50C4</span>. No key was ever exported.</p>
 <ol>

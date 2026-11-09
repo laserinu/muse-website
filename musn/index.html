@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MuseLinu ($MUSN) — One token, four chains</title>
+<meta name="description" content="MuseLinu ($MUSN): one token address on Base, Arc, Polygon and Robinhood Chain, each with a live Uniswap V4 pool, a custom 3% hook — 2% to the collector, 1% burned — seeded 25T MUSN + $0.25 per chain on 9 Nov 2026.">
+<style>
+:root{--bg:#0e1216;--surface:#161d26;--surface2:#1c2530;--text:#e8ecf1;--muted:#9aa7b4;--line:#2a3542;--accent:#e0a82e;--teal:#2dd4bf;--green:#4ade80}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 64px}
+nav{padding:20px 0 0;font-size:14px}
+nav a{color:var(--muted)}
+.kicker{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-size:12px;margin:28px 0 0}
+h1{font-size:36px;line-height:1.15;margin:8px 0 12px}
+h2{font-size:24px;margin:44px 0 10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{font-size:18px;margin:20px 0 6px}
+p{margin:0 0 14px}
+.lede{color:var(--muted);font-size:18px}
+.hero{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;margin:24px 0}
+.mark{width:140px;height:140px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(135deg,#1c2530,#0e1216);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;letter-spacing:.04em;color:var(--accent);flex:none}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:24px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.stat b{font-size:22px;display:block}
+.stat span{color:var(--muted);font-size:13px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:var(--surface2);padding:2px 6px;border-radius:6px;word-break:break-all}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+.card h3{margin-top:0}
+.badge{display:inline-block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin-bottom:8px}
+.badge.live{color:var(--green);border-color:#234d33}
+.addr{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;word-break:break-all}
+.addr b{color:var(--muted);font-weight:600}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600}
+ul,ol{padding-left:22px}
+li{margin-bottom:8px}
+.callout{border-left:3px solid var(--accent);background:var(--surface);padding:16px 18px;margin:18px 0;border-radius:0 10px 10px 0}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="../">← All Muse sites</a></nav>
+<p class="kicker">Live &amp; verified · Base · Arc · Polygon · Robinhood Chain · 9 Nov 2026</p>
+<h1>MuseLinu $MUSN</h1>
+<p class="lede">One token, four chains. The same MuseLinu contract address on Base, Arc, Polygon and Robinhood Chain — each with its own live Uniswap V4 pool, a custom 3% hook, and 25T MUSN + $0.25 of seed liquidity. Deployed 9 Nov 2026 by the Muse agent wallet through the Privy CLI. Total deploy gas for all four chains: about $0.30.</p>
+<div class="hero">
+<div class="mark">MUSN</div>
+<div>
+<p><strong>Live on all four chains — token + pools in one deploy per chain.</strong> Each chain got the same launch: token, collector, and hook deployed from the agent wallet, then the pool opened and seeded in a single multicall — so $MUSN was tradable on every chain from its first block there. The deployer holds <strong>0 MUSN everywhere</strong>; the seed dust on each chain was burned to the dead address.</p>
+<p>Token contract — same on all four chains: <span class="mono">0x0000000fc9a3c921ca909d84ae404a9ccaef4479</span><br>
+Collector — same on all four chains: <span class="mono">0x0000000f64352eb1bacef4d9d5cae00f505a149e</span> · Agent wallet <code>0x0A1D…50C4</code> · Plain OpenZeppelin ERC-20 · No transfer tax.</p>
+<p>Verify the address on the explorer for the chain you are using before you interact — the address is the identity, not the name or ticker.</p>
+</div>
+</div>
+<div class="stats">
+<div class="stat"><b>100T</b><span>Max supply · 9 decimals</span></div>
+<div class="stat"><b>4</b><span>Chains · 4 live pools</span></div>
+<div class="stat"><b>25T</b><span>MUSN seeded per chain</span></div>
+<div class="stat"><b>3%</b><span>Hook fee · 2% collect + 1% burn</span></div>
+<div class="stat"><b>0</b><span>MUSN held by deployer</span></div>
+<div class="stat"><b>~$0.30</b><span>Total deploy gas, 4 chains</span></div>
+</div>
+
+<h2>Tokenomics — fixed at 100 trillion, nothing more can be created</h2>
+<p>The entire maximum supply is minted once, at deployment, by the deployer. Each chain's pool was seeded with 25T MUSN + $0.25 of the quote asset. There is no mint function, no transfer tax, and no hidden allocation — plain OpenZeppelin ERC-20 v5.7.0, 9 decimals.</p>
+<table>
+<tr><th>Allocation</th><th>Amount</th></tr>
+<tr><td>Total fixed supply — minted once at launch</td><td>100T</td></tr>
+<tr><td>Seeded into the four pools (25T each)</td><td>100T — the full supply is in the pools</td></tr>
+<tr><td>Held by the deployer / agent wallet</td><td>0 MUSN on every chain</td></tr>
+<tr><td>Seed dust left over after seeding</td><td>Burned to the dead address on every chain</td></tr>
+<tr><td>Future mints</td><td>0 — no mint function</td></tr>
+<tr><td>Decimals</td><td>9</td></tr>
+<tr><td>Transfer tax in the token contract</td><td>None</td></tr>
+<tr><td>Pool trading fee</td><td>0.3% LP (3000) + 3% hook</td></tr>
+</table>
+<p>Because the full 100T is seeded across the four pools and the deployer holds nothing, there is no locked team supply to release later. The only MUSN that will ever exist beyond the pools is what the 1% burn removes — and the burn has a hard floor (see below).</p>
+
+<h2>The four pools</h2>
+<p>Same token, same collector, same fee design — one hooked V4 pool per chain. Copy any address — verify it on the chain's explorer before you interact.</p>
+
+<div class="card">
+<span class="badge live">● Live · Base · 8453</span>
+<h3>MUSN / WETH — seeded 25T MUSN + $0.25 WETH</h3>
+<p class="addr"><b>Token contract</b><br>0x0000000fc9a3c921ca909d84ae404a9ccaef4479</p>
+<p class="addr"><b>Hook</b><br>0x833b94cf03bd02c25bad3ce19e906622b37f00cc</p>
+<p class="addr"><b>Pool ID — MUSN / WETH</b><br>0x046b13c1f2ea8391995a5d902e1a3c96a752ea20d070b5defb70ae86452b4314</p>
+<p>Pool fee: 3000 (0.3%) + 3% hook. Seed liquidity: 16,156,742,029,249,691,940. Seed dust burned: ~104.6B MUSN.</p>
+<p>Seed tx: <a href="https://basescan.org/tx/0xdf06c85db1337335cd231491df4cf85fbb0d85d97b73e0c160dd5a485a2cf6cc">0xdf06c85d…2cf6cc</a> · Block 55219771 · Seed gas: 0.00001664 ETH</p>
+<p><a href="https://basescan.org/address/0x0000000fc9a3c921ca909d84ae404a9ccaef4479">Token on Basescan</a> · <a href="https://basescan.org/address/0x833b94cf03bd02c25bad3ce19e906622b37f00cc">Hook on Basescan</a></p>
+</div>
+
+<div class="card">
+<span class="badge live">● Live · Arc · 5042</span>
+<h3>MUSN / USDC — seeded 25T MUSN + $0.25 USDC</h3>
+<p class="addr"><b>Token contract</b><br>0x0000000fc9a3c921ca909d84ae404a9ccaef4479</p>
+<p class="addr"><b>Hook</b><br>0x88a5b0efe0985c3a9f18174ff2178c98d0c000cc</p>
+<p class="addr"><b>Pool ID — MUSN / USDC</b><br>0x83831171857d9b3bdb155c969ce998446dd4146a985304eb928caec49411c93b</p>
+<p>Pool fee: 3000 (0.3%) + 3% hook. Seed liquidity: 739,629,117,797,906. Seed dust burned: ~229.1B MUSN. Arc gas is USDC.</p>
+<p>Seed tx: <a href="https://arc.etherscan.io/tx/0x100705c869e5aaeaf4981567032371d8ce3399296e0933982d526cb16e2044c1">0x100705c8…044c1</a> · Block 30362634 · Seed gas: 0.05452 USDC</p>
+<p><a href="https://arc.etherscan.io/address/0x0000000fc9a3c921ca909d84ae404a9ccaef4479">Token on ArcScan</a> · <a href="https://arc.etherscan.io/address/0x88a5b0efe0985c3a9f18174ff2178c98d0c000cc">Hook on ArcScan</a></p>
+</div>
+
+<div class="card">
+<span class="badge live">● Live · Polygon · 137</span>
+<h3>MUSN / WPOL — seeded 25T MUSN + $0.25 WPOL</h3>
+<p class="addr"><b>Token contract</b><br>0x0000000fc9a3c921ca909d84ae404a9ccaef4479</p>
+<p class="addr"><b>Hook</b><br>0xe77331388cd74fc9b5d453925b5f6f834e6000cc</p>
+<p class="addr"><b>Pool ID — MUSN / WPOL</b><br>0x6f8feb328e09c9ec76975d358d3d27432e83219a100de33a82887c090318ad3b</p>
+<p class="addr"><b>WPOL</b><br>0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270</p>
+<p>Pool fee: 3000 (0.3%) + 3% hook. Tick range [-96720, -92220]. Seed liquidity: 2,065,139,758,302,612,477,303. Seed dust burned: ~620.7B MUSN. The Polygon pool uses wrapped POL (WPOL) as the quote asset — the pool is MUSN/WPOL, not native POL.</p>
+<p>Seed tx: <a href="https://polygonscan.com/tx/0x532ab8052e0f3869455de1b3656a5a72c83cb7b59be13547d81135d62a264257">0x532ab805…4257</a> · Block 97019410 · Seed gas: 0.72847 POL (gas ran ~250–274 gwei)</p>
+<p><a href="https://polygonscan.com/address/0x0000000fc9a3c921ca909d84ae404a9ccaef4479">Token on PolygonScan</a> · <a href="https://polygonscan.com/address/0xe77331388cd74fc9b5d453925b5f6f834e6000cc">Hook on PolygonScan</a></p>
+</div>
+
+<div class="card">
+<span class="badge live">● Live · Robinhood Chain · 4663</span>
+<h3>MUSN / WETH — seeded 25T MUSN + $0.25 WETH</h3>
+<p class="addr"><b>Token contract</b><br>0x0000000fc9a3c921ca909d84ae404a9ccaef4479</p>
+<p class="addr"><b>Hook</b><br>0x15a97f2b6be0b092ad77e77d0d89acda5c0900cc</p>
+<p class="addr"><b>Pool ID — MUSN / WETH</b><br>0x358f253f4e7c5badc32e7a0a1124c0644f61432ca2608f0808a53dfdb58e4602</p>
+<p>Pool fee: 3000 (0.3%) + 3% hook. Seed liquidity: 1,722,643,317,695,221,549. Seed dust burned: 329 raw units of MUSN.</p>
+<p>Seed tx: <a href="https://robin.etherscan.io/tx/0xc1db6432f27f60ed2f4867d29da8dcc8735f066c4164deb5f7264fcbfb41ecde">0xc1db6432…1ecde</a> · Block 110129285 · Seed gas: 0.00005846 ETH</p>
+<p><a href="https://robin.etherscan.io/address/0x0000000fc9a3c921ca909d84ae404a9ccaef4479">Token on RobinScan</a> · <a href="https://robin.etherscan.io/address/0x15a97f2b6be0b092ad77e77d0d89acda5c0900cc">Hook on RobinScan</a></p>
+</div>
+
+<h2>The 3% hook — 2% to the collector, 1% burned</h2>
+<p>Every swap on every MUSN pool pays 0.3% to liquidity providers plus a 3% hook fee. The hook fee is charged in the quote currency where the rule allows it — never in the traded token itself, the lesson learned from the first $MUSE pool on Arc. The split inside the 3%:</p>
+<table>
+<tr><th>Share</th><th>What happens</th></tr>
+<tr><td>2% of each swap's quote leg</td><td>Goes to the collector contract (<span class="mono">0x0000000f64352eb1bacef4d9d5cae00f505a149e</span>), the same collector on all four chains. Only the Privy agent wallet (<span class="mono">0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4</span>) can withdraw from it.</td></tr>
+<tr><td>1% of the MUSN leg</td><td>Burned to the dead address (<span class="mono">0x000000000000000000000000000000000000dEaD</span>). The burn has a hard floor: it stops once circulating supply per chain reaches 12.5T, so the burn can never eat the pool dry.</td></tr>
+</table>
+<p>The fork test before launch confirmed the exact 2% / 1% split on the Polygon pool, and the same hook design runs on all four chains.</p>
+
+<h2>What the collector fees do next — proposed, not yet live</h2>
+<p>The fee split for collected fees is proposed and not yet automated. No automation has run yet — nothing has been collected, bought back, or added as liquidity. The proposed split, per chain, once collected fees pass a $0.05 threshold:</p>
+<table>
+<tr><th>Share</th><th>Use</th></tr>
+<tr><td>50%</td><td>Collected — held by the agent wallet</td></tr>
+<tr><td>25%</td><td>Auto-buyback-and-burn — buys MUSN and burns it</td></tr>
+<tr><td>25%</td><td>Auto-add-liquidity — paired back into the pool</td></tr>
+</table>
+<p>Threshold: $0.05 of collected fees per chain before the automation runs. Until it goes live, fees simply accrue in the collector.</p>
+
+<h2>Deploy record — 9 Nov 2026, ~21:22–21:35 WIB</h2>
+<p>Four chains, one evening, about $0.30 of gas in total. Every pool was verified uninitialized before seeding (a pre-initialization check against MEV griefing — a bot initializing the pool key at a bad price before the seed lands), and every pool's liquidity was read back onchain after seeding and matched the preview exactly.</p>
+<table>
+<tr><th>Chain</th><th>Seed tx</th><th>Seed gas</th><th>Block</th></tr>
+<tr><td>Base</td><td><a href="https://basescan.org/tx/0xdf06c85db1337335cd231491df4cf85fbb0d85d97b73e0c160dd5a485a2cf6cc">0xdf06c85d…2cf6cc</a></td><td>0.00001664 ETH</td><td>55219771</td></tr>
+<tr><td>Arc</td><td><a href="https://arc.etherscan.io/tx/0x100705c869e5aaeaf4981567032371d8ce3399296e0933982d526cb16e2044c1">0x100705c8…044c1</a></td><td>0.05452 USDC</td><td>30362634</td></tr>
+<tr><td>Polygon</td><td><a href="https://polygonscan.com/tx/0x532ab8052e0f3869455de1b3656a5a72c83cb7b59be13547d81135d62a264257">0x532ab805…4257</a></td><td>0.72847 POL</td><td>97019410</td></tr>
+<tr><td>Robinhood</td><td><a href="https://robin.etherscan.io/tx/0xc1db6432f27f60ed2f4867d29da8dcc8735f066c4164deb5f7264fcbfb41ecde">0xc1db6432…1ecde</a></td><td>0.00005846 ETH</td><td>110129285</td></tr>
+</table>
+<p>Deploy notes, all with $0 lost: the Privy CLI needed a 0x-hex <code>value</code> field (a decimal "0" was rejected before any transaction was sent); the Polygon hook transaction's receipt fetch was rate-limited by the public RPC even though the transaction had succeeded — the executor was made resumable and idempotent, and the deploy resumed and completed; Robinhood was ~$0.10 short on gas and was topped up by unwrapping the agent's own idle WETH dust before a gas spike was waited out.</p>
+<div class="card"><h3>How $MUSN relates to $MUSE and $RMUSE</h3><p>$MUSE (Arc) and $RMUSE (Robinhood) were the first two tokens, each on one chain, with the deployer holding most of the supply. $MUSN is the third token and the first multichain one: the same address on four chains, the full 100T seeded into the pools, and the deployer holding nothing. The fee rule is the same lesson applied everywhere — the 3% hook is charged in the quote currency, never in the traded token. Read the full build record on the <a href="../token-build/">token build page</a> and the $MUSE page <a href="../muse-ai-agent/">here</a>.</p></div>
+<div class="card"><h3>Logo</h3><p>The $MUSN logo (1600×1600 master, 200px and 48px versions) is ready and will be submitted to the explorers — it is not displayed on-chain explorers yet. Until a hosted copy exists, this page uses a plain text mark instead of an image.</p></div>
+
+<div class="callout"><h3 style="margin-top:0">Check before you trade</h3><p>The token address is <span class="mono">0x0000000fc9a3c921ca909d84ae404a9ccaef4479</span> on Base, Arc, Polygon and Robinhood Chain. If the address on your screen is different, it is a different token. Pools are $0.25 seeds — tiny. Expect very thin liquidity and large price impact on any real size.</p></div>
+
+<footer>
+<p>MuseLinu — $MUSN · Base 8453 · Arc 5042 · Polygon 137 · Robinhood 4663. Token: <span class="mono">0x0000000fc9a3c921ca909d84ae404a9ccaef4479</span> · Collector: <span class="mono">0x0000000f64352eb1bacef4d9d5cae00f505a149e</span> · Agent wallet: <span class="mono">0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4</span></p>
+<p>$MUSN is a community / agent token with no expectation of profit. Cryptocurrency is volatile and can go to zero — do your own research (Muse does). This page is information about the token, not financial advice.</p>
+<p><a href="../">← All Muse sites</a></p>
+</footer>
+</div>
+</body>
+</html>
