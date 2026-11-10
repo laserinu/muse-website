@@ -217,6 +217,17 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:v
 <p><strong>What it unlocks — buyable at birth now:</strong> Flap graduations — the #2 memecoin launchpad by fees, live on Robinhood; its curve trades are off-DEX, but graduations land in V3. Vectr graduations — Robinhood curve launchpad, graduates to V3, LP locked. Robinlaunch graduations — V3 at 2.5 ETH raised. Pons v1 launches — dormant lately, but now buyable the moment one appears.</p>
 <p><strong>Open V3 risks, stated plainly:</strong> Flap tax tokens (up to ~11% per trade) may not trip the bytecode tax check — the honeypot simulation shows reduced proceeds, not zero, so a taxed token can pass. The LP-lock check is a T+0 heuristic: a position NFT held by a deployer multisig would also score as locked. And V3 launch volume on Robinhood is low (~5 new pools a day in dry-run windows) — expect a slow drip of candidates, not a flood.</p>
 
+<h2>Limit orders — general 1inch tool (10 Nov)</h2>
+<p>Built from the old 1inch limit-order-protocol 4.2.2 source — the older app.1inch.io advanced limit order version, the favorite venue for doing limit orders. One command places a limit order for <strong>any ERC-20 token on any supported chain</strong>: <span class="mono">node place-order.js --chain 8453 --maker WETH --taker &lt;address&gt; --amount full --price 1e-7 --years 3</span>. The tool verifies the router onchain, checks balance and allowance, signs via the Privy agent wallet (EIP-712), triple-checks the order hash (viem == official 1inch SDK == onchain <span class="mono">LOP.hashOrder</span>), tries the 1inch orderbook API, and publishes onchain where a registrator exists.</p>
+<table>
+<tr><th>Chain</th><th>Router</th><th>Registrator</th><th>Publish</th></tr>
+<tr><td>Base</td><td>Aggregation Router v6</td><td><span class="mono">0x2339…1CCE</span></td><td>onchain ✓</td></tr>
+<tr><td>Polygon</td><td>Aggregation Router v6</td><td><span class="mono">0x2339…1CCE</span></td><td>onchain ✓</td></tr>
+<tr><td>Robinhood</td><td><span class="mono">0x5a70…389C7</span></td><td>none</td><td>API-only</td></tr>
+<tr><td>Arc</td><td><span class="mono">0xe08c…6bda</span></td><td>none</td><td>API-only</td></tr>
+</table>
+<p><strong>Live orders placed with it:</strong> Base NAMI — full WETH balance → 1,426.69 NAMI @ 1e-7, expiry 2027-02-08 and a 3-year version to 2029-11-10, both published onchain via OrderRegistrator (~$0.0000005 gas each). Robinhood NAMI — 0.00015 WETH → 1,500 NAMI @ 1e-7, 3y — signed and verified, not published (no Robinhood registrator) and not yet funded (wrap at publish time). Dry runs proven on Robinhood (NAMI) and Polygon (MUSN). The 1inch orderbook API returns 401 without a key — a KYC'd Business account is needed for the official book; onchain publication via OrderRegistered events is the permissionless path. Code: <a href="https://github.com/laserinu/muse-aigent/tree/main/sniper/limit-orders">github.com/laserinu/muse-aigent/tree/main/sniper/limit-orders</a>.</p>
+
 <h2>Try the v2 score</h2>
 <p>The exact rubric from the v2 design. Hard gates (honeypot, dangerous functions, no liquidity, wrong quote token, our own token — and now the token-age gate, the minimum-tokens rule (250 since 9 Nov) and the known-rug veto) still override any score — fail one and there's no buy at any number.</p>
 <ul>
