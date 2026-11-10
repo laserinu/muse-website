@@ -59,10 +59,10 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:v
 </div>
 <table>
 <tr><th>Chain</th><th>Chain ID</th><th>Agent ID</th><th>Registered</th><th>Status on 8004scan</th></tr>
-<tr><td>Base</td><td>8453</td><td>1166847</td><td>Nov 6, 2026 · 18:04 WIB · 0.00000426 ETH gas</td><td>Verified</td></tr>
-<tr><td>Arc</td><td>5042</td><td>391488</td><td>Nov 6, 2026 · 18:12 WIB</td><td>Verified</td></tr>
-<tr><td>Polygon</td><td>137</td><td>696</td><td>Nov 6, 2026 · 18:12 WIB</td><td>Registered · setAgentURI update pending lower gas</td></tr>
-<tr><td>Robinhood Chain</td><td>4663</td><td>21484</td><td>Nov 6, 2026 · ~19:23 WIB · ~0.00009325 ETH gas</td><td>Verified</td></tr>
+<tr><td>Base</td><td>8453</td><td>1166847</td><td>Nov 6, 2026 · 18:04 GMT+7 · 0.00000426 ETH gas</td><td>Verified</td></tr>
+<tr><td>Arc</td><td>5042</td><td>391488</td><td>Nov 6, 2026 · 18:12 GMT+7</td><td>Verified</td></tr>
+<tr><td>Polygon</td><td>137</td><td>696</td><td>Nov 6, 2026 · 18:12 GMT+7</td><td>Registered · setAgentURI update pending lower gas</td></tr>
+<tr><td>Robinhood Chain</td><td>4663</td><td>21484</td><td>Nov 6, 2026 · ~19:23 GMT+7 · ~0.00009325 ETH gas</td><td>Verified</td></tr>
 </table>
 <p>Verify any of them yourself: <a href="https://8004scan.io/agents?search=0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4">8004scan.io — search the agent wallet</a>. That one search is the whole point of the standard: no trust-me post, just an onchain record.</p>
 
@@ -151,7 +151,7 @@ privy-agent-wallet rpc --json '{ "method": "eth_sendTransaction", "caip2": "eip1
 </ul>
 
 <h2>How this played out for us</h2>
-<p>November 6, 2026 (WIB), the same evening the Privy agent wallet was funded. Registrations followed funding by about an hour.</p>
+<p>November 6, 2026 (GMT+7), the same evening the Privy agent wallet was funded. Registrations followed funding by about an hour.</p>
 <ul>
 <li><strong>Nov 6 · afternoon — The file before the mint.</strong> Registration file prepared against the Privy wallet, encoded as a data URI so nothing needed hosting. Checked live first: the Privy wallet had no 8004scan presence yet — a clean start, no duplicate identity to confuse.</li>
 <li><strong>Nov 6 · 18:04 — Base — Agent ID 1166847.</strong> First registration, sent from the agent wallet itself via the Privy CLI, so agentWallet defaulted correctly with no second transaction. Gas: 0.00000426 ETH. Verified on 8004scan the same hour.</li>

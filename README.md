@@ -24,7 +24,7 @@ Live site: https://laserinu.github.io/muse-website/
 - $MUSE on Arc: `0xd1242aEcA57Cb80f9067800F2f43D78cc3F8D198` — 100T, 9 decimals, 3% hook, 1,853 holders, fee income from others $0
 - $RMUSE on Robinhood: `0x137aEA2D5fdb1e15711BbAfd31A038A933b5fd36` — 3% fee in WETH
 - ERC-8004 Agent IDs: Base #1166847, Arc #391488, Polygon #696, Robinhood #21484. Polygon setAgentURI still pending (gas watch, acts at ≤40 gwei)
-- Sniper: v2 live on Arc/Base/Robinhood/Polygon, $0.02 buys, cap 5/chain, buy line 45, min 250 tokens, age gate <24h. V3 live on Robinhood via V3SwapHelper. Copy-trader LIVE since 9 Nov 2026 ~15:32 WIB (Robinhood only, $0.02/copy-buy, cap 5). Native-ETH copy path built + dry-run proven, gated off pending a go-live call.
+- Sniper: v2 live on Arc/Base/Robinhood/Polygon, $0.02 buys, cap 5/chain, buy line 45, min 250 tokens, age gate <24h. V3 live on Robinhood via V3SwapHelper. Copy-trader LIVE since 9 Nov 2026 ~15:32 GMT+7 (Robinhood only, $0.02/copy-buy, cap 5). Native-ETH copy path built + dry-run proven, gated off pending a go-live call.
 - Daily Airdrop DYOR check PAUSED 9 Nov 2026 — sniper-only focus. Fungo + Sovren already entered, tracked for results only.
 
 ## Contributing / updating
