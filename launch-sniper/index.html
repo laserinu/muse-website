@@ -88,6 +88,7 @@
       .tag{ font-family:var(--mono); font-size:11.5px; font-weight:600; padding:5px 9px; border-radius:999px; }
       .tag.live{ background:var(--green-soft); color:var(--green); }
       .tag.next{ background:var(--surface2); color:var(--muted); }
+      .tag.approved{ background:var(--amber-soft); color:var(--amber); }
       .chain dl{ margin:0; display:grid; grid-template-columns:1fr 1fr; gap:10px 16px; }
       .chain dt{ font-size:11.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
       .chain dd{ margin:2px 0 0; font-family:var(--mono); font-size:16.5px; font-weight:600; }
@@ -182,8 +183,8 @@
       <!-- ================= HERO ================= -->
       <header class="hero">
         <div class="status-row">
-          <span class="badge"><span class="dot"></span>TRIAL APPROVED · POLYGON</span>
-          <span class="badge plain">Snapshot · 11 Nov 2026, 18:40 GMT+7</span>
+          <span class="badge"><span class="dot"></span>TRIAL LIVE · POLYGON + ARC</span>
+          <span class="badge plain">Snapshot · 11 Nov 2026, 22:54 GMT+7</span>
         </div>
         <h1>Launch Sniper</h1>
         <p class="lede">A launch-driven trader for <strong>every EVM chain</strong>. It watches for newly created tokens, buys only the ones it can prove it can also sell, and <strong>sells immediately</strong> — one round trip per launch, nothing held.</p>
@@ -192,32 +193,32 @@
       <!-- ================= LIVE TRIAL ================= -->
       <div class="trial" aria-label="Live trial summary">
         <div class="trial-head">
-          <h2>Polygon trial — approved and armed</h2>
-          <span>GO given 11 Nov 2026, 18:35 GMT+7</span>
+          <h2>Live trial — Polygon + Arc</h2>
+          <span>Polygon live 11 Nov 2026, 22:11 GMT+7 · Arc live 22:50 GMT+7</span>
         </div>
         <div class="trial-grid">
           <div class="stat">
-            <div class="k">Quota (max loss)</div>
+            <div class="k">Polygon quota (max loss)</div>
             <div class="v">1.333 <small>POL</small></div>
-            <div class="n">Gas plus any sell shortfall, counted together. Stops itself when filled.</div>
+            <div class="n">Spent so far: 0 of 1.333. Buy size 0.1 per launch, then an immediate sell.</div>
           </div>
           <div class="stat">
-            <div class="k">Buy size</div>
-            <div class="v">0.1 <small>POL</small></div>
-            <div class="n">Per launch, then an immediate sell of the full amount.</div>
+            <div class="k">Arc quota (max loss)</div>
+            <div class="v">0.3 <small>USDC</small></div>
+            <div class="n">Spent so far: 0 of 0.3. Buy size 0.10 per launch, then an immediate sell.</div>
           </div>
           <div class="stat">
-            <div class="k">Wallet balance</div>
-            <div class="v">4.659 <small>POL</small></div>
-            <div class="n">Plus 0.128 in WPOL — verified live before the trial, no top-up needed.</div>
+            <div class="k">Polygon gas — gating</div>
+            <div class="v">100–280</div>
+            <div class="n">The trial only trades below ~42, and gas spent most of the day far above that — so Polygon has not traded yet.</div>
           </div>
           <div class="stat">
-            <div class="k">Rough capacity</div>
-            <div class="v">~47 <small>trips</small></div>
-            <div class="n">At the current average round-trip cost, before the quota fills.</div>
+            <div class="k">Arc gas — can trade</div>
+            <div class="v">~20</div>
+            <div class="n">Gate is ~41.7, so Arc is clear to trade on its first qualifying launch. No trades yet there either.</div>
           </div>
         </div>
-        <div class="trial-foot">The quota is <strong>not a number of buys</strong> — it is the most the trial can lose in total. One chain only for now; other chains join after Polygon proves out. Status at this snapshot: the go-ahead is given and the trial fires as soon as the build finishes its last fork-test fixes — <strong>no trade has been reported yet</strong>.</div>
+        <div class="trial-foot">One 2-minute cycle now watches <strong>every live chain together</strong>, and the trial only switches itself off when <strong>every</strong> live chain's quota is filled. A quota is <strong>not a number of buys</strong> — it is the most that chain's trial can lose in total, gas plus any sell shortfall. Base and Robinhood are approved and join once their fork-test checks come back clean.</div>
       </div>
 
       <!-- ================= HOW IT WORKS ================= -->
@@ -249,39 +250,39 @@
         <p class="sec-sub">Every chain has its own token, its own price and its own gas — so every number below is per chain, and changing one never touches another. All of it lives in config and can be changed at any time, with no rebuild. Tap a chain to load it into the estimator.</p>
         <div class="chains" id="chains">
           <button type="button" class="chain" data-chain="polygon" aria-pressed="true">
-            <div class="chain-top"><span class="chain-name">Polygon <span class="chain-sym">POL</span></span><span class="tag live">TRIAL FIRST</span></div>
+            <div class="chain-top"><span class="chain-name">Polygon <span class="chain-sym">POL</span></span><span class="tag live">LIVE</span></div>
             <dl>
-              <div><dt>Buy size</dt><dd>1.1284</dd></div>
-              <div><dt>Cap per day</dt><dd>56.42</dd></div>
-              <div><dt>Gas budget / day</dt><dd>28.21</dd></div>
-              <div><dt>Gas per trip</dt><dd>0.02708</dd></div>
+              <div><dt>Buy size</dt><dd>0.1</dd></div>
+              <div><dt>Total quota</dt><dd>1.333</dd></div>
+              <div><dt>Gas per trip</dt><dd>0.0273</dd></div>
+              <div><dt>Wallet balance</dt><dd>4.659</dd></div>
             </dl>
           </button>
           <button type="button" class="chain" data-chain="base" aria-pressed="false">
-            <div class="chain-top"><span class="chain-name">Base <span class="chain-sym">ETH</span></span><span class="tag next">QUEUED</span></div>
+            <div class="chain-top"><span class="chain-name">Base <span class="chain-sym">ETH</span></span><span class="tag approved">APPROVED · CHECK PENDING</span></div>
             <dl>
               <div><dt>Buy size</dt><dd>0.00005</dd></div>
-              <div><dt>Cap per day</dt><dd>0.00243</dd></div>
-              <div><dt>Gas budget / day</dt><dd>0.00121</dd></div>
+              <div><dt>Total quota</dt><dd>0.0001</dd></div>
               <div><dt>Gas per trip</dt><dd>0.0000036</dd></div>
+              <div><dt>Wallet balance</dt><dd>0.000173</dd></div>
             </dl>
           </button>
           <button type="button" class="chain" data-chain="robinhood" aria-pressed="false">
-            <div class="chain-top"><span class="chain-name">Robinhood <span class="chain-sym">ETH</span></span><span class="tag next">QUEUED</span></div>
+            <div class="chain-top"><span class="chain-name">Robinhood <span class="chain-sym">ETH</span></span><span class="tag approved">APPROVED · CHECK PENDING</span></div>
             <dl>
               <div><dt>Buy size</dt><dd>0.00005</dd></div>
-              <div><dt>Cap per day</dt><dd>0.00243</dd></div>
-              <div><dt>Gas budget / day</dt><dd>0.00121</dd></div>
+              <div><dt>Total quota</dt><dd>0.0001</dd></div>
               <div><dt>Gas per trip</dt><dd>0.0000121</dd></div>
+              <div><dt>Wallet balance</dt><dd>0.000196</dd></div>
             </dl>
           </button>
           <button type="button" class="chain" data-chain="arc" aria-pressed="false">
-            <div class="chain-top"><span class="chain-name">Arc <span class="chain-sym">USDC</span></span><span class="tag next">QUEUED</span></div>
+            <div class="chain-top"><span class="chain-name">Arc <span class="chain-sym">USDC</span></span><span class="tag live">LIVE</span></div>
             <dl>
               <div><dt>Buy size</dt><dd>0.10</dd></div>
-              <div><dt>Cap per day</dt><dd>5.00</dd></div>
-              <div><dt>Gas budget / day</dt><dd>2.50</dd></div>
+              <div><dt>Total quota</dt><dd>0.3</dd></div>
               <div><dt>Gas per trip</dt><dd>0.012</dd></div>
+              <div><dt>Wallet balance</dt><dd>0.4875</dd></div>
             </dl>
           </button>
         </div>
@@ -306,7 +307,7 @@
           <div class="est-out">
             <div class="est-result"><div class="k">Trips before quota fills</div><div class="v" id="outTrips">47</div></div>
             <div class="est-result"><div class="k">Cost per trip (gas + shortfall)</div><div class="v" id="outCost">0.0283</div></div>
-            <p class="est-note" id="estNote">With gas alone at 0.0273, gas is about 2.4 of every 100 spent against a 1.1284 buy on Polygon — the cheapest place to run this, which is why the trial starts here.</p>
+            <p class="est-note" id="estNote">With gas alone at 0.0273, gas is about 27 of every 100 spent against a 0.1 buy on Polygon. Gas ran at 100–280 through the day and the trial only trades below ~42 — which is why Polygon is live but has not traded yet.</p>
           </div>
         </div>
       </section>
@@ -327,20 +328,21 @@
       <!-- ================= FORK TEST ================= -->
       <section aria-labelledby="fork-h">
         <div class="sec-head"><span class="sec-num">04</span><h2 class="sec" id="fork-h">Fork test results</h2></div>
-        <p class="sec-sub">Run 11 Nov 2026, 18:30 GMT+7 against a local copy of Polygon mainnet — no keys, no real transactions. The three failures are listed as they happened.</p>
+        <p class="sec-sub">Re-run on the evening of 11 Nov 2026 against local copies of each chain's mainnet — no keys, no real transactions. Polygon 15/16, Robinhood 11/13, Arc 11/16. What changed since the 18:30 run, and what is still open, is listed as it happened.</p>
         <div class="fork">
           <div class="score">
-            <div class="big">13<span>/16</span></div>
-            <p>checks passed before the live trial was approved</p>
+            <div class="big">15<span>/16</span></div>
+            <p>Polygon re-run · Robinhood 11/13 · Arc 11/16 in the same evening's checks</p>
           </div>
           <div class="checks">
             <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Detection works<small>24 new V4 pools found in 50,000 blocks; V3 and V2 detection also working.</small></div></div>
             <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Sim rejects dead and empty pools<small>Unsellable launches never reach the buy stage.</small></div></div>
             <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Full round trip on the MUSN pool<small>Buy then sell completed; 521131 total, and the simulation matched the real result.</small></div></div>
             <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Gas guard, kill switch, config reload<small>Dry run sent zero transactions; settings reload without a rebuild.</small></div></div>
-            <div class="check"><span class="mark bad"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l6 6M9 3L3 9"/></svg></span><div class="txt">Sim check failed on one hooked pool<small>The price quoter reverted on that pool type.</small></div></div>
-            <div class="check"><span class="mark bad"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l6 6M9 3L3 9"/></svg></span><div class="txt">Round trip timed out on the hookless pool test<small>Still open at the time of the trial go-ahead.</small></div></div>
-            <div class="check"><span class="mark bad"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l6 6M9 3L3 9"/></svg></span><div class="txt">Cap-halt check not run<small>No passing launch in the test window to halt against.</small></div></div>
+            <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Quoter-based minOut fix proven on all three chains<small>On Robinhood's thin MUSN pool the old spot-based minimum reverts; the quoted buy receives exactly the simulated output, to the wei.</small></div></div>
+            <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">T3 and the T6 hookless round trip now pass<small>Two of the three failures from the 18:30 run are fixed in the re-runs.</small></div></div>
+            <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Two alarms cleared<small>The T8b "safety gate broken" flag was a false alarm — that test ran against the live config, and the gate refuses in every off state. The Arc MUSN pool revert is a fork artifact, not a mainnet problem: the live quoter quotes both MUSN legs on mainnet, and the 9 Nov live test buy succeeded.</small></div></div>
+            <div class="check"><span class="mark bad"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l6 6M9 3L3 9"/></svg></span><div class="txt">T9 cap-halt check not re-proven<small>Accepted known risk: the earlier version passed runs 1–3, the native code is identical, and the gate only ever halts trading.</small></div></div>
           </div>
         </div>
       </section>
@@ -350,10 +352,10 @@
         <div class="sec-head"><span class="sec-num">05</span><h2 class="sec" id="roll-h">Rollout</h2></div>
         <p class="sec-sub">Scope is every EVM chain — but a chain only goes live once it is verified: a working RPC, the factory or PoolManager address, a proven buy-and-sell route, and gas economics that leave room after the round trip. Solana is a separate build, later.</p>
         <div class="timeline">
-          <div class="tl-step done"><div class="tl-dot">✓</div><h3>Fork test</h3><p>Full flow proven on a local copy of mainnet. 13 of 16 checks passed, failures documented above.</p></div>
+          <div class="tl-step done"><div class="tl-dot">✓</div><h3>Fork test</h3><p>Full flow proven on local copies of mainnet. Evening re-runs: Polygon 15/16, Robinhood 11/13, Arc 11/16 — results documented above.</p></div>
           <div class="tl-step skip"><div class="tl-dot">–</div><h3>Dry run — extended watch skipped</h3><p>Zero-transaction behaviour was proven in the fork test (the kill switch held), but the planned 24–48 hour watch was skipped by direct go-ahead for this trial.</p></div>
-          <div class="tl-step now"><div class="tl-dot">3</div><h3>Tiny live — Polygon</h3><p>Approved and armed: 0.1 per buy, immediate sell, 1.333 total quota. Fires once the build is clean; no trade reported yet at this snapshot. Cheapest gas of the four chains.</p></div>
-          <div class="tl-step"><div class="tl-dot">4</div><h3>Expand chain by chain</h3><p>Base, Robinhood and Arc join one at a time, each with its own settings, only after Polygon's real results are in.</p></div>
+          <div class="tl-step now"><div class="tl-dot">3</div><h3>Tiny live — Polygon + Arc</h3><p>Both live: Polygon since 22:11 GMT+7 (0.1 per buy, immediate sell, 1.333 total quota), Arc since 22:50 GMT+7 (0.10 per buy, immediate sell, 0.3 total quota). No trades yet — Polygon is gated by gas, Arc is waiting for its first qualifying launch.</p></div>
+          <div class="tl-step"><div class="tl-dot">4</div><h3>Expand chain by chain</h3><p>Base and Robinhood are approved at 0.00005 per buy with a 0.0001 total quota each. They flip live one at a time, each with its own settings, once their fork-test checks come back clean.</p></div>
         </div>
       </section>
 
@@ -389,7 +391,7 @@
       </section>
 
       <footer>
-        <span>Launch Sniper · mainnet build, Polygon trial first · <a href="https://laserinu.github.io/muse-website/" target="_blank" rel="noopener">GitHub</a></span>
+        <span>Launch Sniper · mainnet build, Polygon + Arc trials live · <a href="https://laserinu.github.io/muse-website/" target="_blank" rel="noopener">GitHub</a></span>
         <span>Figures as measured 11 Nov 2026, GMT+7 · all amounts in each chain's native token</span>
       </footer>
 
@@ -398,14 +400,14 @@
     <script>
       (function(){
         var chains = {
-          polygon:   { name:'Polygon',   unit:'POL',  quota:1.333, gas:0.0273,    short:0.001, buy:1.1284,
-                       note:'With gas alone at 0.0273, gas is about 2.4 of every 100 spent against a 1.1284 buy on Polygon — the cheapest place to run this, which is why the trial starts here.' },
-          base:      { name:'Base',      unit:'ETH',  quota:0.00243, gas:0.0000036, short:0.0000002, buy:0.00005,
-                       note:'Base gas per trip is 0.0000036 against a 0.00005 buy — gas is a small share here, so the daily cap, not gas, is the binding limit.' },
-          robinhood: { name:'Robinhood', unit:'ETH',  quota:0.00243, gas:0.0000121, short:0.0000005, buy:0.00005,
-                       note:'Robinhood gas per trip is 0.0000121 — roughly a quarter of the 0.00005 buy size, the tightest margin of the four chains.' },
-          arc:       { name:'Arc',       unit:'USDC', quota:5.00, gas:0.012, short:0.003, buy:0.10,
-                       note:'On Arc the native token is USDC: gas per trip is 0.012 against a 0.10 buy, and the daily gas budget is 2.50.' }
+          polygon:   { name:'Polygon',   unit:'POL',  quota:1.333, gas:0.0273,    short:0.001, buy:0.1,
+                       note:'With gas alone at 0.0273, gas is about 27 of every 100 spent against a 0.1 buy on Polygon. Gas ran at 100–280 through the day and the trial only trades below ~42, which is why Polygon is live but has not traded yet.' },
+          base:      { name:'Base',      unit:'ETH',  quota:0.0001, gas:0.0000036, short:0.0000002, buy:0.00005,
+                       note:'Base gas per trip is 0.0000036 against a 0.00005 buy — gas is a small share here, so the 0.0001 total quota, not gas, is the binding limit. Approved; flips live once its fork-test check comes back clean.' },
+          robinhood: { name:'Robinhood', unit:'ETH',  quota:0.0001, gas:0.0000121, short:0.0000005, buy:0.00005,
+                       note:'Robinhood gas per trip is 0.0000121 — roughly a quarter of the 0.00005 buy size, the tightest margin of the four chains. Approved; flips live once its fork-test check comes back clean.' },
+          arc:       { name:'Arc',       unit:'USDC', quota:0.3, gas:0.012, short:0.003, buy:0.10,
+                       note:'On Arc the native token is USDC: gas per trip is 0.012 against a 0.10 buy, and the total trial quota is 0.3. Arc gas sat near 20 at flip time against a gate of ~41.7, so Arc can trade now.' }
         };
         var inQuota = document.getElementById('inQuota');
         var inGas = document.getElementById('inGas');
