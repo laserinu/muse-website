@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robin Muse ($RMUSE) — Muse's token on Robinhood Chain</title>
+<meta name="description" content="Robin Muse ($RMUSE): Muse's second token, live on Robinhood Chain with a Uniswap V4 RMUSE/WETH pool, a custom 3% hook charged in WETH, seeded 99T RMUSE + 0.000099 ETH on 7 Nov 2026.">
+<style>
+:root{--bg:#0e1216;--surface:#161d26;--surface2:#1c2530;--text:#e8ecf1;--muted:#9aa7b4;--line:#2a3542;--accent:#4ade80;--teal:#2dd4bf;--green:#4ade80}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 64px}
+nav{padding:20px 0 0;font-size:14px}
+nav a{color:var(--muted)}
+.kicker{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-size:12px;margin:28px 0 0}
+h1{font-size:36px;line-height:1.15;margin:8px 0 12px}
+h2{font-size:24px;margin:44px 0 10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{font-size:18px;margin:20px 0 6px}
+p{margin:0 0 14px}
+.lede{color:var(--muted);font-size:18px}
+.hero{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;margin:24px 0}
+.mark{width:140px;height:140px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(135deg,#1c2530,#0e1216);display:flex;align-items:center;justify-content:center;flex:none}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:24px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.stat b{font-size:22px;display:block}
+.stat span{color:var(--muted);font-size:13px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:var(--surface2);padding:2px 6px;border-radius:6px;word-break:break-all}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+.card h3{margin-top:0}
+.badge{display:inline-block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin-bottom:8px}
+.badge.live{color:var(--green);border-color:#234d33}
+.addr{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;word-break:break-all}
+.addr b{color:var(--muted);font-weight:600}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600}
+ul,ol{padding-left:22px}
+li{margin-bottom:8px}
+.callout{border-left:3px solid var(--accent);background:var(--surface);padding:16px 18px;margin:18px 0;border-radius:0 10px 10px 0}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="../">← All Muse sites</a></nav>
+<p class="kicker">Live &amp; verified · Robinhood Chain · 7 Nov 2026</p>
+<h1>Robin Muse $RMUSE</h1>
+<p class="lede">Muse's second token, on Robinhood Chain. A Uniswap V4 RMUSE/WETH pool, a custom 3% hook charged in WETH — never in the traded token — seeded 99T RMUSE + 0.000099 ETH on 7 Nov 2026. Deployed by the Muse agent wallet through the Privy CLI. Total deploy cost: about 0.000183 ETH including the seed.</p>
+<div class="hero">
+<img class="mark" src="rmuse-logo-64.svg" alt="Robin Muse ($RMUSE) logo — fluffy mouse in a green Robin Hood hood" width="140" height="140">
+<div>
+<p><strong>Live on Robinhood Chain — token + pool in one launch.</strong> The deployer factory created the token, deployed the hook, and opened and seeded the pool in a single launch transaction — so $RMUSE was tradable from its first block. The deployer holds <strong>1T RMUSE (1%)</strong>, owner-withdrawable only to the agent wallet; the agent wallet itself holds <strong>0 RMUSE</strong>.</p>
+<p>Token contract: <span class="mono">0x137aEA2D5fdb1e15711BbAfd31A038A933b5fd36</span><br>
+Factory: <span class="mono">0x2B2A411Cf14D2D63395f2950333342cb3135926B</span> · Hook: <span class="mono">0xe7833f4179505CE865DFC73FDd61A489954140cc</span> · Agent wallet <code>0x0A1D…50C4</code> · Plain OpenZeppelin ERC-20 · No transfer tax.</p>
+<p>Verify the address on the explorer for the chain you are using before you interact — the address is the identity, not the name or ticker.</p>
+</div>
+</div>
+<div class="stats">
+<div class="stat"><b>100T</b><span>Max supply · 9 decimals</span></div>
+<div class="stat"><b>99T</b><span>RMUSE seeded in the pool</span></div>
+<div class="stat"><b>1T</b><span>Held by the deployer (1%)</span></div>
+<div class="stat"><b>3%</b><span>Hook fee · in WETH</span></div>
+<div class="stat"><b>0</b><span>RMUSE held by the agent wallet</span></div>
+<div class="stat"><b>~$0.40</b><span>Total deploy cost incl. seed</span></div>
+</div>
+
+<h2>Tokenomics — fixed at 100 trillion, nothing more can be created</h2>
+<p>The entire maximum supply is minted once, at deployment, by the deployer factory. 99% of it seeds the pool; 1% stays in the deployer, withdrawable only by the agent wallet. There is no mint function, no transfer tax, and no hidden allocation — plain OpenZeppelin ERC-20 v5.7.0, 9 decimals.</p>
+<table>
+<tr><th>Allocation</th><th>Amount</th></tr>
+<tr><td>Total fixed supply — minted once at launch</td><td>100T</td></tr>
+<tr><td>Seeded into the RMUSE/WETH pool</td><td>99T</td></tr>
+<tr><td>Held by the deployer (owner-withdrawable only)</td><td>1T</td></tr>
+<tr><td>Held by the agent wallet</td><td>0 RMUSE</td></tr>
+<tr><td>Future mints</td><td>0 — no mint function</td></tr>
+<tr><td>Decimals</td><td>9</td></tr>
+<tr><td>Transfer tax in the token contract</td><td>None</td></tr>
+<tr><td>Pool trading fee</td><td>0.3% LP (3000) + 3% hook in WETH</td></tr>
+</table>
+
+<h2>The pool</h2>
+<p>One hooked V4 pool on Robinhood Chain. Copy any address — verify it on the chain's explorer before you interact.</p>
+
+<div class="card">
+<span class="badge live">● Live · Robinhood Chain · 4663</span>
+<h3>RMUSE / WETH — seeded 99T RMUSE + 0.000099 ETH</h3>
+<p class="addr"><b>Token contract</b><br>0x137aEA2D5fdb1e15711BbAfd31A038A933b5fd36</p>
+<p class="addr"><b>Hook</b><br>0xe7833f4179505CE865DFC73FDd61A489954140cc</p>
+<p class="addr"><b>Pool ID — RMUSE / WETH</b><br>0x7763e960970e50d5c7a4208fc3e0004055ea2b0fe47a944e10abdcc7e7be6fc1</p>
+<p class="addr"><b>Position NFT</b><br>4214669 — full range [-887220, 887220], owned by the agent wallet</p>
+<p>Pool fee: 3000 (0.3%) + 3% hook. Starting price: 1 wei per RMUSE. Quote token is aeWETH <span class="mono">0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73</span>.</p>
+<p>Launch tx: <a href="https://robin.etherscan.io/tx/0xf4db89f0df4887d8508d42d08cb64f963316fe3b7d7436ba63aed494fc4dc10d">0xf4db89f0…c10d</a> · Block 107992894 · Factory deploy: <a href="https://robin.etherscan.io/tx/0x17ac494694c00e6c45738395f4ff5ae561a79e870f3089ccb45f4bf5b9896e4d">0x17ac4946…6e4d</a> · Block 107992552</p>
+<p><a href="https://robin.etherscan.io/address/0x137aEA2D5fdb1e15711BbAfd31A038A933b5fd36">Token on RobinScan</a> · <a href="https://robin.etherscan.io/address/0xe7833f4179505CE865DFC73FDd61A489954140cc">Hook on RobinScan</a> · <a href="https://robin.etherscan.io/address/0x2B2A411Cf14D2D63395f2950333342cb3135926B">Factory on RobinScan</a></p>
+</div>
+
+<h2>The 3% hook — charged in WETH, never in RMUSE</h2>
+<p>Every swap on the RMUSE pool pays 0.3% to liquidity providers plus a 3% hook fee to the agent wallet, taken in WETH: on a buy, from the WETH input before the swap; on a sell, from the WETH output after the swap. The fee recipient is the agent wallet (<span class="mono">0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4</span>), hardcoded with no owner or setters, and the hook only serves this pool. The fork test before launch confirmed exactly 3.000% on both buy and sell legs. This is the fee design the user set for all future deployments, after the first $MUSE pool on Arc charged its fee in the traded token instead.</p>
+
+<h2>Deploy record — 7 Nov 2026</h2>
+<p>Three transactions from the agent wallet via the Privy CLI: deploy the factory, deploy the hook via CREATE2, then launch — token, pool and seed in one call. Total gas 4,209,885; total cost 0.000183373675056 ETH (seed 0.000099 + gas ~0.000084). Onchain verification at block 107993314 confirmed name / symbol / decimals, totalSupply 1e23, the factory holding ~1T, the agent holding 0, the pool holding ~99T, the position NFT owned by the agent wallet, and the hook's fee recipient and 300 bps fee. Token, factory and hook are all Sourcify exact-match (token matchId 58690583, factory 58690604, hook 58690606).</p>
+<p>One note on deployment, since it affects verification: the token was created by the RobinMuseDeployer factory contract via a plain <code>new RobinMuseToken()</code> CREATE inside its launch transaction, so the factory — not the agent wallet — is the token's immediate creator. That is by EVM construction, and it is why a signature-based ownership check from the deployer wallet is not the route used here; the ownership chain (agent wallet → factory → token) is verifiable on RobinScan.</p>
+<div class="card"><h3>How $RMUSE relates to $MUSE and $MUSN</h3><p>$MUSE (Arc) was the first token; $RMUSE (Robinhood) was the second, and the first to charge its 3% fee in the quote currency. $MUSN is the third token and the first multichain one: the same address on four chains, the full 100T seeded into the pools, and the deployer holding nothing. Read the $MUSE page <a href="../muse-ai-agent/">here</a> and the $MUSN page <a href="../musn/">here</a>.</p></div>
+<div class="card"><h3>Logo</h3><p><img src="rmuse-logo-64.svg" alt="Robin Muse ($RMUSE) logo" width="64" height="64" style="border-radius:12px"> The $RMUSE logo is hosted here: 64×64 SVG (<a href="rmuse-logo-64.svg">rmuse-logo-64.svg</a>). This is the logo file submitted to RobinScan.</p></div>
+
+<div class="callout"><h3 style="margin-top:0">Check before you trade</h3><p>The token address is <span class="mono">0x137aEA2D5fdb1e15711BbAfd31A038A933b5fd36</span> on Robinhood Chain. If the address on your screen is different, it is a different token. The pool is a 0.000099 ETH seed — tiny. Expect very thin liquidity and large price impact on any real size.</p></div>
+
+<footer>
+<p>Robin Muse — $RMUSE · Robinhood Chain 4663. Token: <span class="mono">0x137aEA2D5fdb1e15711BbAfd31A038A933b5fd36</span> · Factory: <span class="mono">0x2B2A411Cf14D2D63395f2950333342cb3135926B</span> · Hook: <span class="mono">0xe7833f4179505CE865DFC73FDd61A489954140cc</span> · Agent wallet: <span class="mono">0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4</span></p>
+<p>Official contact email: <a href="mailto:linulaserinu@gmail.com">linulaserinu@gmail.com</a></p>
+<p>$RMUSE is a community / agent token with no expectation of profit. Cryptocurrency is volatile and can go to zero — do your own research (Muse does). This page is information about the token, not financial advice.</p>
+<p><a href="../">← All Muse sites</a></p>
+</footer>
+</div>
+</body>
+</html>

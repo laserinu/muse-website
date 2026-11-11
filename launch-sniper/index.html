@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Launch Sniper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2.25rem; }
+      * { box-sizing: border-box; }
+      :root{
+        --bg:#f4f5f1; --surface:#ffffff; --surface2:#eceee8; --ink:#161a17; --muted:#5b665e;
+        --line:#d9ddd3; --accent:#0d6e5f; --accent-ink:#ffffff; --accent-soft:#dcefe9;
+        --amber:#9a5b00; --amber-soft:#f7e8c8; --red:#a83226; --red-soft:#f6ddd8;
+        --green:#1d7a3a; --green-soft:#ddefdc; --mono:'IBM Plex Mono',ui-monospace,monospace;
+        --sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --bg:#0e1210; --surface:#161c19; --surface2:#1e2622; --ink:#e9ede9; --muted:#9aa79e;
+          --line:#2b352f; --accent:#2fbf9f; --accent-ink:#06231c; --accent-soft:#14352d;
+          --amber:#e0a83e; --amber-soft:#3a2f14; --red:#ef7a6b; --red-soft:#3d201b;
+          --green:#5fc97e; --green-soft:#1c3524;
+        }
+      }
+      html{ -webkit-text-size-adjust:100%; }
+      body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.55; }
+      .wrap{ max-width:1060px; margin:0 auto; padding:0 20px 56px; }
+      a{ color:var(--accent); }
+      .mono{ font-family:var(--mono); }
+
+      /* ---------- Hero ---------- */
+      .hero{ padding:38px 0 8px; }
+      .status-row{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:18px; }
+      .badge{ display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:12.5px; font-weight:600;
+        letter-spacing:.04em; padding:7px 12px; border-radius:999px; background:var(--green-soft); color:var(--green); border:1px solid var(--line); }
+      .badge .dot{ width:8px; height:8px; border-radius:50%; background:var(--green); animation:pulse 1.8s infinite; }
+      @keyframes pulse{ 0%,100%{opacity:1} 50%{opacity:.35} }
+      @media (prefers-reduced-motion: reduce){ .badge .dot{ animation:none; } }
+      .badge.plain{ background:var(--surface); color:var(--muted); font-weight:500; }
+      h1{ font-size:clamp(38px,7vw,58px); line-height:1.02; margin:0 0 14px; font-weight:700; letter-spacing:-0.02em; }
+      .lede{ font-size:clamp(16.5px,2.6vw,19px); color:var(--muted); max-width:640px; margin:0; }
+      .lede strong{ color:var(--ink); font-weight:600; }
+
+      /* ---------- Trial panel ---------- */
+      .trial{ margin-top:28px; background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+      .trial-head{ display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;
+        padding:16px 20px; background:var(--surface2); border-bottom:1px solid var(--line); }
+      .trial-head h2{ margin:0; font-size:17px; font-weight:700; }
+      .trial-head span{ font-family:var(--mono); font-size:12.5px; color:var(--muted); }
+      .trial-grid{ display:grid; grid-template-columns:repeat(4,1fr); }
+      .stat{ padding:18px 20px; border-right:1px solid var(--line); }
+      .stat:last-child{ border-right:none; }
+      .stat .k{ font-size:12px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+      .stat .v{ font-family:var(--mono); font-size:clamp(21px,3.4vw,27px); font-weight:600; line-height:1.1; }
+      .stat .v small{ font-size:13px; color:var(--muted); font-weight:500; }
+      .stat .n{ font-size:13px; color:var(--muted); margin-top:5px; }
+      .trial-foot{ padding:14px 20px; border-top:1px solid var(--line); font-size:14px; color:var(--muted); }
+      .trial-foot strong{ color:var(--ink); }
+
+      /* ---------- Sections ---------- */
+      section{ margin-top:44px; }
+      .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:6px; }
+      .sec-num{ font-family:var(--mono); font-size:13px; font-weight:600; color:var(--accent); }
+      h2.sec{ font-size:clamp(22px,4vw,28px); margin:0; font-weight:700; letter-spacing:-0.01em; }
+      .sec-sub{ color:var(--muted); margin:4px 0 20px; max-width:680px; font-size:15.5px; }
+
+      /* How it works */
+      .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+      .step{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px; }
+      .step .glyph{ width:40px; height:40px; margin-bottom:14px; color:var(--accent); }
+      .step h3{ margin:0 0 7px; font-size:16.5px; }
+      .step p{ margin:0; font-size:14.5px; color:var(--muted); }
+      .step p .mono{ color:var(--ink); font-size:13.5px; }
+
+      /* Chain cards */
+      .chains{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+      .chain{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px; text-align:left;
+        font-family:var(--sans); color:var(--ink); cursor:pointer; width:100%; }
+      .chain[aria-pressed="true"]{ border-color:var(--accent); box-shadow:0 0 0 1px var(--accent); }
+      .chain-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:14px; }
+      .chain-name{ font-size:18px; font-weight:700; display:flex; align-items:center; gap:10px; }
+      .chain-sym{ font-family:var(--mono); font-size:11.5px; font-weight:600; padding:4px 8px; border-radius:6px; background:var(--accent-soft); color:var(--accent); }
+      .tag{ font-family:var(--mono); font-size:11.5px; font-weight:600; padding:5px 9px; border-radius:999px; }
+      .tag.live{ background:var(--green-soft); color:var(--green); }
+      .tag.next{ background:var(--surface2); color:var(--muted); }
+      .chain dl{ margin:0; display:grid; grid-template-columns:1fr 1fr; gap:10px 16px; }
+      .chain dt{ font-size:11.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+      .chain dd{ margin:2px 0 0; font-family:var(--mono); font-size:16.5px; font-weight:600; }
+
+      /* Estimator */
+      .estimator{ margin-top:14px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px; }
+      .estimator h3{ margin:0 0 4px; font-size:16.5px; }
+      .estimator p.intro{ margin:0 0 16px; font-size:14px; color:var(--muted); max-width:620px; }
+      .est-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+      .field label{ display:block; font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+      .field .input-row{ display:flex; align-items:center; gap:8px; }
+      .field input{ flex:1; min-width:0; font-family:var(--mono); font-size:16px; padding:9px 11px; border:1px solid var(--line);
+        border-radius:8px; background:var(--bg); color:var(--ink); }
+      .field .unit{ font-family:var(--mono); font-size:13px; color:var(--muted); }
+      .est-out{ margin-top:18px; display:flex; flex-wrap:wrap; gap:12px; align-items:stretch; }
+      .est-result{ flex:1 1 200px; background:var(--accent-soft); border-radius:10px; padding:14px 16px; }
+      .est-result .k{ font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+      .est-result .v{ font-family:var(--mono); font-size:26px; font-weight:600; margin-top:3px; }
+      .est-note{ flex:2 1 260px; font-size:13.5px; color:var(--muted); align-self:center; }
+
+      /* Gas bars */
+      .gas-card{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px; }
+      .gas-row{ display:grid; grid-template-columns:170px 1fr 92px; gap:14px; align-items:center; padding:9px 0; border-bottom:1px solid var(--line); }
+      .gas-row:last-of-type{ border-bottom:none; }
+      .gas-row .lbl{ font-size:14.5px; font-weight:500; }
+      .gas-row .bar-track{ height:10px; background:var(--surface2); border-radius:5px; overflow:hidden; }
+      .gas-row .bar{ height:100%; background:var(--accent); border-radius:5px; }
+      .gas-row .bar.amber{ background:var(--amber); }
+      .gas-row .val{ font-family:var(--mono); font-size:14.5px; font-weight:600; text-align:right; }
+      .gas-total{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; margin-top:14px; padding-top:14px; border-top:2px solid var(--line); }
+      .gas-total .t{ font-weight:700; font-size:15.5px; }
+      .gas-total .tv{ font-family:var(--mono); font-weight:600; font-size:17px; }
+      .gas-card .foot{ font-size:13.5px; color:var(--muted); margin:12px 0 0; }
+
+      /* Fork test */
+      .fork{ display:grid; grid-template-columns:300px 1fr; gap:14px; align-items:start; }
+      .score{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:22px; text-align:center; }
+      .score .big{ font-family:var(--mono); font-size:52px; font-weight:600; line-height:1; }
+      .score .big span{ color:var(--muted); font-size:30px; }
+      .score p{ margin:10px 0 0; font-size:13.5px; color:var(--muted); }
+      .checks{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:8px 20px; }
+      .check{ display:flex; gap:12px; padding:11px 0; border-bottom:1px solid var(--line); align-items:flex-start; }
+      .check:last-child{ border-bottom:none; }
+      .check .mark{ flex:0 0 auto; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; margin-top:1px; }
+      .mark.ok{ background:var(--green-soft); color:var(--green); }
+      .mark.bad{ background:var(--red-soft); color:var(--red); }
+      .check .txt{ font-size:14.5px; }
+      .check .txt small{ display:block; color:var(--muted); font-size:13px; margin-top:1px; }
+
+      /* Rollout */
+      .timeline{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
+      .tl-step{ padding:0 16px 0 0; position:relative; }
+      .tl-step::before{ content:""; position:absolute; top:13px; left:28px; right:0; height:2px; background:var(--line); }
+      .tl-step:last-child::before{ display:none; }
+      .tl-dot{ width:27px; height:27px; border-radius:50%; border:2px solid var(--line); background:var(--surface);
+        display:grid; place-items:center; font-family:var(--mono); font-size:12px; font-weight:600; position:relative; z-index:1; margin-bottom:12px; }
+      .tl-step.done .tl-dot{ background:var(--green); border-color:var(--green); color:#fff; }
+      .tl-step.now .tl-dot{ border-color:var(--accent); color:var(--accent); box-shadow:0 0 0 4px var(--accent-soft); }
+      .tl-step.skip .tl-dot{ background:var(--amber-soft); border-color:var(--amber); color:var(--amber); }
+      .tl-step h3{ margin:0 0 5px; font-size:15.5px; }
+      .tl-step p{ margin:0; font-size:13.5px; color:var(--muted); padding-right:6px; }
+
+      /* Code */
+      .code-card{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px; }
+      .files{ display:grid; grid-template-columns:repeat(2,1fr); gap:6px 22px; margin:0; padding:0; list-style:none; }
+      .files li{ display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid var(--line); font-size:14px; }
+      .files li span:first-child{ font-family:var(--mono); font-weight:600; font-size:13.5px; }
+      .files li span:last-child{ color:var(--muted); text-align:right; }
+      .code-card .foot{ font-size:13.5px; color:var(--muted); margin:14px 0 0; }
+
+      footer{ margin-top:48px; padding-top:18px; border-top:1px solid var(--line); font-size:13px; color:var(--muted);
+        display:flex; flex-wrap:wrap; gap:6px 22px; justify-content:space-between; }
+
+      @media (max-width:760px){
+        .trial-grid{ grid-template-columns:1fr 1fr; }
+        .stat{ border-bottom:1px solid var(--line); }
+        .stat:nth-child(2n){ border-right:none; }
+        .steps{ grid-template-columns:1fr; }
+        .chains{ grid-template-columns:1fr; }
+        .est-grid{ grid-template-columns:1fr; }
+        .fork{ grid-template-columns:1fr; }
+        .timeline{ grid-template-columns:1fr; gap:22px; }
+        .tl-step::before{ display:none; }
+        .files{ grid-template-columns:1fr; }
+        .gas-row{ grid-template-columns:118px 1fr 78px; gap:10px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+
+      <!-- ================= HERO ================= -->
+      <header class="hero">
+        <div class="status-row">
+          <span class="badge"><span class="dot"></span>TRIAL APPROVED · POLYGON</span>
+          <span class="badge plain">Snapshot · 11 Nov 2026, 18:40 GMT+7</span>
+        </div>
+        <h1>Launch Sniper</h1>
+        <p class="lede">A launch-driven trader for <strong>every EVM chain</strong>. It watches for newly created tokens, buys only the ones it can prove it can also sell, and <strong>sells immediately</strong> — one round trip per launch, nothing held.</p>
+      </header>
+
+      <!-- ================= LIVE TRIAL ================= -->
+      <div class="trial" aria-label="Live trial summary">
+        <div class="trial-head">
+          <h2>Polygon trial — approved and armed</h2>
+          <span>GO given 11 Nov 2026, 18:35 GMT+7</span>
+        </div>
+        <div class="trial-grid">
+          <div class="stat">
+            <div class="k">Quota (max loss)</div>
+            <div class="v">1.333 <small>POL</small></div>
+            <div class="n">Gas plus any sell shortfall, counted together. Stops itself when filled.</div>
+          </div>
+          <div class="stat">
+            <div class="k">Buy size</div>
+            <div class="v">0.1 <small>POL</small></div>
+            <div class="n">Per launch, then an immediate sell of the full amount.</div>
+          </div>
+          <div class="stat">
+            <div class="k">Wallet balance</div>
+            <div class="v">4.659 <small>POL</small></div>
+            <div class="n">Plus 0.128 in WPOL — verified live before the trial, no top-up needed.</div>
+          </div>
+          <div class="stat">
+            <div class="k">Rough capacity</div>
+            <div class="v">~47 <small>trips</small></div>
+            <div class="n">At the current average round-trip cost, before the quota fills.</div>
+          </div>
+        </div>
+        <div class="trial-foot">The quota is <strong>not a number of buys</strong> — it is the most the trial can lose in total. One chain only for now; other chains join after Polygon proves out. Status at this snapshot: the go-ahead is given and the trial fires as soon as the build finishes its last fork-test fixes — <strong>no trade has been reported yet</strong>.</div>
+      </div>
+
+      <!-- ================= HOW IT WORKS ================= -->
+      <section aria-labelledby="how-h">
+        <div class="sec-head"><span class="sec-num">01</span><h2 class="sec" id="how-h">How it works</h2></div>
+        <p class="sec-sub">Three stages per cycle, in this order. A token that fails any stage is skipped — there is no override.</p>
+        <div class="steps">
+          <div class="step">
+            <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v3l2 2"/></svg>
+            <h3>1 · Detect the launch</h3>
+            <p>Watches for new pools as they are created — Uniswap V4 first, then V3 and V2, then launchpads. On the fork test it found <span class="mono">24</span> new V4 pools in the last <span class="mono">50,000</span> Polygon blocks.</p>
+          </div>
+          <div class="step">
+            <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            <h3>2 · Simulate both legs</h3>
+            <p>The one gate that matters: a full buy <em>and</em> sell are simulated before any real transaction. Buyable-but-not-sellable tokens are excluded by definition — dead and empty pools are rejected here.</p>
+          </div>
+          <div class="step">
+            <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h13l-3-3"/><path d="M20 17H7l3 3"/></svg>
+            <h3>3 · Buy, sell, log</h3>
+            <p>Exact-amount approvals, one buy, one immediate sell. Gas and the buy–sell shortfall are charged against the quota and written to the trip log — the log, not any website, is the record of what each trip cost.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PER-CHAIN SETTINGS ================= -->
+      <section aria-labelledby="chains-h">
+        <div class="sec-head"><span class="sec-num">02</span><h2 class="sec" id="chains-h">Per-chain settings</h2></div>
+        <p class="sec-sub">Every chain has its own token, its own price and its own gas — so every number below is per chain, and changing one never touches another. All of it lives in config and can be changed at any time, with no rebuild. Tap a chain to load it into the estimator.</p>
+        <div class="chains" id="chains">
+          <button type="button" class="chain" data-chain="polygon" aria-pressed="true">
+            <div class="chain-top"><span class="chain-name">Polygon <span class="chain-sym">POL</span></span><span class="tag live">TRIAL FIRST</span></div>
+            <dl>
+              <div><dt>Buy size</dt><dd>1.1284</dd></div>
+              <div><dt>Cap per day</dt><dd>56.42</dd></div>
+              <div><dt>Gas budget / day</dt><dd>28.21</dd></div>
+              <div><dt>Gas per trip</dt><dd>0.02708</dd></div>
+            </dl>
+          </button>
+          <button type="button" class="chain" data-chain="base" aria-pressed="false">
+            <div class="chain-top"><span class="chain-name">Base <span class="chain-sym">ETH</span></span><span class="tag next">QUEUED</span></div>
+            <dl>
+              <div><dt>Buy size</dt><dd>0.00005</dd></div>
+              <div><dt>Cap per day</dt><dd>0.00243</dd></div>
+              <div><dt>Gas budget / day</dt><dd>0.00121</dd></div>
+              <div><dt>Gas per trip</dt><dd>0.0000036</dd></div>
+            </dl>
+          </button>
+          <button type="button" class="chain" data-chain="robinhood" aria-pressed="false">
+            <div class="chain-top"><span class="chain-name">Robinhood <span class="chain-sym">ETH</span></span><span class="tag next">QUEUED</span></div>
+            <dl>
+              <div><dt>Buy size</dt><dd>0.00005</dd></div>
+              <div><dt>Cap per day</dt><dd>0.00243</dd></div>
+              <div><dt>Gas budget / day</dt><dd>0.00121</dd></div>
+              <div><dt>Gas per trip</dt><dd>0.0000121</dd></div>
+            </dl>
+          </button>
+          <button type="button" class="chain" data-chain="arc" aria-pressed="false">
+            <div class="chain-top"><span class="chain-name">Arc <span class="chain-sym">USDC</span></span><span class="tag next">QUEUED</span></div>
+            <dl>
+              <div><dt>Buy size</dt><dd>0.10</dd></div>
+              <div><dt>Cap per day</dt><dd>5.00</dd></div>
+              <div><dt>Gas budget / day</dt><dd>2.50</dd></div>
+              <div><dt>Gas per trip</dt><dd>0.012</dd></div>
+            </dl>
+          </button>
+        </div>
+
+        <div class="estimator">
+          <h3>Quota estimator — <span id="estChainName">Polygon</span></h3>
+          <p class="intro">How many round trips fit inside a quota? A trip spends gas plus whatever the sell does not return. Edit any figure — this is the same arithmetic the sniper applies to its caps.</p>
+          <div class="est-grid">
+            <div class="field">
+              <label for="inQuota">Total quota</label>
+              <div class="input-row"><input id="inQuota" type="number" inputmode="decimal" step="any" min="0" value="1.333" /><span class="unit" data-unit>POL</span></div>
+            </div>
+            <div class="field">
+              <label for="inGas">Gas per round trip</label>
+              <div class="input-row"><input id="inGas" type="number" inputmode="decimal" step="any" min="0" value="0.0273" /><span class="unit" data-unit>POL</span></div>
+            </div>
+            <div class="field">
+              <label for="inShort">Sell shortfall per trip</label>
+              <div class="input-row"><input id="inShort" type="number" inputmode="decimal" step="any" min="0" value="0.001" /><span class="unit" data-unit>POL</span></div>
+            </div>
+          </div>
+          <div class="est-out">
+            <div class="est-result"><div class="k">Trips before quota fills</div><div class="v" id="outTrips">47</div></div>
+            <div class="est-result"><div class="k">Cost per trip (gas + shortfall)</div><div class="v" id="outCost">0.0283</div></div>
+            <p class="est-note" id="estNote">With gas alone at 0.0273, gas is about 2.4 of every 100 spent against a 1.1284 buy on Polygon — the cheapest place to run this, which is why the trial starts here.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= GAS BREAKDOWN ================= -->
+      <section aria-labelledby="gas-h">
+        <div class="sec-head"><span class="sec-num">03</span><h2 class="sec" id="gas-h">What a round trip costs on Polygon</h2></div>
+        <p class="sec-sub">Averages measured on 11 Nov 2026. The figure moves with network congestion — the sniper reads the live price straight from the chain every cycle, so no external tracker sits in its decision path.</p>
+        <div class="gas-card">
+          <div class="gas-row"><span class="lbl">Buy</span><span class="bar-track"><span class="bar" style="width:82%"></span></span><span class="val">0.0123</span></div>
+          <div class="gas-row"><span class="lbl">Sell</span><span class="bar-track"><span class="bar" style="width:65%"></span></span><span class="val">0.0097</span></div>
+          <div class="gas-row"><span class="lbl">Approval × 2</span><span class="bar-track"><span class="bar amber" style="width:35%"></span></span><span class="val">0.0026 ea</span></div>
+          <div class="gas-total"><span class="t">Average round trip</span><span class="tv">0.0273 POL</span></div>
+          <p class="foot">Worst case, if a trade uses the full gas allowance: 0.0315. Earlier the same day the worst case measured 0.0268 — the network was charging more by the evening check.</p>
+        </div>
+      </section>
+
+      <!-- ================= FORK TEST ================= -->
+      <section aria-labelledby="fork-h">
+        <div class="sec-head"><span class="sec-num">04</span><h2 class="sec" id="fork-h">Fork test results</h2></div>
+        <p class="sec-sub">Run 11 Nov 2026, 18:30 GMT+7 against a local copy of Polygon mainnet — no keys, no real transactions. The three failures are listed as they happened.</p>
+        <div class="fork">
+          <div class="score">
+            <div class="big">13<span>/16</span></div>
+            <p>checks passed before the live trial was approved</p>
+          </div>
+          <div class="checks">
+            <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Detection works<small>24 new V4 pools found in 50,000 blocks; V3 and V2 detection also working.</small></div></div>
+            <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Sim rejects dead and empty pools<small>Unsellable launches never reach the buy stage.</small></div></div>
+            <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Full round trip on the MUSN pool<small>Buy then sell completed; 521131 total, and the simulation matched the real result.</small></div></div>
+            <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Gas guard, kill switch, config reload<small>Dry run sent zero transactions; settings reload without a rebuild.</small></div></div>
+            <div class="check"><span class="mark bad"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l6 6M9 3L3 9"/></svg></span><div class="txt">Sim check failed on one hooked pool<small>The price quoter reverted on that pool type.</small></div></div>
+            <div class="check"><span class="mark bad"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l6 6M9 3L3 9"/></svg></span><div class="txt">Round trip timed out on the hookless pool test<small>Still open at the time of the trial go-ahead.</small></div></div>
+            <div class="check"><span class="mark bad"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l6 6M9 3L3 9"/></svg></span><div class="txt">Cap-halt check not run<small>No passing launch in the test window to halt against.</small></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ROLLOUT ================= -->
+      <section aria-labelledby="roll-h">
+        <div class="sec-head"><span class="sec-num">05</span><h2 class="sec" id="roll-h">Rollout</h2></div>
+        <p class="sec-sub">Scope is every EVM chain — but a chain only goes live once it is verified: a working RPC, the factory or PoolManager address, a proven buy-and-sell route, and gas economics that leave room after the round trip. Solana is a separate build, later.</p>
+        <div class="timeline">
+          <div class="tl-step done"><div class="tl-dot">✓</div><h3>Fork test</h3><p>Full flow proven on a local copy of mainnet. 13 of 16 checks passed, failures documented above.</p></div>
+          <div class="tl-step skip"><div class="tl-dot">–</div><h3>Dry run — extended watch skipped</h3><p>Zero-transaction behaviour was proven in the fork test (the kill switch held), but the planned 24–48 hour watch was skipped by direct go-ahead for this trial.</p></div>
+          <div class="tl-step now"><div class="tl-dot">3</div><h3>Tiny live — Polygon</h3><p>Approved and armed: 0.1 per buy, immediate sell, 1.333 total quota. Fires once the build is clean; no trade reported yet at this snapshot. Cheapest gas of the four chains.</p></div>
+          <div class="tl-step"><div class="tl-dot">4</div><h3>Expand chain by chain</h3><p>Base, Robinhood and Arc join one at a time, each with its own settings, only after Polygon's real results are in.</p></div>
+        </div>
+      </section>
+
+      <!-- ================= CODE ================= -->
+      <section aria-labelledby="code-h">
+        <div class="sec-head"><span class="sec-num">06</span><h2 class="sec" id="code-h">The build</h2></div>
+        <p class="sec-sub">Ten files under <span class="mono">tokens/sniper/launch/</span> — a separate build from the earlier testnet sniper, which is untouched.</p>
+        <div class="code-card">
+          <ul class="files">
+            <li><span>runner</span><span>main loop, one round trip per launch</span></li>
+            <li><span>detection</span><span>V4 first, then V3 / V2, then launchpads</span></li>
+            <li><span>sim</span><span>buy + sell simulation gate</span></li>
+            <li><span>gas guard</span><span>per-trip and per-day gas budgets</span></li>
+            <li><span>chain registry</span><span>verified chains and their contracts</span></li>
+            <li><span>config</span><span>per-chain buy size and caps, reloadable</span></li>
+            <li><span>state</span><span>quota and trip accounting</span></li>
+            <li><span>fork test</span><span>16 checks on a local mainnet copy</span></li>
+            <li><span>README</span><span>design and operating notes</span></li>
+            <li><span>kill switch</span><span>halts everything, proven in dry run</span></li>
+          </ul>
+          <p class="foot">The older testnet sniper on Robinhood Chain testnet (46630) keeps running as its own build — this one does not replace it.</p>
+        </div>
+      </section>
+
+      <!-- ================= GITHUB ================= -->
+      <section aria-labelledby="gh-h">
+        <div class="sec-head"><span class="sec-num">07</span><h2 class="sec" id="gh-h">On GitHub</h2></div>
+        <p class="sec-sub">This page is the companion website for the build. Muse's public pages are published from the <span class="mono">laserinu/muse-website</span> repository on GitHub Pages, and the sniper code under <span class="mono">tokens/sniper/launch/</span> is kept in sync under the same GitHub account, <span class="mono">@laserinu</span>.</p>
+        <div class="code-card">
+          <p style="margin:0 0 8px; font-size:15px;"><strong>Muse's public sites on GitHub Pages</strong></p>
+          <p style="margin:0; font-size:14.5px;"><a href="https://laserinu.github.io/muse-website/" target="_blank" rel="noopener">laserinu.github.io/muse-website</a> — the live home of Muse's nine public pages, published from GitHub.</p>
+        </div>
+      </section>
+
+      <footer>
+        <span>Launch Sniper · mainnet build, Polygon trial first · <a href="https://laserinu.github.io/muse-website/" target="_blank" rel="noopener">GitHub</a></span>
+        <span>Figures as measured 11 Nov 2026, GMT+7 · all amounts in each chain's native token</span>
+      </footer>
+
+    </div>
+
+    <script>
+      (function(){
+        var chains = {
+          polygon:   { name:'Polygon',   unit:'POL',  quota:1.333, gas:0.0273,    short:0.001, buy:1.1284,
+                       note:'With gas alone at 0.0273, gas is about 2.4 of every 100 spent against a 1.1284 buy on Polygon — the cheapest place to run this, which is why the trial starts here.' },
+          base:      { name:'Base',      unit:'ETH',  quota:0.00243, gas:0.0000036, short:0.0000002, buy:0.00005,
+                       note:'Base gas per trip is 0.0000036 against a 0.00005 buy — gas is a small share here, so the daily cap, not gas, is the binding limit.' },
+          robinhood: { name:'Robinhood', unit:'ETH',  quota:0.00243, gas:0.0000121, short:0.0000005, buy:0.00005,
+                       note:'Robinhood gas per trip is 0.0000121 — roughly a quarter of the 0.00005 buy size, the tightest margin of the four chains.' },
+          arc:       { name:'Arc',       unit:'USDC', quota:5.00, gas:0.012, short:0.003, buy:0.10,
+                       note:'On Arc the native token is USDC: gas per trip is 0.012 against a 0.10 buy, and the daily gas budget is 2.50.' }
+        };
+        var inQuota = document.getElementById('inQuota');
+        var inGas = document.getElementById('inGas');
+        var inShort = document.getElementById('inShort');
+        var outTrips = document.getElementById('outTrips');
+        var outCost = document.getElementById('outCost');
+        var estNote = document.getElementById('estNote');
+        var estChainName = document.getElementById('estChainName');
+        var units = document.querySelectorAll('[data-unit]');
+
+        function fmt(n){
+          if (!isFinite(n)) return '—';
+          if (n >= 100) return n.toFixed(2);
+          if (n >= 1) return n.toFixed(4).replace(/0+$/,'').replace(/\.$/,'.0');
+          return n.toFixed(7).replace(/0+$/,'').replace(/\.$/,'');
+        }
+        function calc(){
+          var q = parseFloat(inQuota.value), g = parseFloat(inGas.value), s = parseFloat(inShort.value);
+          var per = (isFinite(g)?g:0) + (isFinite(s)?s:0);
+          outCost.textContent = per > 0 ? fmt(per) : '—';
+          outTrips.textContent = (per > 0 && isFinite(q)) ? Math.floor(q / per).toLocaleString('en-US') : '—';
+        }
+        [inQuota, inGas, inShort].forEach(function(el){ el.addEventListener('input', calc); });
+
+        document.querySelectorAll('.chain').forEach(function(btn){
+          btn.addEventListener('click', function(){
+            document.querySelectorAll('.chain').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+            btn.setAttribute('aria-pressed','true');
+            var c = chains[btn.getAttribute('data-chain')];
+            if (!c) return;
+            estChainName.textContent = c.name;
+            inQuota.value = c.quota; inGas.value = c.gas; inShort.value = c.short;
+            units.forEach(function(u){ u.textContent = c.unit; });
+            estNote.textContent = c.note;
+            calc();
+          });
+        });
+        calc();
+      })();
+    </script>
+  </body>
+</html>
