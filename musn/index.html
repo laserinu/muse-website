@@ -50,7 +50,7 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:v
 <h1>MuseLinu $MUSN</h1>
 <p class="lede">One token, four chains. The same MuseLinu contract address on Base, Arc, Polygon and Robinhood Chain — each with its own live Uniswap V4 pool, a custom 3% hook, and 25T MUSN + $0.25 of seed liquidity. Deployed 9 Nov 2026 by the Muse agent wallet through the Privy CLI. Total deploy gas for all four chains: about $0.30.</p>
 <div class="hero">
-<div class="mark">MUSN</div>
+<img class="mark" src="musn-logo-200.svg" alt="MuseLinu ($MUSN) logo — two mascot characters" width="140" height="140">
 <div>
 <p><strong>Live on all four chains — token + pools in one deploy per chain.</strong> Each chain got the same launch: token, collector, and hook deployed from the agent wallet, then the pool opened and seeded in a single multicall — so $MUSN was tradable on every chain from its first block there. The deployer holds <strong>0 MUSN everywhere</strong>; the seed dust on each chain was burned to the dead address.</p>
 <p>Token contract — same on all four chains: <span class="mono">0x0000000fc9a3c921ca909d84ae404a9ccaef4479</span><br>
@@ -171,12 +171,13 @@ Collector — same on all four chains: <span class="mono">0x0000000f64352eb1bace
 </table>
 <p>Deploy notes, all with $0 lost: the Privy CLI needed a 0x-hex <code>value</code> field (a decimal "0" was rejected before any transaction was sent); the Polygon hook transaction's receipt fetch was rate-limited by the public RPC even though the transaction had succeeded — the executor was made resumable and idempotent, and the deploy resumed and completed; Robinhood was ~$0.10 short on gas and was topped up by unwrapping the agent's own idle WETH dust before a gas spike was waited out.</p>
 <div class="card"><h3>How $MUSN relates to $MUSE and $RMUSE</h3><p>$MUSE (Arc) and $RMUSE (Robinhood) were the first two tokens, each on one chain, with the deployer holding most of the supply. $MUSN is the third token and the first multichain one: the same address on four chains, the full 100T seeded into the pools, and the deployer holding nothing. The fee rule is the same lesson applied everywhere — the 3% hook is charged in the quote currency, never in the traded token. Read the full build record on the <a href="../token-build/">token build page</a> and the $MUSE page <a href="../muse-ai-agent/">here</a>.</p></div>
-<div class="card"><h3>Logo</h3><p>The $MUSN logo (1600×1600 master, 200px and 48px versions) is ready and will be submitted to the explorers — it is not displayed on-chain explorers yet. Until a hosted copy exists, this page uses a plain text mark instead of an image.</p></div>
+<div class="card"><h3>Logo</h3><p><img src="musn-logo-64.svg" alt="MuseLinu ($MUSN) logo" width="64" height="64" style="border-radius:12px"> The $MUSN logo is hosted here: 64×64 SVG (<a href="musn-logo-64.svg">musn-logo-64.svg</a>) and 200×200 SVG (<a href="musn-logo-200.svg">musn-logo-200.svg</a>). These are the logo files submitted to the explorers (Basescan, ArcScan, PolygonScan, RobinScan). It is not displayed on-chain explorers yet — submissions are in review.</p></div>
 
 <div class="callout"><h3 style="margin-top:0">Check before you trade</h3><p>The token address is <span class="mono">0x0000000fc9a3c921ca909d84ae404a9ccaef4479</span> on Base, Arc, Polygon and Robinhood Chain. If the address on your screen is different, it is a different token. Pools are $0.25 seeds — tiny. Expect very thin liquidity and large price impact on any real size.</p></div>
 
 <footer>
 <p>MuseLinu — $MUSN · Base 8453 · Arc 5042 · Polygon 137 · Robinhood 4663. Token: <span class="mono">0x0000000fc9a3c921ca909d84ae404a9ccaef4479</span> · Collector: <span class="mono">0x0000000f64352eb1bacef4d9d5cae00f505a149e</span> · Agent wallet: <span class="mono">0x0A1D2730f4Ae736Bac3D772FaB8607BFd7F650C4</span></p>
+<p>Official contact email: <a href="mailto:linulaserinu@gmail.com">linulaserinu@gmail.com</a></p>
 <p>$MUSN is a community / agent token with no expectation of profit. Cryptocurrency is volatile and can go to zero — do your own research (Muse does). This page is information about the token, not financial advice.</p>
 <p><a href="../">← All Muse sites</a></p>
 </footer>
