@@ -187,53 +187,53 @@
       <!-- ================= HERO ================= -->
       <header class="hero">
         <div class="status-row">
-          <span class="badge"><span class="dot"></span>TRIAL LIVE · ALL FOUR CHAINS</span>
-          <span class="badge plain">Snapshot · 12 Nov 2026, 14:06 GMT+7</span>
+          <span class="badge"><span class="dot"></span>LIVE · ARC · REAL-TIME, WORKER-ONLY</span>
+          <span class="badge plain">Updated · 12 Nov 2026, 18:15 GMT+7</span>
         </div>
         <h1>Launch Sniper</h1>
-        <p class="lede">A launch-driven trader for <strong>every EVM chain</strong>, now live on <strong>Polygon, Arc, Base and Robinhood</strong>. It watches for newly created tokens, buys only the ones it can prove it can also sell, and <strong>sells immediately</strong> — one round trip per launch. <strong>20 round trips completed</strong> so far.</p>
+        <p class="lede">A launch-driven trader that now runs <strong>on Arc only</strong>, as an <strong>always-on watcher</strong>: it reacts to a new pool <strong>within seconds of its birth</strong> and trades only through a verified worker contract — buy and sell in <strong>one atomic transaction</strong>, so no position can ever be stranded. <strong>36 round trips completed</strong> so far: 28 on Arc, 6 on Base, 2 on Robinhood.</p>
       </header>
 
       <!-- ================= LIVE TRIAL ================= -->
-      <div class="trial" aria-label="Live trial summary">
+      <div class="trial" aria-label="Current status summary">
         <div class="trial-head">
-          <h2>Live trial — all four chains</h2>
-          <span>Polygon live 11 Nov 2026, 22:11 GMT+7 · Arc 22:50 · Robinhood ~23:06 · Base ~23:11</span>
+          <h2>Now — Arc, real-time, worker-only</h2>
+          <span>Watcher live 12 Nov 2026, 17:50 GMT+7 · the four-chain trial ended 12 Nov 2026, 16:30 GMT+7</span>
         </div>
         <div class="trial-grid">
           <div class="stat">
             <div class="k">Round trips completed</div>
-            <div class="v">20</div>
-            <div class="n">Arc 10 · Base 6 · Robinhood 2 · Polygon 0. First trade: Robinhood, 11 Nov 2026, ~23:20 GMT+7. Every trip sells in full, immediately.</div>
+            <div class="v">36</div>
+            <div class="n">Arc 28 · Base 6 · Robinhood 2 · Polygon 0. First trade: Robinhood, 11 Nov 2026, ~23:20 GMT+7. Every trip sells in full — inside the same transaction on Arc, inside the same cycle during the trial.</div>
           </div>
           <div class="stat">
-            <div class="k">Arc quota spent</div>
-            <div class="v">0.0241 <small>of 0.3 USDC</small></div>
-            <div class="n">Exact spend: 0.024069475339369692. Arc traded for the first time on 12 Nov, from 12:49 GMT+7 — 10 round trips in one afternoon, right after the Arc balance-read fix landed.</div>
+            <div class="k">Real-time watcher</div>
+            <div class="v">~5.5 <small>seconds to react</small></div>
+            <div class="n">Live 12 Nov 2026, 17:50 GMT+7. In its shadow test it caught 2 real births at 5.54 and 5.83 seconds after the birth block; the old 2-minute schedule could wait up to 2 minutes. That schedule is now disabled, kept only as a fallback.</div>
           </div>
           <div class="stat">
-            <div class="k">Base quota — 77% used</div>
-            <div class="v">0.0000772 <small>of 0.0001 ETH</small></div>
-            <div class="n">Exact spend: 0.00007718807198563201 across 6 trips. Paused 12 Nov, 06:38 GMT+7; resumed 13:02 GMT+7 after 0.0001 WETH was unwrapped to native for gas.</div>
+            <div class="k">Worker contract — Arc</div>
+            <div class="v">0.12 <small>cap per call</small></div>
+            <div class="n">SniperWorker <span class="mono">0xffff0000b0902085742d11f50b0212ef7d61cbdb</span> — Sourcify-verified, exact match, owned by the agent wallet. Every Arc trade executes through it: buy and sell together in one transaction.</div>
           </div>
           <div class="stat">
-            <div class="k">Robinhood quota — 65% used</div>
-            <div class="v">0.0000650 <small>of 0.0001 ETH</small></div>
-            <div class="n">Exact spend: 0.00006501121724582742 across 2 trips. The remaining 0.00003498878275417258 is below one 0.00005 buy, so Robinhood cannot trade again unless its quota is raised.</div>
+            <div class="k">Arc spend — no quota now</div>
+            <div class="v" style="font-size:18px; overflow-wrap:anywhere">0.06592887314763492</div>
+            <div class="n">Cumulative net spend across Arc's 28 trips. Since the 12 Nov relaunch Arc runs non-stop with no total quota — bounded only by the worker contract's own balance and the per-call cap. First fully worker-routed trips: 26 and 27, on 12 Nov at ~16:02 and ~16:27 GMT+7.</div>
           </div>
         </div>
-        <div class="trial-foot">Polygon is still at <strong>0 of 1.333</strong> — its gas ran 100–280 through the trial and the sniper only trades below ~42, so Polygon has watched but not traded. A quota is <strong>not a number of buys</strong> — it is the most that chain's trial can lose in total, gas plus any sell shortfall. <strong>Held positions: exactly one</strong> — UniBase on Base, bought 12 Nov 2026, 13:14 GMT+7; its pool's liquidity was pulled after the buy, so it cannot be sold unless liquidity returns. Everything else was sold inside its own cycle.</div>
+        <div class="trial-foot">The four-chain trial ended on 12 Nov 2026, 16:30 GMT+7. Arc relaunched the same day in its new shape — worker-only and non-stop — and the first trip of that mode landed at 17:16 GMT+7 (transaction <span class="mono">0x2548e418979e84da11a73e6b47d4e41bd682030a4cf875bbdd57333d51236542</span>). The worker contract is <strong>not deployed yet</strong> on Polygon, Base or Robinhood — those chains follow one by one, Arc first. <strong>Held positions: exactly one</strong> — UniBase on Base, bought 12 Nov 2026, 13:14 GMT+7; its pool's liquidity was pulled after the buy, so it cannot be sold unless liquidity returns. Everything else was sold inside its own transaction or cycle.</div>
       </div>
 
       <!-- ================= HOW IT WORKS ================= -->
       <section aria-labelledby="how-h">
         <div class="sec-head"><span class="sec-num">01</span><h2 class="sec" id="how-h">How it works</h2></div>
-        <p class="sec-sub">Three stages per cycle, in this order. A token that fails any stage is skipped — there is no override.</p>
+        <p class="sec-sub">Three stages per launch, in this order. A token that fails any stage is skipped — there is no override.</p>
         <div class="steps">
           <div class="step">
             <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v3l2 2"/></svg>
             <h3>1 · Detect the launch</h3>
-            <p>Three sources feed it: onchain scanning for new Uniswap V4 pools as they are created (<span class="mono">Initialize</span> events), plus the Bankr and Clanker launch feeds, live since 12 Nov 2026, 02:41 GMT+7. Feed launches pass through exactly the same simulation, gas guard, quotas and caps as onchain finds. On the fork test the scanner found <span class="mono">24</span> new V4 pools in the last <span class="mono">50,000</span> Polygon blocks.</p>
+            <p>An always-on watcher follows Arc block by block and picks up new Uniswap V4 pools as they are created (<span class="mono">Initialize</span> events) — seconds after the birth block, not at the next scheduled check. The Bankr and Clanker launch feeds, live since 12 Nov 2026, 02:41 GMT+7, feed the same pipeline. Every launch passes through exactly the same simulation and gas guard, whichever source found it. On the fork test the scanner found <span class="mono">24</span> new V4 pools in the last <span class="mono">50,000</span> Polygon blocks.</p>
           </div>
           <div class="step">
             <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
@@ -243,7 +243,7 @@
           <div class="step">
             <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h13l-3-3"/><path d="M20 17H7l3 3"/></svg>
             <h3>3 · Buy, sell, log</h3>
-            <p>Exact-amount approvals, one buy, one immediate sell. Gas and the buy–sell shortfall are charged against the quota and written to the trip log — the log, not any website, is the record of what each trip cost.</p>
+            <p>On Arc the whole trip is one call to the worker contract: it buys and sells back in a single transaction, capped at 0.12 per call, with the minimum return enforced onchain — a token that cannot be sold back never leaves a position behind. Gas and the buy–sell shortfall are written to the trip log — the log, not any website, is the record of what each trip cost.</p>
           </div>
         </div>
       </section>
@@ -251,53 +251,53 @@
       <!-- ================= PER-CHAIN SETTINGS ================= -->
       <section aria-labelledby="chains-h">
         <div class="sec-head"><span class="sec-num">02</span><h2 class="sec" id="chains-h">Per-chain settings</h2></div>
-        <p class="sec-sub">Every chain has its own token, its own price and its own gas — so every number below is per chain, and changing one never touches another. All of it lives in config and can be changed at any time, with no rebuild. Tap a chain to load it into the estimator.</p>
+        <p class="sec-sub">Every chain has its own token, its own price and its own gas — so every number below is per chain, and changing one never touches another. The trial settings are kept here as the record; Arc's card shows the live setup. Tap a chain to load its trial figures into the estimator.</p>
         <div class="chains" id="chains">
           <button type="button" class="chain" data-chain="polygon" aria-pressed="true">
-            <div class="chain-top"><span class="chain-name">Polygon <span class="chain-sym">POL</span></span><span class="tag live">LIVE</span></div>
+            <div class="chain-top"><span class="chain-name">Polygon <span class="chain-sym">POL</span></span><span class="tag next">TRIAL ENDED</span></div>
             <dl>
               <div><dt>Buy size</dt><dd>0.1</dd></div>
               <div><dt>Total quota</dt><dd>1.333</dd></div>
               <div><dt>Spent so far</dt><dd>0</dd></div>
               <div><dt>Round trips</dt><dd>0</dd></div>
             </dl>
-            <p class="chain-note">Live since 11 Nov 2026, 22:11 GMT+7. Gas still gates it — gas ran 100–280 and the trial only trades below ~42, so no qualifying trip yet.</p>
+            <p class="chain-note">Trial ran 11–12 Nov 2026. Gas ran 100–280 through the trial and the sniper only trades below ~42, so Polygon watched but never traded. The worker contract is not deployed here yet.</p>
           </button>
           <button type="button" class="chain" data-chain="base" aria-pressed="false">
-            <div class="chain-top"><span class="chain-name">Base <span class="chain-sym">ETH</span></span><span class="tag live">LIVE</span></div>
+            <div class="chain-top"><span class="chain-name">Base <span class="chain-sym">ETH</span></span><span class="tag next">TRIAL ENDED</span></div>
             <dl>
               <div><dt>Buy size</dt><dd>0.00005</dd></div>
               <div><dt>Total quota</dt><dd>0.0001</dd></div>
               <div><dt>Spent so far</dt><dd class="long">0.00007718807198563201</dd></div>
               <div><dt>Round trips</dt><dd>6</dd></div>
             </dl>
-            <p class="chain-note">Live since 11 Nov 2026, ~23:11 GMT+7. Paused by the owner on 12 Nov, 06:38 GMT+7, and resumed 13:02 GMT+7 after 0.0001 WETH was unwrapped to native for gas. 77% of the quota used.</p>
+            <p class="chain-note">Live 11 Nov 2026, ~23:11 GMT+7 until the trial ended on 12 Nov, 16:30 GMT+7. Paused once on 12 Nov, 06:38 GMT+7, and resumed 13:02 GMT+7 after 0.0001 WETH was unwrapped to native for gas. 77% of its trial quota used. The worker contract is not deployed here yet.</p>
           </button>
           <button type="button" class="chain" data-chain="robinhood" aria-pressed="false">
-            <div class="chain-top"><span class="chain-name">Robinhood <span class="chain-sym">ETH</span></span><span class="tag live">LIVE</span></div>
+            <div class="chain-top"><span class="chain-name">Robinhood <span class="chain-sym">ETH</span></span><span class="tag next">TRIAL ENDED</span></div>
             <dl>
               <div><dt>Buy size</dt><dd>0.00005</dd></div>
               <div><dt>Total quota</dt><dd>0.0001</dd></div>
               <div><dt>Spent so far</dt><dd class="long">0.00006501121724582742</dd></div>
               <div><dt>Round trips</dt><dd>2</dd></div>
             </dl>
-            <p class="chain-note">Live since 11 Nov 2026, ~23:06 GMT+7 — and home of the first trade, that night at ~23:20 GMT+7. 65% of the quota used; the remainder is below one buy, so it cannot trade again unless the quota is raised.</p>
+            <p class="chain-note">Live 11 Nov 2026, ~23:06 GMT+7 until the trial ended on 12 Nov, 16:30 GMT+7 — and home of the first trade, that night at ~23:20 GMT+7. 65% of its trial quota used; the remainder is below one buy. The worker contract is not deployed here yet.</p>
           </button>
           <button type="button" class="chain" data-chain="arc" aria-pressed="false">
-            <div class="chain-top"><span class="chain-name">Arc <span class="chain-sym">USDC</span></span><span class="tag live">LIVE</span></div>
+            <div class="chain-top"><span class="chain-name">Arc <span class="chain-sym">USDC</span></span><span class="tag live">LIVE · WORKER-ONLY</span></div>
             <dl>
-              <div><dt>Buy size</dt><dd>0.10</dd></div>
-              <div><dt>Total quota</dt><dd>0.3</dd></div>
-              <div><dt>Spent so far</dt><dd class="long">0.024069475339369692</dd></div>
-              <div><dt>Round trips</dt><dd>10</dd></div>
+              <div><dt>Buy size</dt><dd>0.1</dd></div>
+              <div><dt>Cap per call</dt><dd>0.12</dd></div>
+              <div><dt>Spent so far</dt><dd class="long">0.06592887314763492</dd></div>
+              <div><dt>Round trips</dt><dd>28</dd></div>
             </dl>
-            <p class="chain-note">Live since 11 Nov 2026, 22:50 GMT+7. First trades came on 12 Nov, from 12:49 GMT+7 — 10 round trips in one afternoon.</p>
+            <p class="chain-note">The live chain. Since 12 Nov 2026, 17:50 GMT+7 an always-on watcher trades Arc in real time, only through the SniperWorker contract — no quota, non-stop. Trial record before the relaunch: 27 round trips by 16:30 GMT+7.</p>
           </button>
         </div>
 
         <div class="estimator">
           <h3>Quota estimator — <span id="estChainName">Polygon</span></h3>
-          <p class="intro">How many round trips fit inside a quota? A trip spends gas plus whatever the sell does not return. Edit any figure — this is the same arithmetic the sniper applies to its caps.</p>
+          <p class="intro">How the trial quotas worked: a trip spends gas plus whatever the sell does not return, charged against that chain's quota. Edit any figure — this is the arithmetic the trial caps applied. Arc no longer runs under a quota; the other chains' quotas were trial-only.</p>
           <div class="est-grid">
             <div class="field">
               <label for="inQuota">Total quota</label>
@@ -315,7 +315,7 @@
           <div class="est-out">
             <div class="est-result"><div class="k">Trips before quota fills</div><div class="v" id="outTrips">47</div></div>
             <div class="est-result"><div class="k">Cost per trip (gas + shortfall)</div><div class="v" id="outCost">0.0283</div></div>
-            <p class="est-note" id="estNote">With gas alone at 0.0273, gas is about 27 of every 100 spent against a 0.1 buy on Polygon. Gas ran at 100–280 through the day and the trial only trades below ~42 — which is why Polygon is live but has not traded yet.</p>
+            <p class="est-note" id="estNote">With gas alone at 0.0273, gas is about 27 of every 100 spent against a 0.1 buy on Polygon. Gas ran at 100–280 through the trial and the trial only traded below ~42 — which is why Polygon watched but never traded.</p>
           </div>
         </div>
       </section>
@@ -360,14 +360,15 @@
       <!-- ================= 12 NOV FIXES ================= -->
       <section aria-labelledby="fixes-h">
         <div class="sec-head"><span class="sec-num">05</span><h2 class="sec" id="fixes-h">Fixes and hardening — 12 Nov 2026</h2></div>
-        <p class="sec-sub">A day of live trading surfaced real faults; each was root-caused and fixed the same day. This is the honest list, including the one item still open.</p>
+        <p class="sec-sub">A day of live trading surfaced real faults; each was root-caused and fixed the same day. This is the honest list — nothing left open.</p>
         <div class="checks">
           <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Runner fix batch — landed ~03:00 GMT+7<small>Balance-read retries, receipt-read tolerance, and atomic state locking, so a transient read failure can no longer burn a launch or corrupt the trip accounting.</small></div></div>
           <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">DEADLIFT sell root cause found and fixed<small>The sell bundle's approve transaction reverted because that token fixes its Permit2 allowance at infinity — the redundant approve is now dropped whenever the allowance already covers the sell. The position itself was sold manually by the owner on 11 Nov 2026, 23:54 GMT+7, after the runner's sell failed.</small></div></div>
           <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Pre-buy balance gate — fixed 04:20 GMT+7<small>Wrapped-native balance now counts toward the gate, matching what the buy path can actually spend.</small></div></div>
           <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Trip recording — fixed 05:09 GMT+7<small>Trip amounts now record their true values even when the external price feed is unreachable.</small></div></div>
           <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Arc balance read — fixed later that morning<small>Native-paired Arc pools quote through the zero address, and the balance check now handles that case. Proven live the same day: Arc's 10 round trips.</small></div></div>
-          <div class="check"><span class="mark warn"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2v5M6 9.6v.4"/></svg></span><div class="txt">Open item: signing service intermittently throws on broadcast<small>It happened 5 times on 12 Nov. No funds were lost in any of them — a failed broadcast simply means the launch is missed. A bounded one-time retry for exactly this case is being added.</small></div></div>
+          <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Send-step failures root-caused: MinOutBuy<small>Worker attempts kept dying at the send step with an unknown-reason revert. Replaying the exact failed attempts onchain decoded it: every one reverted MinOutBuy — a fresh pool's price moves several percent within seconds, past the old minimum-out buffer of 98% of the quoted price. Nothing was wrong with the worker contract, the cap or the signing service, and no funds were lost in any failure.</small></div></div>
+          <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Fix applied 12 Nov 2026: minimum-out buffer widened to 90%<small>At 90% of the quoted price, all the replayed failures would have executed; the sell leg still guarantees at least half the buy amount back inside the same transaction. Verified by the worker fork suite, 29/29, and by a control run on the original code proving the remaining full-suite differences were fork-window drift, not the change.</small></div></div>
         </div>
       </section>
 
@@ -378,18 +379,20 @@
         <div class="timeline">
           <div class="tl-step done"><div class="tl-dot">✓</div><h3>Fork test</h3><p>Full flow proven on local copies of mainnet. Final tallies: Polygon 15/16, Robinhood 12/17, Arc 11/16, Base clean — and 27/30 for the full suite after the 12 Nov fixes.</p></div>
           <div class="tl-step skip"><div class="tl-dot">–</div><h3>Dry run — extended watch skipped</h3><p>Zero-transaction behaviour was proven in the fork test (the kill switch held), but the planned 24–48 hour watch was skipped by direct go-ahead for this trial.</p></div>
-          <div class="tl-step done"><div class="tl-dot">✓</div><h3>Tiny live — all four chains</h3><p>Polygon, Arc, Base and Robinhood all went live on 11 Nov 2026, each with its own buy size and total quota. 20 round trips completed by 12 Nov, 14:06 GMT+7. Base was paused and resumed once on 12 Nov, around a gas top-up.</p></div>
-          <div class="tl-step now"><div class="tl-dot">4</div><h3>Expand chain by chain</h3><p>Further chains join the registry one at a time, each only once verified the same way. Solana remains a separate build, later.</p></div>
+          <div class="tl-step done"><div class="tl-dot">✓</div><h3>Tiny live — all four chains</h3><p>Polygon, Arc, Base and Robinhood all went live on 11 Nov 2026, each with its own buy size and total quota. The trial completed 36 round trips and ended on 12 Nov 2026, 16:30 GMT+7. Base was paused and resumed once on 12 Nov, around a gas top-up.</p></div>
+          <div class="tl-step now"><div class="tl-dot">4</div><h3>Worker rollout — Arc first</h3><p>Arc relaunched worker-only and real-time on 12 Nov 2026. The worker contract is not deployed on Polygon, Base or Robinhood yet — each chain gets it one by one, deploy plus source verification as part of its turn. Solana remains a separate build, later.</p></div>
         </div>
       </section>
 
       <!-- ================= CODE ================= -->
       <section aria-labelledby="code-h">
         <div class="sec-head"><span class="sec-num">07</span><h2 class="sec" id="code-h">The build</h2></div>
-        <p class="sec-sub">Thirteen files under <span class="mono">tokens/sniper/launch/</span> — the only sniper now running.</p>
+        <p class="sec-sub">The files under <span class="mono">tokens/sniper/launch/</span> — the only sniper now running, plus the always-on watcher that drives it.</p>
         <div class="code-card">
           <ul class="files">
             <li><span>runner</span><span>main loop, one round trip per launch</span></li>
+            <li><span>daemon</span><span>always-on watcher — real-time since 12 Nov 2026</span></li>
+            <li><span>worker contract</span><span>SniperWorker — atomic buy + sell on Arc</span></li>
             <li><span>detection</span><span>onchain V4 Initialize scanning</span></li>
             <li><span>Bankr feed</span><span>launch detection from the Bankr feed</span></li>
             <li><span>Clanker feed</span><span>launch detection from the Clanker feed</span></li>
@@ -403,7 +406,7 @@
             <li><span>README</span><span>design and operating notes</span></li>
             <li><span>kill switch</span><span>halts everything, proven in dry run</span></li>
           </ul>
-          <p class="foot">The Robinhood testnet loop is <strong>complete</strong>: 976 round trips, its 0.005 test quota filled on 12 Nov 2026, 03:23 GMT+7, and the loop is closed. The earlier v2 and v3 snipers were retired and archived on 12 Nov 2026, ~12:52 GMT+7 — this launch sniper is now the only sniper running.</p>
+          <p class="foot">The Robinhood testnet loop is <strong>complete</strong>: 976 round trips, its 0.005 test quota filled on 12 Nov 2026, 03:23 GMT+7, and the loop is closed. The earlier v2 and v3 snipers were retired and archived on 12 Nov 2026, ~12:52 GMT+7 — this launch sniper is now the only sniper running. Since 12 Nov 2026, 17:50 GMT+7 the watcher runs it continuously under system supervision, with a recovery script that rebuilds its setup after a machine replacement.</p>
         </div>
       </section>
 
@@ -418,7 +421,7 @@
       </section>
 
       <footer>
-        <span>Launch Sniper · mainnet build, trials live on all four chains · <a href="https://laserinu.github.io/muse-website/" target="_blank" rel="noopener">GitHub</a></span>
+        <span>Launch Sniper · live on Arc — real-time, worker-only · <a href="https://laserinu.github.io/muse-website/" target="_blank" rel="noopener">GitHub</a></span>
         <span>Figures as measured 12 Nov 2026, GMT+7 · all amounts in each chain's native token</span>
       </footer>
 
@@ -428,13 +431,13 @@
       (function(){
         var chains = {
           polygon:   { name:'Polygon',   unit:'POL',  quota:1.333, gas:0.0273,    short:0.001, buy:0.1,
-                       note:'With gas alone at 0.0273, gas is about 27 of every 100 spent against a 0.1 buy on Polygon. Gas ran at 100–280 through the day and the trial only trades below ~42, which is why Polygon is live but has not traded yet.' },
+                       note:'With gas alone at 0.0273, gas is about 27 of every 100 spent against a 0.1 buy on Polygon. Gas ran at 100–280 through the trial and the trial only traded below ~42 — which is why Polygon watched but never traded.' },
           base:      { name:'Base',      unit:'ETH',  quota:0.0001, gas:0.0000036, short:0.0000002, buy:0.00005,
-                       note:'Base is live: 6 round trips done and 77% of the 0.0001 quota spent (0.00007718807198563201). Gas per trip is 0.0000036 — a small share next to the quota, so the quota itself is the binding limit.' },
+                       note:'Base trial record: 6 round trips done and 77% of the 0.0001 quota spent (0.00007718807198563201). Gas per trip is 0.0000036 — a small share next to the quota, so the quota itself was the binding limit.' },
           robinhood: { name:'Robinhood', unit:'ETH',  quota:0.0001, gas:0.0000121, short:0.0000005, buy:0.00005,
-                       note:'Robinhood is live: 2 round trips done, 65% of the 0.0001 quota spent (0.00006501121724582742). The remaining 0.00003498878275417258 is below one 0.00005 buy, so it cannot trade again unless the quota is raised.' },
+                       note:'Robinhood trial record: 2 round trips done, 65% of the 0.0001 quota spent (0.00006501121724582742). The remaining 0.00003498878275417258 is below one 0.00005 buy.' },
           arc:       { name:'Arc',       unit:'USDC', quota:0.3, gas:0.012, short:0.003, buy:0.10,
-                       note:'Arc is live and the busiest chain: 10 round trips on 12 Nov alone, spending 0.024069475339369692 of the 0.3 USDC quota. Gas per trip is 0.012 against a 0.10 buy.' }
+                       note:'Arc trial record: 27 round trips spending 0.06205352124912353 of the 0.3 quota, before the worker-only relaunch. Arc now runs with no quota — the estimator shows the trial arithmetic only.' }
         };
         var inQuota = document.getElementById('inQuota');
         var inGas = document.getElementById('inGas');
