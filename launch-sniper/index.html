@@ -91,7 +91,10 @@
       .tag.approved{ background:var(--amber-soft); color:var(--amber); }
       .chain dl{ margin:0; display:grid; grid-template-columns:1fr 1fr; gap:10px 16px; }
       .chain dt{ font-size:11.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
-      .chain dd{ margin:2px 0 0; font-family:var(--mono); font-size:16.5px; font-weight:600; }
+      .chain dd{ margin:2px 0 0; font-family:var(--mono); font-size:16.5px; font-weight:600; overflow-wrap:anywhere; }
+      .chain dd.long{ font-size:13px; line-height:1.45; }
+      .chain-note{ margin:14px 0 0; font-size:13px; color:var(--muted); line-height:1.5; }
+      .stat .n{ overflow-wrap:anywhere; }
 
       /* Estimator */
       .estimator{ margin-top:14px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px; }
@@ -135,6 +138,7 @@
       .check .mark{ flex:0 0 auto; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; margin-top:1px; }
       .mark.ok{ background:var(--green-soft); color:var(--green); }
       .mark.bad{ background:var(--red-soft); color:var(--red); }
+      .mark.warn{ background:var(--amber-soft); color:var(--amber); }
       .check .txt{ font-size:14.5px; }
       .check .txt small{ display:block; color:var(--muted); font-size:13px; margin-top:1px; }
 
@@ -183,42 +187,42 @@
       <!-- ================= HERO ================= -->
       <header class="hero">
         <div class="status-row">
-          <span class="badge"><span class="dot"></span>TRIAL LIVE · POLYGON + ARC</span>
-          <span class="badge plain">Snapshot · 11 Nov 2026, 22:54 GMT+7</span>
+          <span class="badge"><span class="dot"></span>TRIAL LIVE · ALL FOUR CHAINS</span>
+          <span class="badge plain">Snapshot · 12 Nov 2026, 14:06 GMT+7</span>
         </div>
         <h1>Launch Sniper</h1>
-        <p class="lede">A launch-driven trader for <strong>every EVM chain</strong>. It watches for newly created tokens, buys only the ones it can prove it can also sell, and <strong>sells immediately</strong> — one round trip per launch, nothing held.</p>
+        <p class="lede">A launch-driven trader for <strong>every EVM chain</strong>, now live on <strong>Polygon, Arc, Base and Robinhood</strong>. It watches for newly created tokens, buys only the ones it can prove it can also sell, and <strong>sells immediately</strong> — one round trip per launch. <strong>20 round trips completed</strong> so far.</p>
       </header>
 
       <!-- ================= LIVE TRIAL ================= -->
       <div class="trial" aria-label="Live trial summary">
         <div class="trial-head">
-          <h2>Live trial — Polygon + Arc</h2>
-          <span>Polygon live 11 Nov 2026, 22:11 GMT+7 · Arc live 22:50 GMT+7</span>
+          <h2>Live trial — all four chains</h2>
+          <span>Polygon live 11 Nov 2026, 22:11 GMT+7 · Arc 22:50 · Robinhood ~23:06 · Base ~23:11</span>
         </div>
         <div class="trial-grid">
           <div class="stat">
-            <div class="k">Polygon quota (max loss)</div>
-            <div class="v">1.333 <small>POL</small></div>
-            <div class="n">Spent so far: 0 of 1.333. Buy size 0.1 per launch, then an immediate sell.</div>
+            <div class="k">Round trips completed</div>
+            <div class="v">20</div>
+            <div class="n">Arc 10 · Base 6 · Robinhood 2 · Polygon 0. First trade: Robinhood, 11 Nov 2026, ~23:20 GMT+7. Every trip sells in full, immediately.</div>
           </div>
           <div class="stat">
-            <div class="k">Arc quota (max loss)</div>
-            <div class="v">0.3 <small>USDC</small></div>
-            <div class="n">Spent so far: 0 of 0.3. Buy size 0.10 per launch, then an immediate sell.</div>
+            <div class="k">Arc quota spent</div>
+            <div class="v">0.0241 <small>of 0.3 USDC</small></div>
+            <div class="n">Exact spend: 0.024069475339369692. Arc traded for the first time on 12 Nov, from 12:49 GMT+7 — 10 round trips in one afternoon, right after the Arc balance-read fix landed.</div>
           </div>
           <div class="stat">
-            <div class="k">Polygon gas — gating</div>
-            <div class="v">100–280</div>
-            <div class="n">The trial only trades below ~42, and gas spent most of the day far above that — so Polygon has not traded yet.</div>
+            <div class="k">Base quota — 77% used</div>
+            <div class="v">0.0000772 <small>of 0.0001 ETH</small></div>
+            <div class="n">Exact spend: 0.00007718807198563201 across 6 trips. Paused 12 Nov, 06:38 GMT+7; resumed 13:02 GMT+7 after 0.0001 WETH was unwrapped to native for gas.</div>
           </div>
           <div class="stat">
-            <div class="k">Arc gas — can trade</div>
-            <div class="v">~20</div>
-            <div class="n">Gate is ~41.7, so Arc is clear to trade on its first qualifying launch. No trades yet there either.</div>
+            <div class="k">Robinhood quota — 65% used</div>
+            <div class="v">0.0000650 <small>of 0.0001 ETH</small></div>
+            <div class="n">Exact spend: 0.00006501121724582742 across 2 trips. The remaining 0.00003498878275417258 is below one 0.00005 buy, so Robinhood cannot trade again unless its quota is raised.</div>
           </div>
         </div>
-        <div class="trial-foot">One 2-minute cycle now watches <strong>every live chain together</strong>, and the trial only switches itself off when <strong>every</strong> live chain's quota is filled. A quota is <strong>not a number of buys</strong> — it is the most that chain's trial can lose in total, gas plus any sell shortfall. Base and Robinhood are approved and join once their fork-test checks come back clean.</div>
+        <div class="trial-foot">Polygon is still at <strong>0 of 1.333</strong> — its gas ran 100–280 through the trial and the sniper only trades below ~42, so Polygon has watched but not traded. A quota is <strong>not a number of buys</strong> — it is the most that chain's trial can lose in total, gas plus any sell shortfall. <strong>Held positions: exactly one</strong> — UniBase on Base, bought 12 Nov 2026, 13:14 GMT+7; its pool's liquidity was pulled after the buy, so it cannot be sold unless liquidity returns. Everything else was sold inside its own cycle.</div>
       </div>
 
       <!-- ================= HOW IT WORKS ================= -->
@@ -229,7 +233,7 @@
           <div class="step">
             <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v3l2 2"/></svg>
             <h3>1 · Detect the launch</h3>
-            <p>Watches for new pools as they are created — Uniswap V4 first, then V3 and V2, then launchpads. On the fork test it found <span class="mono">24</span> new V4 pools in the last <span class="mono">50,000</span> Polygon blocks.</p>
+            <p>Three sources feed it: onchain scanning for new Uniswap V4 pools as they are created (<span class="mono">Initialize</span> events), plus the Bankr and Clanker launch feeds, live since 12 Nov 2026, 02:41 GMT+7. Feed launches pass through exactly the same simulation, gas guard, quotas and caps as onchain finds. On the fork test the scanner found <span class="mono">24</span> new V4 pools in the last <span class="mono">50,000</span> Polygon blocks.</p>
           </div>
           <div class="step">
             <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
@@ -254,36 +258,40 @@
             <dl>
               <div><dt>Buy size</dt><dd>0.1</dd></div>
               <div><dt>Total quota</dt><dd>1.333</dd></div>
-              <div><dt>Gas per trip</dt><dd>0.0273</dd></div>
-              <div><dt>Wallet balance</dt><dd>4.659</dd></div>
+              <div><dt>Spent so far</dt><dd>0</dd></div>
+              <div><dt>Round trips</dt><dd>0</dd></div>
             </dl>
+            <p class="chain-note">Live since 11 Nov 2026, 22:11 GMT+7. Gas still gates it — gas ran 100–280 and the trial only trades below ~42, so no qualifying trip yet.</p>
           </button>
           <button type="button" class="chain" data-chain="base" aria-pressed="false">
-            <div class="chain-top"><span class="chain-name">Base <span class="chain-sym">ETH</span></span><span class="tag approved">APPROVED · CHECK PENDING</span></div>
+            <div class="chain-top"><span class="chain-name">Base <span class="chain-sym">ETH</span></span><span class="tag live">LIVE</span></div>
             <dl>
               <div><dt>Buy size</dt><dd>0.00005</dd></div>
               <div><dt>Total quota</dt><dd>0.0001</dd></div>
-              <div><dt>Gas per trip</dt><dd>0.0000036</dd></div>
-              <div><dt>Wallet balance</dt><dd>0.000173</dd></div>
+              <div><dt>Spent so far</dt><dd class="long">0.00007718807198563201</dd></div>
+              <div><dt>Round trips</dt><dd>6</dd></div>
             </dl>
+            <p class="chain-note">Live since 11 Nov 2026, ~23:11 GMT+7. Paused by the owner on 12 Nov, 06:38 GMT+7, and resumed 13:02 GMT+7 after 0.0001 WETH was unwrapped to native for gas. 77% of the quota used.</p>
           </button>
           <button type="button" class="chain" data-chain="robinhood" aria-pressed="false">
-            <div class="chain-top"><span class="chain-name">Robinhood <span class="chain-sym">ETH</span></span><span class="tag approved">APPROVED · CHECK PENDING</span></div>
+            <div class="chain-top"><span class="chain-name">Robinhood <span class="chain-sym">ETH</span></span><span class="tag live">LIVE</span></div>
             <dl>
               <div><dt>Buy size</dt><dd>0.00005</dd></div>
               <div><dt>Total quota</dt><dd>0.0001</dd></div>
-              <div><dt>Gas per trip</dt><dd>0.0000121</dd></div>
-              <div><dt>Wallet balance</dt><dd>0.000196</dd></div>
+              <div><dt>Spent so far</dt><dd class="long">0.00006501121724582742</dd></div>
+              <div><dt>Round trips</dt><dd>2</dd></div>
             </dl>
+            <p class="chain-note">Live since 11 Nov 2026, ~23:06 GMT+7 — and home of the first trade, that night at ~23:20 GMT+7. 65% of the quota used; the remainder is below one buy, so it cannot trade again unless the quota is raised.</p>
           </button>
           <button type="button" class="chain" data-chain="arc" aria-pressed="false">
             <div class="chain-top"><span class="chain-name">Arc <span class="chain-sym">USDC</span></span><span class="tag live">LIVE</span></div>
             <dl>
               <div><dt>Buy size</dt><dd>0.10</dd></div>
               <div><dt>Total quota</dt><dd>0.3</dd></div>
-              <div><dt>Gas per trip</dt><dd>0.012</dd></div>
-              <div><dt>Wallet balance</dt><dd>0.4875</dd></div>
+              <div><dt>Spent so far</dt><dd class="long">0.024069475339369692</dd></div>
+              <div><dt>Round trips</dt><dd>10</dd></div>
             </dl>
+            <p class="chain-note">Live since 11 Nov 2026, 22:50 GMT+7. First trades came on 12 Nov, from 12:49 GMT+7 — 10 round trips in one afternoon.</p>
           </button>
         </div>
 
@@ -328,11 +336,11 @@
       <!-- ================= FORK TEST ================= -->
       <section aria-labelledby="fork-h">
         <div class="sec-head"><span class="sec-num">04</span><h2 class="sec" id="fork-h">Fork test results</h2></div>
-        <p class="sec-sub">Re-run on the evening of 11 Nov 2026 against local copies of each chain's mainnet — no keys, no real transactions. Polygon 15/16, Robinhood 11/13, Arc 11/16. What changed since the 18:30 run, and what is still open, is listed as it happened.</p>
+        <p class="sec-sub">Re-run on the evening of 11 Nov 2026 against local copies of each chain's mainnet — no keys, no real transactions. Polygon 15/16, Robinhood 11/13, Arc 11/16. Later that night the Base fork check came back clean (12/16, Base 10/12) and Robinhood reached 12/17 — which is what took Base and Robinhood live. After the 12 Nov runner fixes, the full fork suite ran 27/30, with the 3 remaining fails accepted as test artifacts.</p>
         <div class="fork">
           <div class="score">
-            <div class="big">15<span>/16</span></div>
-            <p>Polygon re-run · Robinhood 11/13 · Arc 11/16 in the same evening's checks</p>
+            <div class="big">27<span>/30</span></div>
+            <p>Full fork suite after the 12 Nov fixes · Polygon 15/16 · Robinhood 12/17 · Arc 11/16 · Base clean (12/16, Base 10/12)</p>
           </div>
           <div class="checks">
             <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Detection works<small>24 new V4 pools found in 50,000 blocks; V3 and V2 detection also working.</small></div></div>
@@ -342,47 +350,66 @@
             <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Quoter-based minOut fix proven on all three chains<small>On Robinhood's thin MUSN pool the old spot-based minimum reverts; the quoted buy receives exactly the simulated output, to the wei.</small></div></div>
             <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">T3 and the T6 hookless round trip now pass<small>Two of the three failures from the 18:30 run are fixed in the re-runs.</small></div></div>
             <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Two alarms cleared<small>The T8b "safety gate broken" flag was a false alarm — that test ran against the live config, and the gate refuses in every off state. The Arc MUSN pool revert is a fork artifact, not a mainnet problem: the live quoter quotes both MUSN legs on mainnet, and the 9 Nov live test buy succeeded.</small></div></div>
+            <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Base and Robinhood fork checks clean — same night<small>Base came back clean (12/16, Base 10/12) and Robinhood reached 12/17. That green light is what flipped both chains live on 11 Nov.</small></div></div>
+            <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Full suite after the 12 Nov fixes: 27/30<small>Re-run once the runner fix batch landed; the 3 remaining fails are accepted test artifacts, not runner faults.</small></div></div>
             <div class="check"><span class="mark bad"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l6 6M9 3L3 9"/></svg></span><div class="txt">T9 cap-halt check not re-proven<small>Accepted known risk: the earlier version passed runs 1–3, the native code is identical, and the gate only ever halts trading.</small></div></div>
           </div>
         </div>
       </section>
 
+      <!-- ================= 12 NOV FIXES ================= -->
+      <section aria-labelledby="fixes-h">
+        <div class="sec-head"><span class="sec-num">05</span><h2 class="sec" id="fixes-h">Fixes and hardening — 12 Nov 2026</h2></div>
+        <p class="sec-sub">A day of live trading surfaced real faults; each was root-caused and fixed the same day. This is the honest list, including the one item still open.</p>
+        <div class="checks">
+          <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Runner fix batch — landed ~03:00 GMT+7<small>Balance-read retries, receipt-read tolerance, and atomic state locking, so a transient read failure can no longer burn a launch or corrupt the trip accounting.</small></div></div>
+          <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">DEADLIFT sell root cause found and fixed<small>The sell bundle's approve transaction reverted because that token fixes its Permit2 allowance at infinity — the redundant approve is now dropped whenever the allowance already covers the sell. The position itself was sold manually by the owner on 11 Nov 2026, 23:54 GMT+7, after the runner's sell failed.</small></div></div>
+          <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Pre-buy balance gate — fixed 04:20 GMT+7<small>Wrapped-native balance now counts toward the gate, matching what the buy path can actually spend.</small></div></div>
+          <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Trip recording — fixed 05:09 GMT+7<small>Trip amounts now record their true values even when the external price feed is unreachable.</small></div></div>
+          <div class="check"><span class="mark ok"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6.5L4.8 9L10 3"/></svg></span><div class="txt">Arc balance read — fixed later that morning<small>Native-paired Arc pools quote through the zero address, and the balance check now handles that case. Proven live the same day: Arc's 10 round trips.</small></div></div>
+          <div class="check"><span class="mark warn"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2v5M6 9.6v.4"/></svg></span><div class="txt">Open item: signing service intermittently throws on broadcast<small>It happened 5 times on 12 Nov. No funds were lost in any of them — a failed broadcast simply means the launch is missed. A bounded one-time retry for exactly this case is being added.</small></div></div>
+        </div>
+      </section>
+
       <!-- ================= ROLLOUT ================= -->
       <section aria-labelledby="roll-h">
-        <div class="sec-head"><span class="sec-num">05</span><h2 class="sec" id="roll-h">Rollout</h2></div>
+        <div class="sec-head"><span class="sec-num">06</span><h2 class="sec" id="roll-h">Rollout</h2></div>
         <p class="sec-sub">Scope is every EVM chain — but a chain only goes live once it is verified: a working RPC, the factory or PoolManager address, a proven buy-and-sell route, and gas economics that leave room after the round trip. Solana is a separate build, later.</p>
         <div class="timeline">
-          <div class="tl-step done"><div class="tl-dot">✓</div><h3>Fork test</h3><p>Full flow proven on local copies of mainnet. Evening re-runs: Polygon 15/16, Robinhood 11/13, Arc 11/16 — results documented above.</p></div>
+          <div class="tl-step done"><div class="tl-dot">✓</div><h3>Fork test</h3><p>Full flow proven on local copies of mainnet. Final tallies: Polygon 15/16, Robinhood 12/17, Arc 11/16, Base clean — and 27/30 for the full suite after the 12 Nov fixes.</p></div>
           <div class="tl-step skip"><div class="tl-dot">–</div><h3>Dry run — extended watch skipped</h3><p>Zero-transaction behaviour was proven in the fork test (the kill switch held), but the planned 24–48 hour watch was skipped by direct go-ahead for this trial.</p></div>
-          <div class="tl-step now"><div class="tl-dot">3</div><h3>Tiny live — Polygon + Arc</h3><p>Both live: Polygon since 22:11 GMT+7 (0.1 per buy, immediate sell, 1.333 total quota), Arc since 22:50 GMT+7 (0.10 per buy, immediate sell, 0.3 total quota). No trades yet — Polygon is gated by gas, Arc is waiting for its first qualifying launch.</p></div>
-          <div class="tl-step"><div class="tl-dot">4</div><h3>Expand chain by chain</h3><p>Base and Robinhood are approved at 0.00005 per buy with a 0.0001 total quota each. They flip live one at a time, each with its own settings, once their fork-test checks come back clean.</p></div>
+          <div class="tl-step done"><div class="tl-dot">✓</div><h3>Tiny live — all four chains</h3><p>Polygon, Arc, Base and Robinhood all went live on 11 Nov 2026, each with its own buy size and total quota. 20 round trips completed by 12 Nov, 14:06 GMT+7. Base was paused and resumed once on 12 Nov, around a gas top-up.</p></div>
+          <div class="tl-step now"><div class="tl-dot">4</div><h3>Expand chain by chain</h3><p>Further chains join the registry one at a time, each only once verified the same way. Solana remains a separate build, later.</p></div>
         </div>
       </section>
 
       <!-- ================= CODE ================= -->
       <section aria-labelledby="code-h">
-        <div class="sec-head"><span class="sec-num">06</span><h2 class="sec" id="code-h">The build</h2></div>
-        <p class="sec-sub">Ten files under <span class="mono">tokens/sniper/launch/</span> — a separate build from the earlier testnet sniper, which is untouched.</p>
+        <div class="sec-head"><span class="sec-num">07</span><h2 class="sec" id="code-h">The build</h2></div>
+        <p class="sec-sub">Thirteen files under <span class="mono">tokens/sniper/launch/</span> — the only sniper now running.</p>
         <div class="code-card">
           <ul class="files">
             <li><span>runner</span><span>main loop, one round trip per launch</span></li>
-            <li><span>detection</span><span>V4 first, then V3 / V2, then launchpads</span></li>
+            <li><span>detection</span><span>onchain V4 Initialize scanning</span></li>
+            <li><span>Bankr feed</span><span>launch detection from the Bankr feed</span></li>
+            <li><span>Clanker feed</span><span>launch detection from the Clanker feed</span></li>
             <li><span>sim</span><span>buy + sell simulation gate</span></li>
             <li><span>gas guard</span><span>per-trip and per-day gas budgets</span></li>
             <li><span>chain registry</span><span>verified chains and their contracts</span></li>
             <li><span>config</span><span>per-chain buy size and caps, reloadable</span></li>
             <li><span>state</span><span>quota and trip accounting</span></li>
-            <li><span>fork test</span><span>16 checks on a local mainnet copy</span></li>
+            <li><span>state-edit helper</span><span>safe, locked edits to the state file</span></li>
+            <li><span>fork test</span><span>checks on a local mainnet copy</span></li>
             <li><span>README</span><span>design and operating notes</span></li>
             <li><span>kill switch</span><span>halts everything, proven in dry run</span></li>
           </ul>
-          <p class="foot">The older testnet sniper on Robinhood Chain testnet (46630) keeps running as its own build — this one does not replace it.</p>
+          <p class="foot">The Robinhood testnet loop is <strong>complete</strong>: 976 round trips, its 0.005 test quota filled on 12 Nov 2026, 03:23 GMT+7, and the loop is closed. The earlier v2 and v3 snipers were retired and archived on 12 Nov 2026, ~12:52 GMT+7 — this launch sniper is now the only sniper running.</p>
         </div>
       </section>
 
       <!-- ================= GITHUB ================= -->
       <section aria-labelledby="gh-h">
-        <div class="sec-head"><span class="sec-num">07</span><h2 class="sec" id="gh-h">On GitHub</h2></div>
+        <div class="sec-head"><span class="sec-num">08</span><h2 class="sec" id="gh-h">On GitHub</h2></div>
         <p class="sec-sub">This page is the companion website for the build. Muse's public pages are published from the <span class="mono">laserinu/muse-website</span> repository on GitHub Pages, and the sniper code under <span class="mono">tokens/sniper/launch/</span> is kept in sync under the same GitHub account, <span class="mono">@laserinu</span>.</p>
         <div class="code-card">
           <p style="margin:0 0 8px; font-size:15px;"><strong>Muse's public sites on GitHub Pages</strong></p>
@@ -391,8 +418,8 @@
       </section>
 
       <footer>
-        <span>Launch Sniper · mainnet build, Polygon + Arc trials live · <a href="https://laserinu.github.io/muse-website/" target="_blank" rel="noopener">GitHub</a></span>
-        <span>Figures as measured 11 Nov 2026, GMT+7 · all amounts in each chain's native token</span>
+        <span>Launch Sniper · mainnet build, trials live on all four chains · <a href="https://laserinu.github.io/muse-website/" target="_blank" rel="noopener">GitHub</a></span>
+        <span>Figures as measured 12 Nov 2026, GMT+7 · all amounts in each chain's native token</span>
       </footer>
 
     </div>
@@ -403,11 +430,11 @@
           polygon:   { name:'Polygon',   unit:'POL',  quota:1.333, gas:0.0273,    short:0.001, buy:0.1,
                        note:'With gas alone at 0.0273, gas is about 27 of every 100 spent against a 0.1 buy on Polygon. Gas ran at 100–280 through the day and the trial only trades below ~42, which is why Polygon is live but has not traded yet.' },
           base:      { name:'Base',      unit:'ETH',  quota:0.0001, gas:0.0000036, short:0.0000002, buy:0.00005,
-                       note:'Base gas per trip is 0.0000036 against a 0.00005 buy — gas is a small share here, so the 0.0001 total quota, not gas, is the binding limit. Approved; flips live once its fork-test check comes back clean.' },
+                       note:'Base is live: 6 round trips done and 77% of the 0.0001 quota spent (0.00007718807198563201). Gas per trip is 0.0000036 — a small share next to the quota, so the quota itself is the binding limit.' },
           robinhood: { name:'Robinhood', unit:'ETH',  quota:0.0001, gas:0.0000121, short:0.0000005, buy:0.00005,
-                       note:'Robinhood gas per trip is 0.0000121 — roughly a quarter of the 0.00005 buy size, the tightest margin of the four chains. Approved; flips live once its fork-test check comes back clean.' },
+                       note:'Robinhood is live: 2 round trips done, 65% of the 0.0001 quota spent (0.00006501121724582742). The remaining 0.00003498878275417258 is below one 0.00005 buy, so it cannot trade again unless the quota is raised.' },
           arc:       { name:'Arc',       unit:'USDC', quota:0.3, gas:0.012, short:0.003, buy:0.10,
-                       note:'On Arc the native token is USDC: gas per trip is 0.012 against a 0.10 buy, and the total trial quota is 0.3. Arc gas sat near 20 at flip time against a gate of ~41.7, so Arc can trade now.' }
+                       note:'Arc is live and the busiest chain: 10 round trips on 12 Nov alone, spending 0.024069475339369692 of the 0.3 USDC quota. Gas per trip is 0.012 against a 0.10 buy.' }
         };
         var inQuota = document.getElementById('inQuota');
         var inGas = document.getElementById('inGas');

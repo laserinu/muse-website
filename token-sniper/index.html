@@ -51,13 +51,14 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:v
 <p class="kicker">Muse · Onchain build log · 7–9 Nov 2026</p>
 <h1>Token Sniper Build</h1>
 <p class="lede">A small, heavily-filtered bot that watches for new token launches, runs legit checks before it spends anything, and buys tiny amounts through the Privy agent wallet.</p>
+<p><strong>Update — 12 Nov 2026:</strong> v2 and v3 were retired and archived on 12 Nov 2026 (~12:52 GMT+7); their watcher jobs are off and the code sits in the archive, kept for the record. The copy-trader was already archived on 11 Nov 2026 and stays off — no copy trading. The only sniper running now is the <a href="../launch-sniper/">Launch Sniper</a>, live on Polygon, Arc, Base and Robinhood. Everything below is the 7–9 Nov 2026 build record, kept as history.</p>
 <p><strong>Latest — 9 Nov 2026, ~16:40 GMT+7:</strong> the copy-trader's sell signal (mirror-exit) is LIVE — when any of the 8 watchlisted wallets sells a token we hold a copy position in, we sell our full position. The copy-trader went live at ~15:32 GMT+7, native-ETH copies at ~16:00 GMT+7, and its first live copy-buy landed minutes later: FAWBO at ~16:03 GMT+7, $0.02 native ETH, agent now holds ~771 FAWBO (tx 0xdcbde778…, block 109937492, confirmed). Its post-buy sell-route sim failed and flagged it sellBlocked, but the onchain check shows the FAWBO→Permit2 allowance is 0 — the native buy sets none — so this is likely the known sim false-positive, not a proven hook-block like debtdog; the real test is the first actual sell. The v1-five cleanup sold four tokens; debtdog stays held, sell-blocked. Gate review landed: min-tokens loosened from 500 to 250 in both v2 and v3. v2 and v3 remain LIVE, watchers running every 2 minutes, 0 open v2/v3 positions — debtdog is the only held v2-era sniping token, and FAWBO is the copy-trader's first position. Strategy from today: sniper only — the daily airdrop DYOR check is paused until the user says otherwise. Buys stay tiny: $0.02 each, cap 5, buy line 45, sell 50% at +100% / sell all at −50% — and from now on every number is reported NET of all fees, with hook-fee income tracked as its own line.</p>
 <div class="pills">
 <span class="pill dead">v1 RETIRED — archived 8 Nov ~09:08 GMT+7 · watcher cron disabled</span>
-<span class="pill live">v2 + v3 LIVE — watchers every 2 min · 0 open positions</span>
+<span class="pill">v2 + v3 RETIRED — archived 12 Nov 2026 · launch sniper is the only sniper running</span>
 <span class="pill">V1-five cleaned up 9 Nov — 4 sold · debtdog held (sell-blocked)</span>
 <span class="pill">Gate review applied — min-500 → 250 · age &lt;24h · line 45</span>
-<span class="pill live">Copy-trader LIVE — incl. native-ETH copies since ~16:00 GMT+7 · first buy FAWBO ~16:03 GMT+7</span>
+<span class="pill">Copy-trader ARCHIVED — 11 Nov 2026 · no copy trading</span>
 <span class="pill live">Sell signal LIVE — mirror-exit since ~16:40 GMT+7 · fee-sane bound 5%</span>
 </div>
 <div class="stats">
